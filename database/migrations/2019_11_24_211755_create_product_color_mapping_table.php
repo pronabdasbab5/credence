@@ -15,8 +15,8 @@ class CreateProductColorMappingTable extends Migration
     {
         Schema::create('product_color_mapping', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('product_id');
-            $table->integer('color_id');
+            $table->integer('product_id')->nullable();
+            $table->string('color', 191)->nullable();
             $table->integer('status')->default(1)->comment("1 = Active, 0 = Inactive");
             $table->timestamps();
         });

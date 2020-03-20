@@ -22,32 +22,32 @@
                     <div class="form-row mb-3">
                         <div class="col-md-4 col-sm-12 col-xs-12 mb-3">
                             <label for="top_cate_name">Top-Category</label>
-                            <select class="form-control form-text-element" name="top_cate_name" required>
+                            <select class="form-control" name="top_cate_name">
                                 <option value="" selected disabled>Choose Top-Category</option>
-                                @if(count($data) > 0)
-                                    @foreach($data as $key => $value)
-                                        <option value="{{ $value->id }}" class="form-text-element">{{ $value->top_cate_name }}</option>
+                                @if(count($top_categories) > 0)
+                                    @foreach($top_categories as $key => $value)
+                                        <option value="{{ $value->id }}">{{ $value->top_cate_name }}</option>
                                     @endforeach
                                 @endif
                             </select>
                             @error('top_cate_name')
-                                {{ $message }}
+                                <span style="font-weight: bold; color: red;">{{ $message }}</span>
                             @enderror
                         </div>
 
                          <div class="col-md-4 col-sm-12 col-xs-12 mb-3">
                             <label for="sub_cate_name">Sub-Category</label>
-                            <input type="text"  name="sub_cate_name" id="sub_cate_name"  class="form-control col-md-7 col-xs-12 form-text-element" value="{{ old('sub_cate_name') }}" required>
+                            <input type="text"  name="sub_cate_name" id="sub_cate_name" class="form-control col-md-7 col-xs-12" value="{{ old('sub_cate_name') }}">
                             @error('sub_cate_name')
-                                {{ $message }}
+                                <span style="font-weight: bold; color: red;">{{ $message }}</span>
                             @enderror
                         </div>
 
                         <div class="col-md-4 col-sm-12 col-xs-12 mb-3">
                             <label for="slug">Slug</label>
-                            <input type="text" name="slug" id="slug"  class="form-control col-md-7 col-xs-12" required>
+                            <input type="text" name="slug" id="slug"  class="form-control col-md-7 col-xs-12">
                             @error('slug')
-                                {{ $message }}
+                                <span style="font-weight: bold; color: red;">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -56,7 +56,8 @@
               <div class="ln_solid"></div>
                 <div class="form-group">
                   <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                    <button type="submit" name="submit" class="btn btn-success form-text-element">Add Sub-Category</button>
+                    <button type="submit" name="submit" class="btn btn-success">Add</button>
+                    <a href="{{ route('admin.all_sub_category') }}" class="btn btn-warning">Back</a>
                   </div>
                 </div>
             </form>

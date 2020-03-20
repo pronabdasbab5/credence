@@ -15,7 +15,7 @@
                 <div class="alert alert-success">{{ session()->get('msg') }}</div>
             @endif
             <!-- Section For New User registration -->
-            <form method="POST" autocomplete="off" action="{{ route('admin.update_sub_category', ['subCategoryId' => encrypt($data[0]->id)]) }}" class="form-horizontal form-label-left" enctype="multipart/form-data">
+            <form method="POST" autocomplete="off" action="{{ route('admin.update_sub_category', ['sub_category_id' => $sub_category_record->id]) }}" class="form-horizontal form-label-left" enctype="multipart/form-data">
                 @method('PUT')
                 @csrf
                 <div class="well" style="overflow: auto">
@@ -26,10 +26,10 @@
                                 <option value="" selected disabled>Choose Top-Category</option>
                                 @if(count($all_top_category) > 0)
                                     @foreach($all_top_category as $key => $value)
-                                        @if($value->id == $data[0]->top_category_id)
-                                            <option value="{{ $value->id }}" class="form-text-element" selected>{{ $value->top_cate_name }}</option>
+                                        @if($value->id == $sub_category_record->top_category_id)
+                                            <option value="{{ $value->id }}" selected>{{ $value->top_cate_name }}</option>
                                         @else
-                                            <option value="{{ $value->id }}" class="form-text-element">{{ $value->top_cate_name }}</option>
+                                            <option value="{{ $value->id }}">{{ $value->top_cate_name }}</option>
                                         @endif
                                     @endforeach
                                 @endif
@@ -41,7 +41,7 @@
 
                          <div class="col-md-4 col-sm-12 col-xs-12 mb-3">
                             <label for="sub_cate_name">Sub-Category</label>
-                            <input type="text"  name="sub_cate_name" id="sub_cate_name"  class="form-control col-md-7 col-xs-12 form-text-element" value="{{ $data[0]->sub_cate_name }}" required>
+                            <input type="text" name="sub_cate_name" id="sub_cate_name"  class="form-control col-md-7 col-xs-12" value="{{ $sub_category_record->sub_cate_name }}" required>
                             @error('sub_cate_name')
                                 {{ $message }}
                             @enderror
@@ -49,7 +49,7 @@
 
                         <div class="col-md-4 col-sm-12 col-xs-12 mb-3">
                             <label for="slug">Slug</label>
-                            <input type="text" name="slug" id="slug"  class="form-control col-md-7 col-xs-12" value="{{ $data[0]->slug }}" required>
+                            <input type="text" name="slug" id="slug" class="form-control col-md-7 col-xs-12" value="{{ $sub_category_record->slug }}" required>
                             @error('slug')
                                 {{ $message }}
                             @enderror
@@ -60,7 +60,7 @@
               <div class="ln_solid"></div>
                 <div class="form-group">
                   <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                    <button type="submit" name="submit" class="btn btn-success form-text-element">Save Sub-Category</button>
+                    <button type="submit" name="submit" class="btn btn-success">Save</button>
                     <a href="{{ route('admin.all_sub_category') }}" class="btn btn-warning">Back</a>
                   </div>
                 </div>

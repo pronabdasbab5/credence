@@ -42,17 +42,12 @@ class BrandController extends Controller
     public function allBrand() 
     {
         $all_brand = DB::table('brand')->get();
+
         return view('admin.brand.all_brand', ['data' => $all_brand]);
     }
 
     public function showEditBrandForm($brand_id) 
     {
-        try {
-            $brand_id = decrypt($brand_id);
-        }catch(DecryptException $e) {
-            return redirect()->back();
-        }
-
         $brand_record = DB::table('brand')
             ->where('id', $brand_id)
             ->get();
@@ -65,12 +60,6 @@ class BrandController extends Controller
         $this->validate($request, [
             'brand_name'    => 'required',
         ]);
-
-        try {
-            $brand_id = decrypt($brand_id);
-        }catch(DecryptException $e) {
-            return redirect()->back();
-        }
 
         $count = DB::table('brand')
             ->where('brand_name', ucwords(strtolower($request->input('brand_name'))))

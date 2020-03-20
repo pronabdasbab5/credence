@@ -15,18 +15,19 @@ class CreateProductTable extends Migration
     {
         Schema::create('product', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('product_name', 191);
-            $table->string('slug', 191);
-            $table->integer('top_category_id');
-            $table->integer('sub_category_id');
-            $table->integer('third_level_sub_category_id');
+            $table->string('product_name', 191)->nullable();
+            $table->string('slug', 191)->nullable();
+            $table->integer('top_category_id')->nullable();
+            $table->integer('sub_category_id')->nullable();
+            $table->integer('third_level_sub_category_id')->nullable();
             $table->integer('brand_id')->nullable();
-            $table->integer('discount');
+            $table->integer('discount')->nullable();
             $table->integer('stock')->nullable();
+            $table->integer('stock_type')->default(1)->comment("1 = Single, 2 = Size By");
             $table->text('desc');
             $table->double('price', 8, 2);
             $table->string('banner', 191);
-            $table->integer('status')->default(1)->comment("1 = Active, 0 = Inactive");
+            $table->integer('status')->default(1)->comment("1 = Active, 2 = Inactive");
             $table->timestamps();
         });
     }

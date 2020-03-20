@@ -15,9 +15,10 @@ class CreateSubCategoryTable extends Migration
     {
         Schema::create('sub_category', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('top_category_id');
-            $table->string('sub_cate_name', 191);
-            $table->string('slug', 191);
+            $table->integer('top_category_id')->nullable();
+            $table->string('sub_cate_name', 191)->nullable();
+            $table->string('slug', 191)->nullable();
+            $table->integer('status')->default(1)->comment('1 = Active, 2 = In-Active');
             $table->timestamps();
         });
     }

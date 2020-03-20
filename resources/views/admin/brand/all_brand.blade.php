@@ -25,7 +25,7 @@
                         <tr>
                             <th>Sl No</th>
                             <th>Brand Name</th>
-                            <th>Modify</th>
+                            <th>Action</th>
                         </tr>
                       </thead>
                       <tbody class="form-text-element">
@@ -35,7 +35,7 @@
                                     <td>{{ $value->id }}</td>
                                     <td>{{ $value->brand_name }}</td>
                                     <td>
-                                        <a href="{{ route('admin.edit_brand', ['brand_id' => encrypt($value->id)]) }}" class="btn btn-warning form-text-element">Edit</a>
+                                        <a href="{{ route('admin.edit_brand', ['brand_id' => $value->id]) }}" class="btn btn-warning">Edit</a>
                                     </td>
                                 </tr> 
                             @endforeach

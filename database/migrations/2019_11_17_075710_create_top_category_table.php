@@ -15,8 +15,9 @@ class CreateTopCategoryTable extends Migration
     {
         Schema::create('top_category', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('top_cate_name', 191);
-            $table->string('slug');
+            $table->string('top_cate_name', 191)->nullable();
+            $table->string('slug')->nullable();
+            $table->integer('status')->default(1)->comment('1 = Active, 2 = In-Active');
             $table->timestamps();
         });
     }

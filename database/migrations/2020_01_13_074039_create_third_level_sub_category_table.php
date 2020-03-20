@@ -15,10 +15,11 @@ class CreateThirdLevelSubCategoryTable extends Migration
     {
         Schema::create('third_level_sub_category', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('top_category');
-            $table->integer('sub_category');
+            $table->integer('top_category_id');
+            $table->integer('sub_category_id');
             $table->string('third_level_sub_category_name');
             $table->string('slug');
+            $table->integer('status')->default(1)->comment('1 = Active, 2 = In-Active');
             $table->timestamps();
         });
     }

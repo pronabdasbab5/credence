@@ -25,9 +25,19 @@ Route::group(['middleware'=>'auth:admin','prefix'=>'admin','namespace'=>'Admin']
     Route::get('dashboard', 'AdminDashboardController@index')->name('admin.dashboard');
 
     Route::group(['namespace'=>'TopCategory'],function(){
-    	Route::get('all-top-category', 'TopCategoryController@allTopCategory')->name('admin.all_top_category');
-    	Route::get('edit-top-category/{topCategoryId}', 'TopCategoryController@showEditTopCategoryForm')->name('admin.edit_top_category');
-    	Route::put('update-top-category/{topCategoryId}', 'TopCategoryController@updateTopCategory')->name('admin.update_top_category');
+
+        /** New Top-Category Form **/
+        Route::get('new-top-category', 'TopCategoryController@showNewTopCategoryForm')->name('admin.new_top_category');
+        /** Add Top-Category **/
+        Route::post('add-top-category', 'TopCategoryController@addTopCategory')->name('admin.add_top_category');
+        /** All Top-Categories **/
+        Route::get('all-top-category', 'TopCategoryController@allTopCategory')->name('admin.all_top_category');
+        /** Update Top-Category Status **/
+        Route::get('update-top-category-status/{top_category_id}/{status}', 'TopCategoryController@updateTopCategoryStatus')->name('admin.update_top_category_status');
+        /** Edit Top-Category Form **/
+        Route::get('edit-top-category/{top_category_id}', 'TopCategoryController@showEditTopCategoryForm')->name('admin.edit_top_category');
+        /** Update Top-Category Status **/
+    	Route::post('update-top-category/{top_category_id}', 'TopCategoryController@updateTopCategory')->name('admin.update_top_category');
     });
 
     Route::group(['namespace'=>'GroceryTopCategory'],function(){
@@ -44,6 +54,7 @@ Route::group(['middleware'=>'auth:admin','prefix'=>'admin','namespace'=>'Admin']
 
 
     });
+
     Route::group(['namespace'=>'GrocerySubCategory'],function(){
      
      Route::get('show-grocery-sub-category','GrocerySubCategoryController@showGrocerySubCategoryForm')->name('admin.show-grocery-sub-category');
@@ -57,17 +68,16 @@ Route::group(['middleware'=>'auth:admin','prefix'=>'admin','namespace'=>'Admin']
      Route::put('update-grocery-sub-category/{grocerySubCategoryId}', 'GrocerySubCategoryController@updateGrocerySubCategory')->name('admin.update_grocery_sub_category');
     });
      
-
-
-     
- 
-
     Route::group(['namespace'=>'SubCategory'],function(){
+
+        /** New Sub-Category Form **/
     	Route::get('new-sub-category', 'SubCategoryController@showSubCategoryForm')->name('admin.new_sub_category');
-    	
+    	/** Add Sub-Category **/
         Route::put('add-sub-category', 'SubCategoryController@addSubCategory')->name('admin.add_sub_category');
-    	
+    	/** All Sub-Category **/
         Route::get('all-sub-category', 'SubCategoryController@allSubCategory')->name('admin.all_sub_category');
+        /** Update Sub-Category Status **/
+        Route::get('update-sub-category-status/{sub_category_id}/{status}', 'SubCategoryController@updateSubCategoryStatus')->name('admin.update_sub_category_status');
     	
         Route::get('edit-sub-category/{subCategoryId}', 'SubCategoryController@showEditSubCategoryForm')->name('admin.edit_sub_category');
     	
@@ -75,28 +85,19 @@ Route::group(['middleware'=>'auth:admin','prefix'=>'admin','namespace'=>'Admin']
     });
 
     Route::group(['namespace'=>'ThirdLevelSubCategory'],function(){
+
+        /** New 3rd Sub-Category Form **/
         Route::get('new-third-level-sub-category', 'ThirdLevelSubCategoryController@showThirdLevelSubCategoryForm')->name('admin.new_third_level_sub_category');
+        /** Add 3rd Sub-Category **/
         Route::put('add-third-level-sub-category', 'ThirdLevelSubCategoryController@addThirdLevelSubCategory')->name('admin.add_third_level_sub_category');
+        /** All 3rd Sub-Category **/
         Route::get('all-third-level-sub-category', 'ThirdLevelSubCategoryController@allThirdLevelSubCategory')->name('admin.all_third_level_sub_category');
-        Route::get('edit-third-level-sub-category/{subCategoryId}', 'ThirdLevelSubCategoryController@showEditThirdLevelSubCategoryForm')->name('admin.edit_third_level_sub_category');
-        Route::put('update-third-level-sub-category/{subCategoryId}', 'ThirdLevelSubCategoryController@updateThirdLevelSubCategory')->name('admin.update_third_level_sub_category');
-    });
 
-    Route::group(['namespace'=>'Size'],function(){
-        Route::get('new-size', 'SizeController@showSizeForm')->name('admin.new_size');
-        Route::post('add-size', 'SizeController@addSize')->name('admin.add_size');
-        Route::get('all-size', 'SizeController@allSize')->name('admin.all_size');
-        Route::get('edit-size/{sizeId}', 'SizeController@showEditSizeForm')->name('admin.edit_size');
-       
-        Route::post('update-size/{sizeId}', 'SizeController@updateSize')->name('admin.update_size');
+        Route::get('update-third-sub-category-status/{third_sub_category_id}/{status}', 'ThirdLevelSubCategoryController@updateThirdSubCategoryStatus')->name('admin.update_third_sub_category_status');
 
-        Route::get('new-mappping-size', 'SizeController@showMappingSizeForm')->name('admin.new_mappping_size');
+        Route::get('edit-third-level-sub-category/{third_sub_category_id}', 'ThirdLevelSubCategoryController@showEditThirdLevelSubCategoryForm')->name('admin.edit_third_level_sub_category');
         
-        Route::post('add-mappping-size', 'SizeController@addMappingSize')->name('admin.add_mappping_size');
-      
-        Route::get('edit-mappping-size/{size_mapping_id}', 'SizeController@showEditMappingSizeForm')->name('admin.edit_mappping_size');
-       
-        Route::post('update-mappping-size/{size_mapping_id}', 'SizeController@updateMappingSize')->name('admin.update_mappping_size');
+        Route::post('update-third-level-sub-category/{third_sub_category_id}', 'ThirdLevelSubCategoryController@updateThirdLevelSubCategory')->name('admin.update_third_level_sub_category');
     });
 
     Route::group(['namespace'=>'GrocerySize'],function(){
@@ -124,27 +125,12 @@ Route::group(['middleware'=>'auth:admin','prefix'=>'admin','namespace'=>'Admin']
 
     });
 
-
-
-    Route::group(['namespace'=>'Color'],function(){
-        Route::get('new-color', 'ColorController@showColorForm')->name('admin.new_color');
-        Route::post('add-color', 'ColorController@addColor')->name('admin.add_color');
-        Route::get('all-color', 'ColorController@allColor')->name('admin.all_color');
-        Route::get('edit-color/{colorId}', 'ColorController@showEditColorForm')->name('admin.edit_color');
-        Route::post('update-color/{colorId}', 'ColorController@updateColor')->name('admin.update_color');
-
-        Route::get('new-mappping-color', 'ColorController@showMappingColorForm')->name('admin.new_mappping_color');
-        Route::post('add-mappping-color', 'ColorController@addMappingColor')->name('admin.add_mappping_color');
-        Route::get('edit-mappping-color/{color_mapping_id}', 'ColorController@showEditMappingColorForm')->name('admin.edit_mappping_color');
-        Route::post('update-mappping-color/{color_mapping_id}', 'ColorController@updateMappingColor')->name('admin.update_mappping_color');
-    });
-
     Route::group(['namespace'=>'Brand'],function(){
         Route::get('new-brand', 'BrandController@showBrandForm')->name('admin.new_brand');
-        Route::put('add-brand', 'BrandController@addBrand')->name('admin.add_brand');
+        Route::post('add-brand', 'BrandController@addBrand')->name('admin.add_brand');
         Route::get('all-brand', 'BrandController@allBrand')->name('admin.all_brand');
         Route::get('edit-brand/{brand_id}', 'BrandController@showEditBrandForm')->name('admin.edit_brand');
-        Route::put('update-brand/{brand_id}', 'BrandController@updateBrand')->name('admin.update_brand');
+        Route::post('update-brand/{brand_id}', 'BrandController@updateBrand')->name('admin.update_brand');
     });
 
     Route::group(['namespace'=>'GroceryBrand'],function(){
@@ -188,163 +174,46 @@ Route::group(['middleware'=>'auth:admin','prefix'=>'admin','namespace'=>'Admin']
 
     Route::group(['namespace'=>'Product'],function(){
 
-        Route::group(['namespace'=>'Apparel'],function(){
-            /** New Product **/
-            Route::get('new-apparel-product', 'ApparelController@showProductForm')->name('admin.new_apparel_product');
-            Route::put('add-apparel-product', 'ApparelController@addProduct')->name('admin.add_apparel_product');
+        /** New Product **/
+        Route::get('new-product', 'ProductController@showProductForm')->name('admin.new_product');
+        Route::put('add-product', 'ProductController@addProduct')->name('admin.add_product');
 
-            /** Stock Entry **/
-            Route::get('product-stock-entry/{product_id}', 'ApparelController@productStockEntry')->name('admin.product_stock_entry');
-            Route::post('add-stock-entry/{product_id}', 'ApparelController@addStockEntry')->name('admin.add_stock_entry');
+        /** Products List **/
+        Route::get('prouduct-list', 'ProductController@productList')->name('admin.product_list');
+        Route::post('prouduct-list-data', 'ProductController@productListData')->name('admin.product_list_data');
 
-            /** Products List **/
-            Route::get('prouduct-apparel-list', 'ApparelController@productList')->name('admin.product_apparel_list');
-            Route::post('prouduct-apparel-list-data', 'ApparelController@productListData')->name('admin.product_apparel_list_data');
+        /** Product Status **/
+        Route::get('update-product-status/{product_id}/{status}', 'ProductController@updateProductStatus')->name('admin.update_product_status');
 
-            /** Product Banner Change **/
-            Route::get('edit-apparel-prouduct-banner/{product_id}', 'ApparelController@showEditProductBanner')->name('admin.edit_apparel_product_banner');
-            Route::put('update-apparel-prouduct-banner/{product_id}', 'ApparelController@updateProductBanner')->name('admin.update_apparel_product_banner');
+        /** Product Additional Image **/
+        Route::get('additional-prouduct-image-list/{product_id}', 'ProductController@showProductImageList')->name('admin.additional_product_image_list');
+        Route::put('update-prouduct-additional-image/{additional_image_id}', 'ProductController@updateProductAdditionalImage')->name('admin.update_product_additional_image');
 
-            /** Product Additional Image **/
-            Route::get('additional-apparel-prouduct-image-list/{product_id}', 'ApparelController@showProductImageList')->name('admin.additional_apparel_product_image_list');
-            Route::put('update-apparel-prouduct-additional-image/{additional_image_id}', 'ApparelController@updateProductAdditionalImage')->name('admin.update_apparel_product_additional_image');
+        /** Product View **/
+        Route::get('view-product/{product_id}', 'ProductController@viewProduct')->name('admin.view_product');
 
-            /** Product View **/
-            Route::get('view-apparel-product/{product_id}', 'ApparelController@viewProduct')->name('admin.view_apparel_product');
+        /** Edit Product **/
+        Route::get('edit-product/{product_id}', 'ProductController@showEditProduct')->name('admin.edit_product');
+        Route::put('update-product/{product_id}', 'ProductController@updateProduct')->name('admin.update_product');
 
-            /** Edit Product **/
-            Route::get('edit-apparel-product/{product_id}', 'ApparelController@showEditProduct')->name('admin.edit_apparel_product');
-            Route::put('update-apparel-product/{product_id}', 'ApparelController@updateProduct')->name('admin.update_apparel_product');
+        /** Product Stock Status **/
+        Route::get('update-product-stock-status/{stock_id}/{status}', 'ProductController@updateProductStockStatus')->name('admin.update_product_stock_status');
 
-            /** Edit Product Size **/
-            Route::get('edit-apparel-product-size/{product_id}', 'ApparelController@showEditProductSize')->name('admin.edit_apparel_product_size');
-            Route::post('update-apparel-product-size/{product_id}', 'ApparelController@updateProductSize')->name('admin.update_apparel_product_size');
+        /** Product Color Status **/
+        Route::get('update-product-color-status/{color_id}/{status}', 'ProductController@updateProductColorStatus')->name('admin.update_product_color_status');
 
-            /** Product Size Status **/
-            Route::get('change-apparel-product-size-status/{product_mapping_id}/{status}', 'ApparelController@changeProductSizeStatus')->name('admin.change_apparel_product_size_status'); 
-
-            /** Edit Product Color **/
-            Route::get('edit-apparel-product-color/{product_id}', 'ApparelController@showEditProductColor')->name('admin.edit_apparel_product_color');
-            Route::post('update-apparel-product-color/{product_id}', 'ApparelController@updateProductColor')->name('admin.update_apparel_product_color');
-
-            /** Product Color Status **/
-            Route::get('change-apparel-product-color-status/{product_mapping_id}/{status}', 'ApparelController@changeProductColorStatus')->name('admin.change_apparel_product_color_status'); 
-
-            /** Product Update Stock **/
-            Route::get('edit-apparel-product-stock/{product_id}', 'ApparelController@showEditProductStock')->name('admin.edit_apparel_product_stock');
-            Route::post('update-apparel-product-stock/{product_id}', 'ApparelController@updateProductStock')->name('admin.update_apparel_product_stock');
-
-            /** Product Status **/
-            Route::get('change-apparel-product-status/{product_id}/{status}', 'ApparelController@changeProductStatus')->name('admin.change_apparel_product_status'); 
-
-            /** Active and In-Active Products List **/
-            Route::get('active-apparel-prouduct-list', 'ApparelController@activeProductList')->name('admin.active_apparel_product_list');
-            Route::get('in-active-apparel-prouduct-list', 'ApparelController@inactiveProductList')->name('admin.in_active_apparel_product_list');
-            Route::post('active-in-active-apparel-prouduct-list-data', 'ApparelController@activeInactiveProductListData')->name('admin.active_in_active_apparel_product_list_data');
-        });
-
-        Route::group(['namespace'=>'Cosmetics'],function(){
-            /** New Product **/
-            Route::get('new-cosmetics-product', 'CosmeticsController@showProductForm')->name('admin.new_cosmetics_product');
-            Route::put('add-cosmetics-product', 'CosmeticsController@addProduct')->name('admin.add_cosmetics_product');
-
-            /** Products List **/
-            Route::get('prouduct-cosmetics-list', 'CosmeticsController@productList')->name('admin.product_cosmetics_list');
-            Route::post('prouduct-cosmetics-list-data', 'CosmeticsController@productListData')->name('admin.product_cosmetics_list_data');
-
-            /** Product Banner Change **/
-            Route::get('edit-cosmetics-prouduct-banner/{product_id}', 'CosmeticsController@showEditProductBanner')->name('admin.edit_cosmetics_product_banner');
-            Route::put('update-cosmetics-prouduct-banner/{product_id}', 'CosmeticsController@updateProductBanner')->name('admin.update_cosmetics_product_banner');
-
-            /** Product Additional Image **/
-            Route::get('additional-cosmetics-prouduct-image-list/{product_id}', 'CosmeticsController@showProductImageList')->name('admin.additional_cosmetics_product_image_list');
-            Route::put('update-cosmetics-prouduct-additional-image/{additional_image_id}', 'CosmeticsController@updateProductAdditionalImage')->name('admin.update_cosmetics_product_additional_image');
-
-            /** Product View **/
-            Route::get('view-cosmetics-product/{product_id}', 'CosmeticsController@viewProduct')->name('admin.view_cosmetics_product');
-
-            /** Edit Product **/
-            Route::get('edit-cosmetics-product/{product_id}', 'CosmeticsController@showEditProduct')->name('admin.edit_cosmetics_product');
-            Route::put('update-cosmetics-product/{product_id}', 'CosmeticsController@updateProduct')->name('admin.update_cosmetics_product');
-
-            /** Product Status **/
-            Route::get('change-cosmetics-product-status/{product_id}/{status}', 'CosmeticsController@changeProductStatus')->name('admin.change_cosmetics_product_status'); 
-        });
-
-        Route::group(['namespace'=>'Perfumeries'],function(){
-            /** New Product **/
-            Route::get('new-perfumeries-product', 'PerfumeriesController@showProductForm')->name('admin.new_perfumeries_product');
-            Route::put('add-perfumeries-product', 'PerfumeriesController@addProduct')->name('admin.add_perfumeries_product');
-
-            /** Products List **/
-            Route::get('prouduct-perfumeries-list', 'PerfumeriesController@productList')->name('admin.product_perfumeries_list');
-            Route::post('prouduct-perfumeries-list-data', 'PerfumeriesController@productListData')->name('admin.product_perfumeries_list_data');
-
-            /** Product Banner Change **/
-            Route::get('edit-perfumeries-prouduct-banner/{product_id}', 'PerfumeriesController@showEditProductBanner')->name('admin.edit_perfumeries_product_banner');
-            Route::put('update-perfumeries-prouduct-banner/{product_id}', 'PerfumeriesController@updateProductBanner')->name('admin.update_perfumeries_product_banner');
-
-            /** Product Additional Image **/
-            Route::get('additional-perfumeries-prouduct-image-list/{product_id}', 'PerfumeriesController@showProductImageList')->name('admin.additional_perfumeries_product_image_list');
-            Route::put('update-perfumeries-prouduct-additional-image/{additional_image_id}', 'PerfumeriesController@updateProductAdditionalImage')->name('admin.update_perfumeries_product_additional_image');
-
-            /** Product View **/
-            Route::get('view-perfumeries-product/{product_id}', 'PerfumeriesController@viewProduct')->name('admin.view_perfumeries_product');
-
-            /** Edit Product **/
-            Route::get('edit-perfumeries-product/{product_id}', 'PerfumeriesController@showEditProduct')->name('admin.edit_perfumeries_product');
-            Route::put('update-perfumeries-product/{product_id}', 'PerfumeriesController@updateProduct')->name('admin.update_perfumeries_product');
-
-            /** Product Status **/
-            Route::get('change-perfumeries-product-status/{product_id}/{status}', 'PerfumeriesController@changeProductStatus')->name('admin.change_perfumeries_product_status'); 
-        });
-
-        Route::group(['namespace'=>'Krafts'],function(){
-            /** New Product **/
-            Route::get('new-krafts-product', 'KraftsController@showProductForm')->name('admin.new_krafts_product');
-            Route::put('add-krafts-product', 'KraftsController@addProduct')->name('admin.add_krafts_product');
-
-            /** Products List **/
-            Route::get('prouduct-krafts-list', 'KraftsController@productList')->name('admin.product_krafts_list');
-            Route::post('prouduct-krafts-list-data', 'KraftsController@productListData')->name('admin.product_krafts_list_data');
-
-            /** Product Banner Change **/
-            Route::get('edit-krafts-prouduct-banner/{product_id}', 'KraftsController@showEditProductBanner')->name('admin.edit_krafts_product_banner');
-            Route::put('update-krafts-prouduct-banner/{product_id}', 'KraftsController@updateProductBanner')->name('admin.update_krafts_product_banner');
-
-            /** Product Additional Image **/
-            Route::get('additional-krafts-prouduct-image-list/{product_id}', 'KraftsController@showProductImageList')->name('admin.additional_krafts_product_image_list');
-            Route::put('update-krafts-prouduct-additional-image/{additional_image_id}', 'KraftsController@updateProductAdditionalImage')->name('admin.update_krafts_product_additional_image');
-
-            /** Product View **/
-            Route::get('view-krafts-product/{product_id}', 'KraftsController@viewProduct')->name('admin.view_krafts_product');
-
-            /** Edit Product **/
-            Route::get('edit-krafts-product/{product_id}', 'KraftsController@showEditProduct')->name('admin.edit_krafts_product');
-            Route::put('update-krafts-product/{product_id}', 'KraftsController@updateProduct')->name('admin.update_krafts_product');
-
-            /** Product Status **/
-            Route::get('change-krafts-product-status/{product_id}/{status}', 'KraftsController@changeProductStatus')->name('admin.change_krafts_product_status'); 
-        });
-
-        /** Image URL Generate **/
-        Route::get('banner_image/{product_id}', 'ProductController@bannerImage')->name('admin.banner_image');
-         Route::get('grocery_banner_image/{product_id}', 'ProductController@groceryBannerImage')->name('admin.grocery_banner_image');
-        Route::get('additional_image/{additional_image_id}', 'ProductController@additionalImage')->name('admin.additional_image');
-         Route::get('grocery_additional_image/{additional_image_id}', 'ProductController@groceryAdditionalImage')->name('admin.grocery_additional_image');  
-  
+        /** Active and In-Active Products List **/
+        Route::get('active-prouduct-list', 'ProductController@activeProductList')->name('admin.active_product_list');
+        Route::get('in-active-prouduct-list', 'ProductController@inactiveProductList')->name('admin.in_active_product_list');
+        Route::post('active-in-active-prouduct-list-data', 'ProductController@activeInactiveProductListData')->name('admin.active_in_active_product_list_data');
 
         /** Ajax Route **/
         Route::post('retrive-sub-category', 'ProductController@retriveSubCategory');
+        Route::post('retrive-third-level-sub-category', 'ProductController@retriveThirdLevelSubCategory');
 
        Route::post('retrive-grocery-sub-category', 'ProductController@retriveGrocerySubCategory');
+        Route::post('retrive-grocery-size','ProductController@retriveGrocerySize');
 
-      Route::post('retrive-grocery-size','ProductController@retriveGrocerySize');
-
-        
-        Route::post('retrive-third-level-sub-category', 'ProductController@retriveThirdLevelSubCategory');
-        
-        Route::post('retrive-size-color', 'ProductController@retriveSizeColor');
     });
 
     Route::group(['namespace'=>'Users'],function(){

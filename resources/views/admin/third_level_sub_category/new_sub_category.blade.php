@@ -22,11 +22,11 @@
                     <div class="form-row mb-3">
                         <div class="col-md-6 col-sm-12 col-xs-12 mb-3">
                             <label for="top_cate_name">Top-Category</label>
-                            <select class="form-control form-text-element" name="top_cate_name" id="top_cate_name" required>
+                            <select class="form-control" name="top_cate_name" id="top_cate_name">
                                 <option value="" selected disabled>Choose Top-Category</option>
-                                @if(count($data) > 0)
-                                    @foreach($data as $key => $value)
-                                        <option value="{{ $value->id }}" class="form-text-element">{{ $value->top_cate_name }}</option>
+                                @if(count($top_categories) > 0)
+                                    @foreach($top_categories as $key => $value)
+                                        <option value="{{ $value->id }}">{{ $value->top_cate_name }}</option>
                                     @endforeach
                                 @endif
                             </select>
@@ -37,7 +37,7 @@
 
                         <div class="col-md-6 col-sm-12 col-xs-12 mb-3">
                             <label for="sub_cate_name">Sub-Category</label>
-                            <select class="form-control form-text-element" name="sub_cate_name" id="sub_cate_name" required>
+                            <select class="form-control" name="sub_cate_name" id="sub_cate_name">
                                 <option value="" selected disabled>Choose Sub-Category</option>
                             </select>
                             @error('sub_cate_name')
@@ -47,7 +47,7 @@
 
                          <div class="col-md-6 col-sm-12 col-xs-12 mb-3">
                             <label for="third_level_sub_cate_name">3rd Sub-Category</label>
-                            <input type="text" name="third_level_sub_cate_name" id="third_level_sub_cate_name" class="form-control col-md-7 col-xs-12 form-text-element" value="{{ old('third_level_sub_cate_name') }}" required>
+                            <input type="text" name="third_level_sub_cate_name" id="third_level_sub_cate_name" class="form-control col-md-7 col-xs-12" value="{{ old('third_level_sub_cate_name') }}" required>
                             @error('third_level_sub_cate_name')
                                 {{ $message }}
                             @enderror
@@ -66,7 +66,8 @@
               <div class="ln_solid"></div>
                 <div class="form-group">
                   <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                    <button type="submit" name="submit" class="btn btn-success form-text-element">Add Sub-Category</button>
+                    <button type="submit" name="submit" class="btn btn-success">Add</button>
+                    <a href="{{ route('admin.all_third_level_sub_category') }}" class="btn btn-warning">Back</a>
                   </div>
                 </div>
             </form>

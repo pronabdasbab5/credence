@@ -62,6 +62,12 @@
                   </li>
                   <li><a><i class="fa fa-edit"></i> Manage Products <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
+                      <li><a href="{{ route('admin.new_product') }}">New Product</a></li>
+                      <li><a href="{{ route('admin.active_product_list') }}">Active Products</a></li>
+                      <li><a href="{{ route('admin.in_active_product_list') }}">In-Active Products</a></li>
+                      <li><a href="{{ route('admin.product_list') }}">Products List</a></li>
+                    </ul>
+                    {{-- <ul class="nav child_menu">
                         <li><a>Apparel<span class="fa fa-chevron-down"></span></a>
                           <ul class="nav child_menu">
                              <li><a href="{{ route('admin.new_apparel_product') }}">New Product</a></li>
@@ -88,7 +94,7 @@
                               <li><a href="{{ route('admin.product_krafts_list') }}">Products List</a></li>
                           </ul>
                         </li>
-                    </ul>
+                    </ul> --}}
                   </li>
                   <li><a><i class="fa fa-edit"></i> Manage Users <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
@@ -103,6 +109,12 @@
                       <li><a href="{{ route('admin.canceled_orders_list') }}">Cancel Orders</a></li>
                     </ul>
                   </li>
+                  <li><a><i class="fa fa-edit"></i> Manage Reports <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><a href="#">Stock Reports</a></li>
+                      <li><a href="#">Sales Reports</a></li>
+                    </ul>
+                  </li>
                   <li><a><i class="fa fa-edit"></i> Manage Reviews <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ route('admin.new_reviews_list') }}">New Reviews</a></li>
@@ -112,64 +124,24 @@
                   <li><a><i class="fa fa-edit"></i> Manage Brands <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ route('admin.new_brand') }}">New Brand</a></li>
-                      <li><a href="{{ route('admin.all_brand') }}">All Brands</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-edit"></i> Configuration <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                        <li><a>Manage Size<span class="fa fa-chevron-down"></span></a>
-                          <ul class="nav child_menu">
-                            <li class="sub_menu"><a href="{{ route('admin.new_size') }}">New Size</a>
-                            </li>
-                            <li><a href="{{ route('admin.all_size') }}">All Size</a>
-                            </li>
-                            <li class="sub_menu"><a href="{{ route('admin.new_mappping_size') }}">Size Mapping</a>
-                            </li>
-                          </ul>
-                        </li>
-                        <li><a>Manage Color<span class="fa fa-chevron-down"></span></a>
-                          <ul class="nav child_menu">
-                            <li class="sub_menu"><a href="{{ route('admin.new_color') }}">New Color</a>
-                            </li>
-                            <li><a href="{{ route('admin.all_color') }}">All Color</a>
-                            </li>
-                            <li class="sub_menu"><a href="{{ route('admin.new_mappping_color') }}">Color Mapping</a>
-                            </li>
-                          </ul>
-                        </li>
+                      <li><a href="{{ route('admin.all_brand') }}">Brands List</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-edit"></i> Manage Category <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        <li><a>3rd Level Sub-Category<span class="fa fa-chevron-down"></span></a>
-                          <ul class="nav child_menu">
-                            <li class="sub_menu"><a href="{{ route('admin.new_third_level_sub_category') }}">New Sub-Category</a>
-                            </li>
-                            <li><a href="{{ route('admin.all_third_level_sub_category') }}">All Sub-Category</a>
-                            </li>
-                          </ul>
-                        </li>
-                       <li><a>2nd Level Sub-Category<span class="fa fa-chevron-down"></span></a>
-                          <ul class="nav child_menu">
-                            <li class="sub_menu"><a href="{{ route('admin.new_sub_category') }}">New Sub-Category</a>
-                            </li>
-                            <li><a href="{{ route('admin.all_sub_category') }}">All Sub-Category</a>
-                            </li>
-                          </ul>
-                        </li>
+                      <li><a href="{{ route('admin.all_third_level_sub_category') }}">3rd Sub-Category</a></li>
+                      <li><a href="{{ route('admin.all_sub_category') }}">Sub-Category</a></li>
                       <li><a href="{{ route('admin.all_top_category') }}">Top-Category</a></li>
                     </ul>
                   </li>
                 </ul>
-                 <div class="menu_section">
+                 {{-- <div class="menu_section">
                 <h3>Grocery</h3>
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-edit"></i> Manage Grocery <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{route('admin.new_grocery_product')}}">Add Product</a></li>
                       <li><a href="{{route('admin.grocery_product_list')}}">Product List</a></li>
-                      
-
                     </ul>
                   </li>
                   <li><a><i class="fa fa-edit"></i> Manage Orders <span class="fa fa-chevron-down"></span></a>
@@ -184,7 +156,6 @@
                     <ul class="nav child_menu">
                       <li><a href="{{route('admin.grocery_new_brand')}}">New Brands</a></li>
                       <li><a href="{{route('admin.all_grocery_brand')}}">All Brands</a></li>
-                      
                     </ul>
 
                   </li>
@@ -229,7 +200,7 @@
                     </ul>
                   </li>                 
                 </ul>
-              </div>
+              </div> --}}
               </div>
             </div>
             <!-- /sidebar menu -->
