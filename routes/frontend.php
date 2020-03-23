@@ -1,102 +1,85 @@
 <?php
 
-Route::group(['namespace'=>'Web'],function(){
-	Route::get('/', 'IndexController@index')->name('web.index');
+//========= index =========//
 
-	/** From SubCategory to Product **/
-	Route::get('product-list/{sub_category_id}/{top_category_id}', 'IndexController@subCategoryProductList')->name('web.sub_category_product_list');
+Route::get('/', function () {
+    return view('web.index');
+})->name('web.index');
 
-	/** From SubCategory, Size to Product **/
-	Route::get('product-list-size/{sub_category_id}/{top_category_id}/{size_id}', 'IndexController@subCategorySizeProductList')->name('web.sub_category_size_product_list');
+//========= Product =========//
 
-	/** From SubCategory, Size, Sorted By to Product **/
-	Route::post('product-list-size-sorted-by/{sub_category_id}/{top_category_id}/{size_id}', 'IndexController@subCategorySizeSortedByProductList')->name('web.sub_category_size_sorted_by_product_list');
+Route::get('/product-list', function () {
+    return view('web.product.product-list');
+})->name('web.product.product-list');
 
-	/** Product List View **/
-	Route::get('product-list-view/{sub_category_id}/{top_category_id}/{size_id}/{sorted_by}', 'IndexController@productListView')->name('web.product_list_view');
+Route::get('/single-product', function () {
+    return view('web.product.single-product');
+})->name('web.product.single-product');
 
-	/** Product Details **/
-	Route::get('product-detail/{product_id}', 'IndexController@productDetail')->name('web.product_detail');
+//========= user =========//
 
-	/** Product Stock **/
-	Route::post('checking-product-stock', 'IndexController@checkingProductStock')->name('web.checking_product_stock');
+Route::get('/Login', function () {
+    return view('web.user.login');
+})->name('web.user.login');
 
-	/** Start of Cart Route **/
+Route::get('/Register', function () {
+    return view('web.user.register');
+})->name('web.user.register');
 
-	/** Add Product to Cart **/
-	Route::post('add-cart', 'CartController@addCart')->name('web.add_cart');
-	/** View Cart **/
-	Route::get('view-cart', 'CartController@viewCart')->name('web.view_cart');
-	/** Remove Cart Item **/
-	Route::get('remove-cart-item/{stock_id}', 'CartController@removeCartItem')->name('web.remove_cart_item');
-	/** Update Cart **/
-	Route::post('update-cart', 'CartController@updateCart')->name('web.update_cart');
-	/** End of Cart Route **/
+Route::get('/Forgot-password', function () {
+    return view('web.user.forgot-password');
+})->name('web.user.forgot-password');
 
-	/** Image URL Generate **/
-    Route::get('product-banner-image/{product_id}', 'ProductController@bannerImage')->name('web.product_banner_image');
-    Route::get('product-additional-image/{product_additional_img_id}', 'ProductController@productAdditionalImage')->name('web.product_additional_image');
-    Route::get('brand-banner/{brand_id}', 'ProductController@brandBanner')->name('web.brand_banner');
+Route::get('/Forgot-password/Change-password', function () {
+    return view('web.user.forgot-change-password');
+})->name('web.user.forgot-change-password');
 
-    /** User Register **/
-    Route::get('register', 'UsersController@showUserRegisterForm')->name('web.register');
-    Route::post('register', 'UsersController@createUser');
+//========= Address =========//
 
-    /** User Login Route */
-	Route::get('login', 'UsersLoginController@showUserLoginForm')->name('web.login');
-	Route::post('login', 'UsersLoginController@userLogin');
-	
-	/** User Logout **/
-	Route::get('logout', 'UsersLoginController@logout')->name('web.logout');
+Route::get('/address', function () {
+    return view('web.address.address');
+})->name('web.address.address');
 
-	/** What New Product **/
-	Route::get('whats-new/{sort_by}', 'IndexController@whatsNewProductList')->name('web.whats_new');
-	/** What New Sorted By Product **/
-	Route::post('whats-new-sort', 'IndexController@whatsNewProductSortList')->name('web.whats_new_sort');
+Route::get('/address/Edit', function () {
+    return view('web.address.edit-address');
+})->name('web.address.edit-address');
 
-	/** Theme **/
-	Route::get('theme', 'IndexController@themeList')->name('web.theme');
-	/** Theme Product **/
-	Route::get('theme-product/{theme_id}/{sort_by}', 'IndexController@themeProductList')->name('web.theme_product');
-	/** Theme Sorted By Product **/
-	Route::post('theme-product-sort/{theme_id}', 'IndexController@themeProductSortList')->name('web.theme_product_sort');
-	/** Theme URL Generate **/
-	Route::get('theme-banner/{theme_id}', 'ProductController@themeBanner')->name('web.theme_banner');
+//========= profile =========//
 
-	/** Brand Product **/
-	Route::get('brand-product/{brand_id}/{sort_by}', 'IndexController@brandProductList')->name('web.brand_product');
-	/** Brand Sorted By Product **/
-	Route::post('brand-product-sort/{brand_id}', 'IndexController@brandProductSortList')->name('web.brand_product_sort');
+Route::get('/Profile', function () {
+    return view('web.profile.profile');
+})->name('web.profile.profile');
 
-	Route::group(['middleware'=>'auth:users'],function(){
+Route::get('/Profile/Edit', function () {
+    return view('web.profile.edit-profile');
+})->name('web.profile.edit-profile');
 
-		/** Checkout Page **/
-		Route::get('checkout', 'CheckoutController@showCheckoutForm')->name('web.checkout');
-		/** Place Order **/
-		Route::post('place-order', 'CheckoutController@placeOrder')->name('web.place_order');
-		/** Thank You Page **/
-		Route::get('thankyou', 'CheckoutController@thankyou')->name('web.thankyou');
+Route::get('/Profile/Change-password', function () {
+    return view('web.profile.change-password');
+})->name('web.profile.change-password');
 
-		/** Add Address **/
-		Route::post('address', 'AddressController@addAddress')->name('web.add_address');
+//========= checkout =========//
 
-		/** Add Review **/
-		Route::post('add-review', 'ReviewController@addReview')->name('web.add_review');
+Route::get('/cart', function () {
+    return view('web.checkout.cart');
+})->name('web.checkout.cart');
 
-		/** Add to Wish List **/
-		Route::get('add-wish-list/{product_id}', 'WishListController@addWishList')->name('web.add_wish_list');
-		/** Wish List **/
-		Route::get('wish-list', 'WishListController@wishList')->name('web.wish_list');
-		/** Remove Wish List Item **/
-		Route::get('remove-wish-list/{product_id}', 'WishListController@removeWishList')->name('web.remove_wish_list');
+Route::get('/Checkout', function () {
+    return view('web.checkout.checkout');
+})->name('web.checkout.checkout');
 
-		/** My Orders History **/
-		Route::get('my-order-history', 'OrdersController@myOrderHistory')->name('web.my_order_history');
+Route::get('/Order-placed', function () {
+    return view('web.checkout.corfirm');
+})->name('web.checkout.corfirm');
 
-		/** My Profile **/
-		Route::get('my-profile', 'UsersController@myProfile')->name('web.my_profile'); 
-		/** Update My Profile **/
-		Route::post('update-my-profile', 'UsersController@updateMyProfile')->name('web.update_my_profile');
-	});
-});
-?>
+//========= order =========//
+
+Route::get('/Order', function () {
+    return view('web.order.order');
+})->name('web.order.order');
+
+//========= wishlist =========//
+
+Route::get('/Wishlist', function () {
+    return view('web.wishlist.wishlist');
+})->name('web.wishlist.wishlist');

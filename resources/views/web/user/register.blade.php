@@ -1,100 +1,84 @@
-@extends('web.template.master')
+  @extends('web.templet.master')
 
-@section('content')
-<!-- page-title-area start -->
-		<div class="page-title-area">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="title-heading text-center">
-							<h1>REGISTER PAGE</h1>
-							<p>We are a featured brand that calls itself fashion</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- page-title-area end -->
-		<!-- breadcrumb-area start -->
-		<div class="breadcrumb-area">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="breadcrumb-list">
-							<ul>
-								<li><a href="{{ url('/') }}">HOME</a></li>
-								<li><span>	Register Page</span></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- breadcrumb-area end -->
-		<!-- login-area start -->
-		<div class="login-area">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-2"></div>
-					<div class="col-md-8">
-						<div class="login-content login-margin">
-							<h2 class="login-title">create a new account</h2>
-							@if(session()->has('msg'))
-								<p>{{ session()->get('msg') }}</p>
-							@endif
-							<form action="{{ url('register') }}" autocomplete="off" method="POST">
-								@csrf
-								<label>Name</label>
-								<input type="text" name="name" value="{{ old('name') }}" required />
-								@error('name')
-	                                {{ $message }}
-	                            @enderror
-								<label>Email</label>
-								<input type="email" name="email" value="{{ old('email') }}" required />
-								@error('email')
-	                                {{ $message }}
-	                            @enderror
-								<label>Mobile No</label>
-								<input type="number" min="0" name="mobile_no" value="{{ old('mobile_no') }}" required />
-								@error('mobile_no')
-	                                {{ $message }}
-	                            @enderror
-								<label>Password</label>
-								<input type="password" name="pass" value="{{ old('pass') }}" required />
-								@error('pass')
-	                                {{ $message }}
-	                            @enderror
-								<input class="login-sub" type="submit" value="sign up" />
-								<a href="{{ route('web.login') }}" class="login-link">Already Customer? Login Here</a>
-							</form>
-							<div class="sign-up-today">
-								<h2 class="login-title">sign up today and you'll be able to:</h2>
-								<ul>
-									<li>
-										<span>
-											<i class="fa fa-check-square-o"></i>
-											<span>speed your way through the checkout</span>
-										</span>
-									</li>
-									<li>
-										<span>
-											<i class="fa fa-check-square-o"></i>
-											<span>track your order easily</span>
-										</span>
-									</li>
-									<li>
-										<span>
-											<i class="fa fa-check-square-o"></i>
-											<span>keep a record of your all purchase</span>
-										</span>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-2"></div>
-				</div>
-			</div>
-		</div>
-		<!-- login-area end -->
-@endsection
+  {{-- @include('web.include.seo') --}}
+
+  @section('seo')
+    <meta name="description" content="Credence">
+  @endsection
+
+  @section('content')
+    <!-- JTV Home Slider -->
+    <section class="main-container col1-layout product-login">
+        <div class="main container">
+          <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8" style="margin: auto;">
+              <div class="account-login register-login">
+                  <fieldset class="col2-set">
+                      <div class="new-users"><strong>Register</strong>
+                          <div class="content">
+                            <p>If you don't have an account with us, please register in.</p>
+
+                            <form action="http://assamproducts.webinfotechghy.xyz/registration" autocomplete="off">
+                              <ul class="form-list">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <label for="name">Name <span class="required">*</span></label>
+                                            <br>
+                                            <input type="text" name="name" value="" class="input-text required-entry" required="">
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label for="email">Email Address <span class="required">*</span></label>
+                                            <br>
+                                            <input type="email" class="input-text required-entry" value="" name="email" required="">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="email">Phone Number <span class="required">*</span></label>
+                                            <br>
+                                            <input type="number" class="input-text required-entry" value="" name="contact_no">
+
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label for="pass">Password <span class="required">*</span></label>
+                                            <br>
+                                            <input type="password" class="input-text required-entry validate-password" name="password" required="">
+
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="pass">Confirm Password <span class="required">*</span></label>
+                                            <br>
+                                            <input type="password" title="Confirm Password" name="confirm_password" class="input-text required-entry validate-password">
+                                        </div>
+                                    </div>
+                                </li>
+                              </ul>
+                              <p class="required">* Required Fields</p>
+                              <div class="buttons-set">
+                                  <button id="send2" name="send" type="submit" class="button login"><span>Register Account</span></button>
+                              </div>
+                            </form>
+                            <hr>
+                            <p>If you have an account with us, please log in.</p>
+                            <a class="button login " href="{{route('web.user.login')}}">LOGIN TO ACCOUNT</a>
+                            </div>
+                      </div>
+                  </fieldset>
+              </div>
+            </div>          
+          </div>
+        </div>
+    </section>
+       
+  @endsection
+
+  @section('script')
+  @endsection

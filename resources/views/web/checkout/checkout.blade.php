@@ -1,237 +1,236 @@
-@extends('web.template.master')
+  @extends('web.templet.master')
 
-@section('content')
-<!-- page-title-area start -->
-		<div class="page-title-area">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="title-heading text-center">
-							<h1>Our CHECKOUT PAGE</h1>
-							<p>We are a featured brand that calls itself fashion</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- page-title-area end -->
-		<!-- breadcrumb-area start -->
-		<div class="breadcrumb-area">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="breadcrumb-list">
-							<ul>
-								<li><a href="{{ url('/') }}">HOME</a></li>
-								<li><a href="{{ route('web.view_cart') }}">Shopping Cart</a></li>
-								<li><span>Checkout</span></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- breadcrumb-area end -->
-		<br><br>
-		<!-- checkout-area start -->
-		<div class="checkout-area">
-			<div class="container">
-				<div class="row">
+  {{-- @include('web.include.seo') --}}
 
-						<div class="col-lg-6 col-md-6">
-							<div class="your-order">
-								{{-- <form autocomplete="off" method="POST" action="{{ route('web.place_order') }}"> --}}
-									{{-- @csrf --}}
-								<h3>Your order</h3>
-								<div class="your-order-table table-responsive">
-									<table>
-											<tr class="cart-subtotal">
-												<th>Cart Subtotal</th>
-												<td><span class="amount">₹ {{ $sub_total }}</span></td>
-											</tr>
-											<tr class="shipping">
-												<th>Shipping</th>
-												<td>
-													<ul>
-														<li>
-															<input type="radio" />
-															<label>Free Shipping:</label>
-														</li>
-													</ul>
-												</td>
-											</tr>
-											<tr class="order-total">
-												<th>Order Total</th>
-												<td><strong><span class="amount">₹ {{ $sub_total }}</span></strong>
-												</td>
-											</tr>
-									</table>
-								</div>
-								<div class="payment-method">
-									<div>
-										<center>
-											<a href="javascript:void(0)" data-amount="{{ $sub_total }}" class="buy_now btn order-button-payment">Place order</a>
-										</center>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-lg-6 col-md-6">
-							<div class="checkbox-form">
-								<h3>Billing Details</h3>
-								<div class="row">
-									<div class="col-md-12">
-										@if(count($all_address) > 0)
-											@foreach($all_address as $key => $item)
-											<div class="row" style="padding: 10px 20px;">
-												<div class="col-md-12">
-													<input type="radio" name="address_id" value="{{ $item->id }}" required> 
-													<b>
-														{{ $item->first_name." ".$item->last_name }}, {{ $item->address }}, {{ $item->city }}, {{ $item->pin_code }}, {{ $item->email }}, {{ $item->mobile_no }}, {{ $item->state }} 
-													</b>
-												</div>
-											</div>
-											@endforeach
-											@error('address_id')
-												{{ $message }}
-											@enderror
-										@endif
-									</div>
-								</div>
-							{{-- </form> --}}
-								<div class="different-address">
-										<div class="ship-different-title">
-											<br>
-											<h4>
-												<label>Add New address?</label>
-												<input id="ship-box" type="checkbox" />
-											</h4>
-										</div>
-										<form method="POST" autocomplete="off" action="{{ route('web.add_address') }}">
-											@csrf
-									<div id="ship-box-info" class="row">
-										<div class="col-md-6">
-											<div class="checkout-form-list">
-												<label>First Name <span class="required">*</span></label>
-												<input type="text" name="first_name" required />
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="checkout-form-list">
-												<label>Last Name <span class="required">*</span></label>
-												<input type="text" name="last_name" required />
-											</div>
-										</div>
-										<div class="col-md-12">
-											<div class="checkout-form-list">
-												<label>Address <span class="required">*</span></label>
-												<input type="text" name="address" required />
-											</div>
-										</div>
-										<div class="col-md-12">
-											<div class="checkout-form-list">
-												<label>Town / City <span class="required">*</span></label>
-												<input type="text" name="city" required />
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="checkout-form-list">
-												<label>State / County <span class="required">*</span></label>
-												<input type="text" name="state" required />
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="checkout-form-list">
-												<label>PIN Code <span class="required">*</span></label>
-												<input type="text" name="pin_code" required />
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="checkout-form-list">
-												<label>Email <span class="required">*</span></label>
-												<input type="email" name="email"/>
-											</div>
-										</div>
-										<div class="col-md-6">
-											<div class="checkout-form-list">
-												<label>Mobile No  <span class="required">*</span></label>
-												<input type="text" name="mobile_no" required />
-											</div>
-										</div>
-										<div class="col-md-12">
-											<button type="submit" class="btn btn-primary">Add</button>
-										</div>
-									</div>
-										</form>
-								</div>
-							</div>
-						</div>
-				</div>
-			</div>
-		</div>
-		<!-- checkout-area end -->
-@endsection
+  @section('seo')
+    <meta name="description" content="Credence">
+  @endsection
 
-@section('script')
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script>
-$.ajaxSetup({
-    headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    }
-}); 
+  @section('content')
+    <!-- JTV Home Slider -->
+    <section class="main-container col2-left-layout">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-9">
+            <article class="col-main" style="width: 100%;">              
+              <div class="ordernav" style="padding-bottom: 0.8%;">
+                  <ul>
+                    <li style="border-color: #323d61"><div>Cart information</div></li>
+                    <li class="step"><div>shipping information</div></li>
+                    <li><div>Order confirmation</div></li>
+                  </ul>
+              </div>
+              <div class="container-fluid">
+                  <div class="row">
+                    <!-- <div class="col-md-1"></div> -->
+                    <div class="col-md-12">
+                        <div class="row">
+                          <div class="box-account">
+                            <div class="page-title">
+                              <h2 class="text-center" style="padding: 0">Shipping Information</h2>
+                            </div>                            
+                            <div class="col2-set" id="select-address">
+                              <h5 class="text-center">Select Address</h5>
+                              <div class="col-1">
+                                <div class="single-address flex">
+                                  <label class="radio-container">
+                                    <input type="radio" checked="checked" name="address" value="9">
+                                    <span class="checkmark"></span>
+                                  </label>
+                                  <div class="single-address-content">
+                                    <p>Vishal Nag</p>
+                                    <p>guwahatil</p>
+                                    <p>Phone: 4565456233</p>
+                                    <p>Email: im@vsishal.com</p>
+                                    <p>sdasdasd, sdSDSDSD</p>
+                                    <p>Pincode: 784125</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-1">
+                                <div class="single-address flex">
+                                  <label class="radio-container">
+                                    <input type="radio" checked="checked" name="address" value="9">
+                                    <span class="checkmark"></span>
+                                  </label>
+                                  <div class="single-address-content">
+                                    <p>Vishal Nag</p>
+                                    <p>guwahatil</p>
+                                    <p>Phone: 4565456233</p>
+                                    <p>Email: im@vsishal.com</p>
+                                    <p>sdasdasd, sdSDSDSD</p>
+                                    <p>Pincode: 784125</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-1">
+                                <div class="single-address flex">
+                                  <label class="radio-container">
+                                    <input type="radio" checked="checked" name="address" value="9">
+                                    <span class="checkmark"></span>
+                                  </label>
+                                  <div class="single-address-content">
+                                    <p>Vishal Nag</p>
+                                    <p>guwahatil</p>
+                                    <p>Phone: 4565456233</p>
+                                    <p>Email: im@vsishal.com</p>
+                                    <p>sdasdasd, sdSDSDSD</p>
+                                    <p>Pincode: 784125</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="manage_add" onclick="myFunction()"><h5 class="text-center">Add New Shipping Addresses</h5> </div>
+                            </div>
+                            <div class="checkout-page" id="add-address" style="display: none;">
+                              <h5 class="text-center">Add New Address</h5>   
+                              <div class="box-border">
+                              <form method="POST" action="http://assamproducts.webinfotechghy.xyz/address" autocomplete="off">
+                                <input type="hidden" name="_token" value="SbcrwxGNI8nsUjuCOLRqrFVYCwSHDcTxbYEnbBCi">                      <ul>
+                                  <li class="row">
+                                    <div class="col-sm-6">
+                                      <label for="first_name" class="required">Name</label>
+                                      <input type="text" class="input form-control" name="name" id="name">
+                                      <span id="name_msg" style="color: red;"></span>
+                                    </div>
+                                    <!--/ [col] -->
+                                    <div class="col-sm-6">
+                                      <label for="email_address" class="required">Email Address</label>
+                                      <input type="email" class="input form-control" name="email" id="email_address">
+                                      <span id="email_msg" style="color: red;"></span>
+                                    </div>
+                                    <!--/ [col] --> 
+                                  </li>
+                                  <!--/ .row -->
+                                  <li class="row">
+                                    <div class="col-xs-12">
+                                      <label for="address" class="required">Address</label>
+                                      <textarea class="input form-control form-area" name="address" id="address" rows="10"></textarea>
+                                      <span id="address_msg" style="color: red;"></span>
+                                    </div>
+                                    <!--/ [col] --> 
+                                    
+                                  </li>
+                                  <!-- / .row -->
+                                  <li class="row">
+                                    <div class="col-sm-6">
+                                      <label for="telephone">Phone Number</label>
+                                      <input type="number" name="contact_no" class="input form-control" id="telephone">
+                                      <span id="telephone_msg" style="color: red;"></span>
+                                    </div>
+                                    <!--/ [col] -->
+                                    <div class="col-sm-6">
+                                      <label for="postal_code" class="required">Pincode</label>
+                                      <input type="number" class="input form-control" name="pin_code" id="postal_code">
+                                      <span id="postal_code_msg" style="color: red;"></span>
+                                    </div>
+                                    <!--/ [col] --> 
+                                  </li>
+                                  <!--/ .row -->
+                                  
+                                  <li class="row">
+                                    <div class="col-sm-6">
+                                      <label for="city" class="required">City</label>
+                                      <input class="input form-control" type="text" name="city" id="city">
+                                      <span id="city_msg" style="color: red;"></span>
+                                    </div>
+                                    <!--/ [col] -->
+                                    
+                                    <div class="col-sm-6">
+                                      <label class="required">State/Province</label>
+                                      <input type="text" class="input form-control" name="state" id="state">
+                                      <span id="state_msg" style="color: red;"></span>
+                                    </div>
+                                    <!--/ [col] --> 
+                                  </li>
+                                  <!--/ .row -->
+                                  <li>
+                                    <button onclick="myFunction()" type="button" class="button button1">Cancel</button>
+                                    <button type="submit" class="button" id="address_btn">Continue</button>
+                                  </li>
+                                </ul>
+                                </form>
+                              </div>
+                            </div>                            
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+            </article>
+            <!--  ///*///======    End article  ========= //*/// --> 
+          </div>
+          <div class="sidebar col-sm-3 col-xs-12">
+            <aside class="sidebar">
+              <div class="block-title" style="border-bottom: 0">PAYMENT INFORMATION</div>
+              <div class="cartcalculation">
+                <div class="paymttotal">
+                  <h4 style="text-align: left;">Cart Amount  </h4>
+                  <h4 style="text-align: right;" id="total">880</h4>
+                </div>
+                <div class="paymttotal">
+                  <h4 style="text-align: left;">Shipping  </h4>
+                  <h4 style="text-align: right;" id="total">30</h4>
+                </div>
+                <div class="paymttotal">
+                  <h4 style="text-align: left;font-weight: 700">Grand Total </h4>
+                  <h4 style="text-align: right;font-weight: 700" id="total">910</h4>
+                </div>
 
-$('body').on('click', '.buy_now', function(e){
+                <div class="paymtmthd">
+                  <label>Payment Methord *</label>
+                  <label class="radio-container">
+                    <input type="radio" name="payment_type" value="1" required checked class="payment_type_radio">
+                    <span class="checkmark"></span>
+                    Cash On Delivery
+                  </label>
+                  <label class="radio-container">
+                    <input type="radio" name="payment_type" value="2" required class="payment_type_radio">
+                    <span class="checkmark"></span>
+                    Pay Online
+                  </label> 
+                </div>                                    
+                <div class="paymttotal" style="float: right;margin-top: 10px">
+                    <a href="{{route('web.checkout.corfirm')}}" class="button button--aylen btn">Proceed to Checkout</a>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+       
+  @endsection
 
-	if($("input:radio[name='address_id']").is(":checked")) {
+  @section('script')
+    <script type="text/javascript">
+      function myFunction() {
+        var x = document.getElementById("add-address");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+        var y = document.getElementById("select-address");
+        if (y.style.display === "none") {
+          y.style.display = "block";
+        } else {
+          y.style.display = "none";
+        }
+      }
+      function myFunction1() {
+        var x = document.getElementById("add-address");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+        var y = document.getElementById("select-address");
+        if (y.style.display === "none") {
+          y.style.display = "block";
+        } else {
+          y.style.display = "none";
+        }
+      }
+    </script>
+  @endsection
 
-		var address_id = $('input[name=address_id]:checked').val();
-	    var totalAmount = $(this).attr("data-amount");
-	    var options = {
-	        "key": "rzp_live_ILgsfZCZoFIKMb",
-	        "amount": (1 * 100),
-	        "currency": "INR",
-	        "name": "Ciel Couture",
-	        "description": "Payment",
-	        "image": "https://www.tutsmake.com/wp-content/uploads/2018/12/cropped-favicon-1024-1-180x180.png",
-	        "handler": function (response){
-	            
-	            $.ajax({
-	                url: SITEURL + 'place-order',
-	                type: 'post',
-	                dataType: 'json',
-	                data: {
-	                    razorpay_payment_id: response.razorpay_payment_id ,
-	                    razorpay_order_id: response.razorpay_order_id,
-	                    razorpay_signature: response.razorpay_signature,
-	                    totalAmount : totalAmount,
-	                    address_id: address_id
-	                }, 
-	                success: function (msg) {
-	                    window.location.href = SITEURL + 'thankyou';
-	                }
-	            });
-	        },
-	        "prefill": {
-	        	"name": '{{ Auth::user()->name }}',
-	            "contact": '{{ Auth::user()->contact_no }}',
-	            @if(!empty(Auth::user()->email))
-	            	"email": '{{ Auth::user()->email }}'
-	            @else
-	            	"email": 'pronabdasbaba5@gmail.com'
-	            @endif
-	        },
-	        "theme": {
-	            "color": "#528FF0"
-	        }
-	    };
-	    
-	    var rzp1 = new Razorpay(options);
-	    rzp1.open();
-	    e.preventDefault();
-  	} else {
-  		alert('Please ! Select Address');
-  	}
-});
-</script>
-@endsection

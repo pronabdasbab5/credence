@@ -1,75 +1,154 @@
-@extends('web.template.master')
+  @extends('web.templet.master')
 
-@section('content')
-<!-- page-title-area start -->
-		<div class="page-title-area">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="title-heading text-center">
-							<h1>My Wishlist</h1>
-							<p>We are a featured brand that calls itself fashion</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- page-title-area end -->
-		<!-- breadcrumb-area start -->
-		<div class="breadcrumb-area">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="breadcrumb-list">
-							<ul>
-								<li><a href="{{ route('web.index') }}">HOME</a></li>
-								<li><a href="{{ route('web.view_cart') }}">Shopping cart</a></li>
-								<li><span>Wishlist</span></li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- breadcrumb-area end -->
-		<!-- wishlist-area start -->
-		<div class="wishlist-area">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-12 col-sm-12 col-xs-12">
-						<div class="wishlist-content">
-							<form action="#">
-								<div class="wishlist-table table-responsive">
-									<table>
-										<thead>
-											<tr>
-												<th class="product-remove"><span class="nobr">Remove</span></th>
-												<th class="product-thumbnail">Image</th>
-												<th class="product-name"><span class="nobr">Product Name</span></th>
-												<th class="product-price"><span class="nobr"> Unit Price </span></th>
-												<th class="product-price"><span class="nobr"> Discount </span></th>
-												<th class="product-add-to-cart"><span class="nobr">Go To Cart </span></th>
-											</tr>
-										</thead>
-										<tbody>
-											@foreach($wishlist as $key => $item)
-											<tr>
-												<td class="product-remove"><a href="{{ route('web.remove_wish_list', ['product_id' => encrypt($item->id)]) }}">×</a></td>
-												<td class="product-thumbnail"><a href="{{ route('web.product_detail', ['product_id' => encrypt($item->id)]) }}"><img src="{{ route('web.product_banner_image', ['product_id' => encrypt($item->id)]) }}" alt="" /></a></td>
-												<td class="product-name"><a href="{{ route('web.product_detail', ['product_id' => encrypt($item->id)]) }}">{{ $item->product_name }}</a></td>
-												<td class="product-price"><span class="amount">₹ {{ $item->price }}</span></td>
-												<td class="product-price"><span class="amount">₹ {{ $item->discount }}</span></td>
-												<td class="product-add-to-cart"><a href="{{ route('web.product_detail', ['product_id' => encrypt($item->id)]) }}"> Go to Cart</a></td>
-											</tr>
-											@endforeach
-										</tbody>
-									</table>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- wishlist-area end -->
-@endsection
+  {{-- @include('web.include.seo') --}}
+
+  @section('seo')
+    <meta name="description" content="Credence">
+  @endsection
+
+  @section('content')
+    <!-- JTV Home Slider -->
+    <section class="main-container col2-left-layout wishlist">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-12">
+            <article class="col-main" style="width: 100%;">
+              <div class="container-fluid">
+                  <div class="row">
+                    <div class="category-products">
+                  <ul class="products-grid row">
+                    <li class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
+                      <div class="item">
+                        <div class="item-inner">
+                          <div class="item-img">
+                            <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img06.jpg"> </a>
+                            </div>
+                          </div>
+                          <div class="item-info">
+                            <div class="info-inner">
+                              <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
+                              <div class="item-content">
+                                <div class="item-price">
+                                  <div class="price-box"> <span class="regular-price"> <span class="price">$99.00</span> </span> </div>
+                                </div>
+                                <div class="action">
+                                  <a class="link-wishlist" href="wishlist.html"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
+                                  <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>View Detail</span> </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
+                      <div class="item">
+                        <div class="item-inner">
+                          <div class="item-img">
+                            <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img02.jpg"> </a>
+                            </div>
+                          </div>
+                          <div class="item-info">
+                            <div class="info-inner">
+                              <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
+                              <div class="item-content">
+                                <div class="item-price">
+                                  <div class="price-box"> <span class="regular-price"> <span class="price">$99.00</span> </span> </div>
+                                </div>
+                                <div class="action">
+                                  <a class="link-wishlist" href="wishlist.html"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
+                                  <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>View Detail</span> </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
+                      <div class="item">
+                        <div class="item-inner">
+                          <div class="item-img">
+                            <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img03.jpg"> </a>
+                            </div>
+                          </div>
+                          <div class="item-info">
+                            <div class="info-inner">
+                              <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
+                              <div class="item-content">
+                                <div class="item-price">
+                                  <div class="price-box"> <span class="regular-price"> <span class="price">$99.00</span> </span> </div>
+                                </div>
+                                <div class="action">
+                                  <a class="link-wishlist" href=""><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
+                                  <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>View Detail</span> </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
+                      <div class="item">
+                        <div class="item-inner">
+                          <div class="item-img">
+                            <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img01.jpg"> </a>
+                            </div>
+                          </div>
+                          <div class="item-info">
+                            <div class="info-inner">
+                              <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
+                              <div class="item-content">
+                                <div class="item-price">
+                                  <div class="price-box"> <span class="regular-price"> <span class="price">$99.00</span> </span> </div>
+                                </div>
+                                <div class="action">
+                                  <a class="link-wishlist" href=""><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
+                                  <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>View Detail</span> </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
+                      <div class="item">
+                        <div class="item-inner">
+                          <div class="item-img">
+                            <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img10.jpg"> </a>
+                            </div>
+                          </div>
+                          <div class="item-info">
+                            <div class="info-inner">
+                              <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
+                              <div class="item-content">
+                                <div class="item-price">
+                                  <div class="price-box"> <span class="regular-price"> <span class="price">$99.00</span> </span> </div>
+                                </div>
+                                <div class="action">
+                                  <a class="link-wishlist" href=""><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
+                                  <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>View Detail</span> </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                  </div>
+              </div>
+            </article>
+            <!--  ///*///======    End article  ========= //*/// --> 
+          </div>
+        </div>
+      </div>
+    </section>
+       
+  @endsection
+
+  @section('script')
+  @endsection

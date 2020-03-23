@@ -1,300 +1,329 @@
-(function ($) {
- "use strict";
 
-/*---------------------
- Dropdown
---------------------- */
-	$( '.dropdown' ).each(function() {
-		var _this = $( this );
-		$( this ).find('a').on( 'click', function(e) {
-			e.preventDefault();
-			$( _this ).toggleClass( 'open' );
-			var value = $( this ).text();
-			$( _this ).find( '> ul > li > a' ).text( value );
+jQuery(document).ready(function() {
+	"use strict";
+
+
+/******************************************
+   Newsletter popup
+******************************************/
+ 
+  jQuery('#myModal').appendTo("body");
+          function show_modal(){
+            jQuery('#myModal').modal('show');
+          }
+
+            jQuery('#myModal').modal({
+            keyboard: false,
+           backdrop:false
+          }); 
+		  
+/******************************************
+   Navigation
+******************************************/		  
+
+	jQuery("#nav > li").hover(function() {
+		var el = jQuery(this).find(".jtv-menu-block-wrapper");
+		el.hide();
+		el.css("left", "0");
+		el.stop(true, true).delay(150).fadeIn(300, "easeOutCubic");
+	}, function() {
+		jQuery(this).find(".jtv-menu-block-wrapper").stop(true, true).delay(300).fadeOut(300, "easeInCubic");
+	});
+	var scrolled = false;
+	jQuery("#nav li.level0.drop-menu").mouseover(function() {
+		if (jQuery(window).width() >= 740) {
+			jQuery(this).children('ul.level1').fadeIn(100);
+		}
+		return false;
+	}).mouseleave(function() {
+		if (jQuery(window).width() >= 740) {
+			jQuery(this).children('ul.level1').fadeOut(100);
+		}
+		return false;
+	});
+/******************************************
+   Navigation
+******************************************/	
+jQuery("#hot-deal-slider .slider-items").owlCarousel({
+		items: 1, //10 items above 1000px browser width
+		itemsDesktop: [1024, 1], //5 items between 1024px and 901px
+		itemsDesktopSmall: [900, 1], // 3 items betweem 900px and 601px
+		itemsTablet: [768, 1], //2 items between 600 and 0;
+		itemsMobile: [360, 1],
+		navigation: false,
+		navigationText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
+		slideSpeed: 500,
+		pagination: false,
+		autoPlay: true,
+	});
+	
+/******************************************
+   Navigation
+******************************************/	
+	jQuery("#bestsell-slider .slider-items").owlCarousel({
+		autoPlay: false,
+		items: 4, //10 items above 1000px browser width
+		itemsDesktop: [1024, 3], //5 items between 1024px and 901px
+		itemsDesktopSmall: [900, 3], // 3 items betweem 900px and 601px
+		itemsTablet: [767, 2], //2 items between 600 and 0;
+		itemsMobile: [360, 1],
+		navigation: true,
+		navigationText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
+		slideSpeed: 5000,
+		pagination: false
+	});
+
+	/* New arrivals slider */
+	jQuery("#special-slider .slider-items").owlCarousel({
+		items: 3, //10 items above 1000px browser width
+		itemsDesktop: [1024, 3], //5 items between 1024px and 901px
+		itemsDesktopSmall: [900, 3], // 3 items betweem 900px and 601px
+		itemsTablet: [768, 2], //2 items between 600 and 0;
+		itemsMobile: [360, 1],
+		navigation: true,
+		navigationText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
+		slideSpeed: 500,
+		pagination: false
+	});
+	/* Brand logo slider */
+	jQuery("#brand-logo-slider .slider-items").owlCarousel({
+		autoPlay: true,
+		items: 6, //10 items above 1000px browser width
+		itemsDesktop: [1024, 4], //5 items between 1024px and 901px
+		itemsDesktopSmall: [900, 3], // 3 items betweem 900px and 601px
+		itemsTablet: [600, 2], //2 items between 600 and 0;
+		itemsMobile: [320, 1],
+		navigation: true,
+		navigationText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
+		slideSpeed: 500,
+		pagination: false
+	});
+	/* Category desc slider */
+	jQuery("#category-desc-slider .slider-items").owlCarousel({
+		autoPlay: true,
+		items: 1, //10 items above 1000px browser width
+		itemsDesktop: [1024, 1], //5 items between 1024px and 901px
+		itemsDesktopSmall: [900, 1], // 3 items betweem 900px and 601px
+		itemsTablet: [600, 1], //2 items between 600 and 0;
+		itemsMobile: [320, 1],
+		navigation: true,
+		navigationText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
+		slideSpeed: 500,
+		pagination: false
+	});
+	/* Related products slider */
+	jQuery("#related-products-slider .slider-items").owlCarousel({
+		items: 4, //10 items above 1000px browser width
+		itemsDesktop: [1024, 3], //5 items between 1024px and 901px
+		itemsDesktopSmall: [900, 3], // 3 items betweem 900px and 601px
+		itemsTablet: [768, 2], //2 items between 600 and 0;
+		itemsMobile: [360, 1],
+		navigation: true,
+		navigationText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
+		slideSpeed: 500,
+		pagination: false
+	});
+	/* Upsell products slider (4 items) */
+	jQuery(".upsell-products-slider .slider-items").owlCarousel({
+		items: 4, //10 items above 1000px browser width
+		itemsDesktop: [1024, 3], //5 items between 1024px and 901px
+		itemsDesktopSmall: [900, 3], // 3 items betweem 900px and 601px
+		itemsTablet: [768, 2], //2 items between 600 and 0;
+		itemsMobile: [360, 1],
+		navigation: true,
+		navigationText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
+		slideSpeed: 500,
+		pagination: false
+	});
+	/* Upsell products slider (1 items) */
+	jQuery(".upsell-products-slider1 .slider-items").owlCarousel({
+		items: 1, //10 items above 1000px browser width
+		itemsDesktop: [1024, 3], //5 items between 1024px and 901px
+		itemsDesktopSmall: [900, 3], // 3 items betweem 900px and 601px
+		itemsTablet: [768, 2], //2 items between 600 and 0;
+		itemsMobile: [360, 1],
+		navigation: true,
+		navigationText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
+		slideSpeed: 500,
+		pagination: false
+	});
+	/* Upsell products slider (2 items) */
+	jQuery(".upsell-products-slider2 .slider-items").owlCarousel({
+		items: 2, //10 items above 1000px browser width
+		itemsDesktop: [1024, 3], //5 items between 1024px and 901px
+		itemsDesktopSmall: [900, 3], // 3 items betweem 900px and 601px
+		itemsTablet: [768, 2], //2 items between 600 and 0;
+		itemsMobile: [360, 1],
+		navigation: true,
+		navigationText: ["<a class=\"flex-prev\"></a>", "<a class=\"flex-next\"></a>"],
+		slideSpeed: 500,
+		pagination: false
+	});
+	/* Mobile menu */
+	jQuery("#jtv-mobile-menu").mobileMenu({
+		MenuWidth: 250,
+		SlideSpeed: 300,
+		WindowsMaxWidth: 767,
+		PagePush: true,
+		FromLeft: true,
+		Overlay: true,
+		CollapseMenu: true,
+		ClassName: "jtv-mobile-menu"
+	});
+	/* side nav categories */
+
+	
+	if (jQuery('.subDropdown')[0]) {
+		jQuery('.subDropdown').on("click", function() {
+			jQuery(this).toggleClass('plus');
+			jQuery(this).toggleClass('minus');
+			jQuery(this).parent().find('ul').slideToggle();
+		});
+	}
+	jQuery.extend(jQuery.easing, {
+		easeInCubic: function(x, t, b, c, d) {
+			return c * (t /= d) * t * t + b;
+		},
+		easeOutCubic: function(x, t, b, c, d) {
+			return c * ((t = t / d - 1) * t * t + 1) + b;
+		},
+	});
+	(function(jQuery) {
+		jQuery.fn.extend({
+			accordion: function() {
+				return this.each(function() {
+					function activate(el, effect) {
+						jQuery(el).siblings(panelSelector)[(effect || activationEffect)](((effect == "show") ? activationEffectSpeed : false), function() {
+							jQuery(el).parents().show();
+						});
+					}
+				});
+			}
+		});
+	})(jQuery);
+	jQuery(function(jQuery) {
+		jQuery('.accordion').accordion();
+		jQuery('.accordion').each(function(index) {
+			var activeItems = jQuery(this).find('li.active');
+			activeItems.each(function(i) {
+				jQuery(this).children('ul').css('display', 'block');
+				if (i == activeItems.length - 1) {
+					jQuery(this).addClass("current");
+				}
+			});
 		});
 	});
-	$('html').on( 'click', function(e) {
-		if( $( e.target ).closest('.dropdown.open').length == 0 ) {
-			$( '.dropdown' ).removeClass('open');
-		}
-        });
+	/* Top Cart js */
+	function slideEffectAjax() {
+		jQuery('.jtv-top-cart-box').mouseenter(function() {
+			jQuery(this).find(".jtv-top-cart-content").stop(true, true).slideDown();
+		});
+		jQuery('.jtv-top-cart-box').mouseleave(function() {
+			jQuery(this).find(".jtv-top-cart-content").stop(true, true).slideUp();
+		});
+	}
+	jQuery(document).ready(function() {
+		slideEffectAjax();
+	});
+	/*  sticky header  */
+	jQuery(window).scroll(function() {
+		jQuery(this).scrollTop() > 1 ? jQuery("nav").addClass("jtv-sticky-header") : jQuery("nav").removeClass("jtv-sticky-header")
+		
+	});
+});
+/******************************************
+    PRICE FILTER
+******************************************/
 
-
-	$("[data-background]").each(function () {
-		$(this).css("background-image", "url(" + $(this).attr("data-background") + ")")
-	})
-
-	/*---------------------
-	 TOP Menu Stick
-	--------------------- */
-	var s = $("#sticker");
-	var pos = s.position();
-	$(window).on('scroll',function() {
-		var windowpos = $(window).scrollTop();
-		if (windowpos > pos.top) {
-		s.addClass("stick");
-		} else {
-			s.removeClass("stick");
+jQuery('.slider-range-price').each(function() {
+	var min = jQuery(this).data('min');
+	var max = jQuery(this).data('max');
+	var unit = jQuery(this).data('unit');
+	var value_min = jQuery(this).data('value-min');
+	var value_max = jQuery(this).data('value-max');
+	var label_reasult = jQuery(this).data('label-reasult');
+	var t = jQuery(this);
+	jQuery(this).slider({
+		range: true,
+		min: min,
+		max: max,
+		values: [value_min, value_max],
+		slide: function(event, ui) {
+			var result = label_reasult + " " + unit + ui.values[0] + ' - ' + unit + ui.values[1];
+			console.log(t);
+			t.closest('.slider-range').find('.amount-range-price').html(result);
 		}
 	});
+})
+
+/*---------------------------------------------------
+   tooltips
+----------------------------------------------------- */
+jQuery('[data-toggle=\'tooltip\']').tooltip({container: 'body'});
 
 
-
-	// mainSlider
-	function mainSlider() {
-		var BasicSlider = $('.slider-active');
-		BasicSlider.on('init', function (e, slick) {
-			var $firstAnimatingElements = $('.single-slider:first-child').find('[data-animation]');
-			doAnimations($firstAnimatingElements);
-		});
-		BasicSlider.on('beforeChange', function (e, slick, currentSlide, nextSlide) {
-			var $animatingElements = $('.single-slider[data-slick-index="' + nextSlide + '"]').find('[data-animation]');
-			doAnimations($animatingElements);
-		});
-		BasicSlider.slick({
-			autoplay: true,
-			autoplaySpeed: 10000,
-			dots: true,
-			fade: true,
-			arrows: false,
-			responsive: [
-				{ breakpoint: 767, settings: { dots: false, arrows: false } }
-			]
-		});
-
-		function doAnimations(elements) {
-			var animationEndEvents = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-			elements.each(function () {
-				var $this = $(this);
-				var $animationDelay = $this.data('delay');
-				var $animationType = 'animated ' + $this.data('animation');
-				$this.css({
-					'animation-delay': $animationDelay,
-					'-webkit-animation-delay': $animationDelay
-				});
-				$this.addClass($animationType).one(animationEndEvents, function () {
-					$this.removeClass($animationType);
-				});
+/*  UItoTop */
+jQuery.fn.UItoTop = function(options) {
+	var defaults = {
+		text: '',
+		min: 200,
+		inDelay: 600,
+		outDelay: 400,
+		containerID: 'toTop',
+		containerHoverID: 'toTopHover',
+		scrollSpeed: 1200,
+		easingType: 'linear'
+	};
+	var settings = jQuery.extend(defaults, options);
+	var containerIDhash = '#' + settings.containerID;
+	var containerHoverIDHash = '#' + settings.containerHoverID;
+	jQuery('body').append('<a href="#" id="' + settings.containerID + '">' + settings.text + '</a>');
+	jQuery(containerIDhash).hide().on("click", function() {
+		jQuery('html, body').animate({
+			scrollTop: 0
+		}, settings.scrollSpeed, settings.easingType);
+		jQuery('#' + settings.containerHoverID, this).stop().animate({
+			'opacity': 0
+		}, settings.inDelay, settings.easingType);
+		return false;
+	}).prepend('<span id="' + settings.containerHoverID + '"></span>').hover(function() {
+		jQuery(containerHoverIDHash, this).stop().animate({
+			'opacity': 1
+		}, 600, 'linear');
+	}, function() {
+		jQuery(containerHoverIDHash, this).stop().animate({
+			'opacity': 0
+		}, 700, 'linear');
+	});
+	jQuery(window).scroll(function() {
+		var sd = jQuery(window).scrollTop();
+		if (typeof document.body.style.maxHeight === "undefined") {
+			jQuery(containerIDhash).css({
+				'position': 'absolute',
+				'top': jQuery(window).scrollTop() + jQuery(window).height() - 50
 			});
 		}
+		if (sd > settings.min) jQuery(containerIDhash).fadeIn(settings.inDelay);
+		else jQuery(containerIDhash).fadeOut(settings.Outdelay);
+	});
+};
+/* mobileMenu */
+var isTouchDevice = ('ontouchstart' in window) || (navigator.msMaxTouchPoints > 0);
+jQuery(window).on("load", function() {
+	if (isTouchDevice) {
+		jQuery('#nav a.level-top').on("click", function(e) {
+			jQueryt = jQuery(this);
+			jQueryparent = jQueryt.parent();
+			if (jQueryparent.hasClass('parent')) {
+				if (!jQueryt.hasClass('menu-ready')) {
+					jQuery('#nav a.level-top').removeClass('menu-ready');
+					jQueryt.addClass('menu-ready');
+					return false;
+				} else {
+					jQueryt.removeClass('menu-ready');
+				}
+			}
+		});
 	}
-	mainSlider();
-
-/* ------------------------------------------------------------------------
-   SEARCH OVERLAP
------------------------------------------------------------------------- */
-jQuery('.search-open').on('click', function(){
-	jQuery('.search-inside').fadeIn();
+	jQuery().UItoTop();
 });
-jQuery('.search-close').on('click', function(){
-	jQuery('.search-inside').fadeOut();
-});
-
-/*----------------------------
- jQuery MeanMenu
------------------------------- */
-	$('nav#dropdown').meanmenu({
-		meanScreenWidth: "991",
-		meanMenuContainer: ".mobile-menu-area .container",
-	});
-
-/*----------------------------
- wow js active
------------------------------- */
-	new WOW().init();
-
-/*----------------------------
- owl active
------------------------------- */
-  $(".product-curosel").owlCarousel({
-      autoPlay: false,
-	  slideSpeed:3000,
-	  pagination:false,
-	  navigation:true,
-      items : 4,
-	  /* transitionStyle : "fade", */    /* [This code for animation ] */
-	  navigationText:["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"],
-      itemsDesktop : [1199,4],
-	  itemsDesktopSmall : [980,3],
-	  itemsTablet: [767,1],
-	  itemsMobile : [479,1],
-  });
-
-/*----------------------------
- owl active
------------------------------- */
-  $(".upcoming-curosel").owlCarousel({
-      autoPlay: false,
-	  slideSpeed:3000,
-	  pagination:true,
-	  navigation:false,
-      items : 1,
-	  /* transitionStyle : "fade", */    /* [This code for animation ] */
-	  navigationText:["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"],
-      itemsDesktop : [1199,1],
-	  itemsDesktopSmall : [980,1],
-	  itemsTablet: [768,1],
-	  itemsMobile : [479,1],
-  });
-/*----------------------------
- owl active
------------------------------- */
-  $(".blog-curosel").owlCarousel({
-      autoPlay: false,
-	  slideSpeed:3000,
-	  pagination:false,
-	  navigation:true,
-      items : 3,
-	  /* transitionStyle : "fade", */    /* [This code for animation ] */
-	  navigationText:["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"],
-      itemsDesktop : [1199,3],
-	  itemsDesktopSmall : [980,2],
-	  itemsTablet: [768,1],
-	  itemsMobile : [479,1],
-  });
-
-/*----------------------------
- owl active
------------------------------- */
-  $(".brand-curosel").owlCarousel({
-      autoPlay: false,
-	  slideSpeed:3000,
-	  pagination:false,
-	  navigation:false,
-      items : 6,
-	  /* transitionStyle : "fade", */    /* [This code for animation ] */
-	  navigationText:["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"],
-      itemsDesktop : [1199,5],
-	  itemsDesktopSmall : [980,4],
-	  itemsTablet: [768,2],
-	  itemsMobile : [479,1],
-  });
-
-/*----------------------------
- owl active
------------------------------- */
-  $(".related-curosel").owlCarousel({
-      autoPlay: false,
-	  slideSpeed:3000,
-	  pagination:false,
-	  navigation:false,
-      items : 4,
-	  /* transitionStyle : "fade", */    /* [This code for animation ] */
-	  navigationText:["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"],
-      itemsDesktop : [1199,3],
-	  itemsDesktopSmall : [980,3],
-	  itemsTablet: [768,2],
-	  itemsMobile : [479,1],
-  });
-/*----------------------------
- owl active
------------------------------- */
-  $(".testimonial-carousel").owlCarousel({
-      autoPlay: false,
-	  slideSpeed:3000,
-	  pagination:true,
-	  navigation:false,
-      items : 1,
-	  /* transitionStyle : "fade", */    /* [This code for animation ] */
-	  navigationText:["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"],
-	  singleItem: true,
-  });
-/*----------------------------
- owl active
------------------------------- */
-  $(".sale-off-carosel").owlCarousel({
-      autoPlay: true,
-	  slideSpeed:3000,
-	  pagination:false,
-	  navigation:false,
-      items : 1,
-	  /* transitionStyle : "fade", */    /* [This code for animation ] */
-	  navigationText:["<i class='fa fa-angle-left'></i>","<i class='fa fa-angle-right'></i>"],
-	  singleItem: true,
-  });
-
-/*----------------------------
- price-slider active
------------------------------- */
-	  $( "#slider-range" ).slider({
-	   range: true,
-	   min: 40,
-	   max: 600,
-	   values: [ 60, 570 ],
-	   slide: function( event, ui ) {
-		$( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-	   }
-	  });
-	  $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
-	   " - $" + $( "#slider-range" ).slider( "values", 1 ) );
-
-/*--------------------------
- scrollUp
----------------------------- */
-	$.scrollUp({
-        scrollText: '<i class="fa fa-angle-up"></i>',
-        easingType: 'linear',
-        scrollSpeed: 900,
-        animation: 'fade'
-    });
-
-/*---------------------
- countdown
---------------------- */
-	$('[data-countdown]').each(function() {
-	  var $this = $(this), finalDate = $(this).data('countdown');
-	  $this.countdown(finalDate, function(event) {
-		$this.html(event.strftime('<span class="cdown days"><span class="time-count">%-D</span> <p>Days</p></span> <span class="cdown hour"><span class="time-count">%-H</span> <p>Hour</p></span> <span class="cdown minutes"><span class="time-count">%M</span> <p>Min</p></span> <span class="cdown second"> <span><span class="time-count">%S</span> <p>Sec</p></span>'));
-	  });
-	});
-
-
-	/*----- cart-plus-minus-button -----*/
-	 $(".cart-plus-minus").append('<div class="dec qtybutton">-</div><div class="inc qtybutton">+</div>');
-	  $(".qtybutton").on("click", function() {
-		var $button = $(this);
-		var oldValue = $button.parent().find("input").val();
-		if ($button.text() == "+") {
-		  var newVal = parseFloat(oldValue) + 1;
-		} else {
-		   // Don't allow decrementing below zero
-		  if (oldValue > 0) {
-			var newVal = parseFloat(oldValue) - 1;
-			} else {
-			newVal = 0;
-		  }
-		  }
-		$button.parent().find("input").val(newVal);
-	  });
-
-
-/*-------------------------
-  showlogin toggle function
---------------------------*/
-	 $( '#showlogin' ).on('click', function() {
-        $( '#checkout-login' ).slideToggle(900);
-     });
-
-/*-------------------------
-  showcoupon toggle function
---------------------------*/
-	 $( '#showcoupon' ).on('click', function() {
-        $( '#checkout_coupon' ).slideToggle(900);
-     });
-
-/*-------------------------
-  Create an account toggle function
---------------------------*/
-	 $( '#cbox' ).on('click', function() {
-        $( '#cbox_info' ).slideToggle(900);
-     });
-
-/*-------------------------
-  Create an account toggle function
---------------------------*/
-	 $( '#ship-box' ).on('click', function() {
-        $( '#ship-box-info' ).slideToggle(1000);
-     });
-
-
-})(jQuery);
