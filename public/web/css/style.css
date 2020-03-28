@@ -248,7 +248,7 @@ a.button:hover {
 	transition: all 0.3s linear;
 	-moz-transition: all 0.3s linear;
 	-webkit-transition: all 0.3s linear;
-	border-width: 2px;
+	/*border-width: 2px;*/
 }
 .price, .breadcrumbs li strong, .product-details span.price, #recently-viewed-items .price-box .special-price .price, #recently-viewed-items .price-box .regular-price .price, .availability.out-of-stock span {
 	color: #394771;
@@ -3761,7 +3761,9 @@ a.button.detail-bnt span {
 }
 .old-price {
 	display: inline;
-	margin-right: 15px;
+	margin-right: 5px;
+    color: #999;
+    text-decoration: line-through;
 }
 /* Old price */
 .old-price .price-label {
@@ -5214,6 +5216,7 @@ a#compare-total:hover {
 }
 .product-view .product-img-box .product-image .more-views-items {
 	margin: 0px 10px;
+    max-width: 100px;
 }
 .product-view .flexslider-thumb-vertical-outer {
 	margin: 0 10px 15px 0;
