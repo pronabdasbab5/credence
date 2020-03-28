@@ -45,9 +45,9 @@
                               $discount_amount = ($product_detail->price * $product_detail->discount) / 100;
                               $amount = ($product_detail->price - $discount_amount);
                             @endphp
-                            <p class="special-price"> <span class="price-label">Special Price</span> <span id="product-price-48" class="price"> ₹{{ $product_detail->price }} </span> </p>
+                            <p class="old-price"> <span class="price-label">Special Price</span> <span id="product-price-48" class="price"> ₹{{ $product_detail->price }} </span> </p>&nbsp;
 
-                            <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> ₹{{ $amount }} </span> </p>
+                            <p class="special-price"> <span class="price-label">Regular Price:</span> <span class="price"> ₹{{ $amount }} </span> </p>
                           @else
                             <p class="special-price"> <span class="price-label">Special Price</span> <span id="product-price-48" class="price"> ₹{{ $product_detail->price }} </span> </p>
                           @endif

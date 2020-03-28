@@ -7,6 +7,7 @@
   @endsection
 
   @section('content')
+    <style>.list-group {margin-bottom: 0}</style>
     <!-- JTV Home Slider -->
     <section class="main-container col2-left-layout">
       <div class="container-fluid">
@@ -72,10 +73,10 @@
                                           $discount_amount = ($item->price * $item->discount) / 100;
                                           $amount = ($item->price - $discount_amount);
                                         @endphp
-                                        ₹{{ $item->price }}
-                                        ₹discount {{ $amount }}
+                                       <span class="old-price"> ₹{{ $item->price }}</span>
+                                       <span class="special-price">₹{{ $amount }}</span>
                                       @else
-                                        ₹{{ $item->price }}
+                                        <span class="special-price">₹{{ $item->price }}</span>
                                       @endif
                                     </span> </span> </div>
                                 </div>
@@ -111,7 +112,21 @@
               <div class="block-title">Shop By Catagories</div>
               <div class="block block-layered-nav">
                 <div class="block-content" id="sidebar">
-                  <p class="block-subtitle">Shopping Options</p> 
+                  	<p class="block-subtitle">Shopping Options</p> 
+	                <div class="list-group">
+                    <a href="#menu5" class="list-group-item ji collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false">
+                      <span class="hidden-sm-down">Apparelnew</span> 
+                    </a>
+                    <div class="sub-cat-1 list-group-item ji collapsed" id="menu5" href="#menu5a" data-toggle="collapse" data-parent="#sidebar" style="height: 0px;" aria-expanded="false">
+	                    <a class="list-group-item" data-parent="#menu5"><span class="hidden-sm-down">Men<i class="fa fa-angle-down"></i></span></a>
+	                    <div class="sub-cat collapse" id="menu5a" aria-expanded="false">
+		                    <a href="#" class="list-group-item" data-parent="#menu5a">Topware</a>			                    
+		                    <a href="#" class="list-group-item" data-parent="#menu5a">Bottomware</a>
+			                </div>
+	                    <a href="#" class="list-group-item" data-parent="#menu1">Women</a>
+	                </div>
+                      
+                    </div>
                   @if(!empty($categories) && (count($categories) > 0))
                     @php
                       $collapse_id = 0;
