@@ -271,239 +271,47 @@
         <div class="nav-inner"> 
           <!-- BEGIN NAV -->
           <ul id="nav" class="hidden-xs">
-            <li class="drop-menu"><a href="{{route('web.index')}}" class="level-top active"><span>Home</span></a></li>            
-            <li class="mega-menu"> <a class="level-top"><span>Appsial</span></a>
-              <div class="jtv-menu-block-wrapper">
-                <div class="jtv-menu-block-wrapper2">
-                  <div class="nav-block jtv-nav-block-center">
-                    <ul class="level0">
-                      <li class="parent item"> <a href="{{route('web.product.product-list')}}"><span>Leather Laptop</span></a>
-                        <ul class="level1">
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Hobo Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Fabric Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Backpack Bga</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Laptop Bga</span></a> </li>
-                        </ul>
-                      </li>
-                      <li class="parent item"> <a href="{{route('web.product.product-list')}}"><span>Brandvilla NewYork</span></a>
-                        <ul class="level1">
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Print Laptop Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Office Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>shoulder bags</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>leather totes</span></a> </li>
-                        </ul>
-                      </li>
-                      <li class="parent item"> <a href="{{route('web.product.product-list')}}"><span>Blue Laptop Bag </span></a>
-                        <ul class="level1">
-                          <li> <a href="{{route('web.product.product-list')}}"><span>leather totes</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Office Bag </span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Fabric Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>WallyBags</span></a> </li>
-                        </ul>
-                      </li>
-                      <li class="parent item"> <a href="{{route('web.product.product-list')}}"><span>Clownfish Synthetic</span></a>
-                        <ul class="level1">
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Clutches bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Genuine bag </span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>WallyBags </span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Leather Bags</span></a> </li>
-                        </ul>
-                      </li>
-                      <li class="parent item"> <a href="{{route('web.product.product-list')}}"><span>Tara Vintage </span></a>
-                        <ul class="level1">
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Crossbody Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Clutch Handbag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Hobo Shoulder</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Saddle Bag</span></a> </li>
-                        </ul>
-                      </li>
-                      <li class="parent item"> <a href="{{route('web.product.product-list')}}"><span>Goatter Denim</span></a>
-                        <ul class="level1">
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Toaster Crossbody</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Piper Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Leather Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Canvas Bag</span></a> </li>
-                        </ul>
-                      </li>
-                    </ul>
+            <li class="drop-menu"><a href="{{route('web.index')}}" class="level-top active"><span>Home</span></a></li>    
+            @if(!empty($header_data['categories']) && (count($header_data['categories']) > 0))
+              @foreach($header_data['categories'] as $key => $item)        
+              <li class="mega-menu"> 
+
+                @if(!empty($item['sub_categories']) && (count($item['sub_categories']) > 0))
+                  <a class="level-top"><span>{{ $item['top_cate_name'] }}</span></a>
+                @else
+                  <a class="level-top" href="{{ route('web.product_list', ['slug' => $item['top_cate_name'], 'top_category_id' => $item['top_category_id'], 'sub_category_id' => 0, 'last_category_id' => 0, 'sorted_by' => 0]) }}"><span>{{ $item['top_cate_name'] }}</span></a>
+                @endif
+
+                @if(!empty($item['sub_categories']) && (count($item['sub_categories']) > 0))
+                <div class="jtv-menu-block-wrapper">
+                  <div class="jtv-menu-block-wrapper2">
+                    <div class="nav-block jtv-nav-block-center">
+                      <ul class="level0">
+                        @foreach($item['sub_categories'] as $keys => $items) 
+
+                          @if (!empty($items->last_category) && (count($items->last_category) > 0))
+                            <li class="parent item"> <a><span>{{ $items->sub_cate_name }}</span></a>
+                          @else
+                            <li class="parent item"> <a href="{{ route('web.product_list', ['slug' => $items->sub_cate_name, 'top_category_id' => $item['top_category_id'], 'sub_category_id' => $items->id, 'last_category_id' => 0, 'sorted_by' => 0]) }}"><span>{{ $items->sub_cate_name }}</span></a>
+                          @endif
+
+                          @if(!empty($items->last_category) && (count($items->last_category) > 0))
+                          <ul class="level1">
+                            @foreach($items->last_category as $keyss => $itemss) 
+                              <li> <a href="{{ route('web.product_list', ['slug' => $itemss->third_level_sub_category_name, 'top_category_id' => $item['top_category_id'], 'sub_category_id' => $items->id, 'last_category_id' => $itemss->id, 'sorted_by' => 0]) }}"><span>{{ $itemss->third_level_sub_category_name }}</span></a> </li>
+                            @endforeach
+                          </ul>
+                          @endif
+                        </li>
+                        @endforeach
+                      </ul>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </li>
-            <li class="mega-menu"> <a class="level-top"><span>Cosmatics</span></a>
-              <div class="jtv-menu-block-wrapper">
-                <div class="jtv-menu-block-wrapper2">
-                  <div class="nav-block jtv-nav-block-center">
-                    <ul class="level0">
-                      <li class="parent item"> <a href="{{route('web.product.product-list')}}"><span>Leather Laptop</span></a>
-                        <ul class="level1">
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Hobo Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Fabric Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Backpack Bga</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Laptop Bga</span></a> </li>
-                        </ul>
-                      </li>
-                      <li class="parent item"> <a href="{{route('web.product.product-list')}}"><span>Brandvilla NewYork</span></a>
-                        <ul class="level1">
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Print Laptop Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Office Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>shoulder bags</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>leather totes</span></a> </li>
-                        </ul>
-                      </li>
-                      <li class="parent item"> <a href="{{route('web.product.product-list')}}"><span>Blue Laptop Bag </span></a>
-                        <ul class="level1">
-                          <li> <a href="{{route('web.product.product-list')}}"><span>leather totes</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Office Bag </span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Fabric Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>WallyBags</span></a> </li>
-                        </ul>
-                      </li>
-                      <li class="parent item"> <a href="{{route('web.product.product-list')}}"><span>Clownfish Synthetic</span></a>
-                        <ul class="level1">
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Clutches bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Genuine bag </span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>WallyBags </span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Leather Bags</span></a> </li>
-                        </ul>
-                      </li>
-                      <li class="parent item"> <a href="{{route('web.product.product-list')}}"><span>Tara Vintage </span></a>
-                        <ul class="level1">
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Crossbody Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Clutch Handbag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Hobo Shoulder</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Saddle Bag</span></a> </li>
-                        </ul>
-                      </li>
-                      <li class="parent item"> <a href="{{route('web.product.product-list')}}"><span>Goatter Denim</span></a>
-                        <ul class="level1">
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Toaster Crossbody</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Piper Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Leather Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Canvas Bag</span></a> </li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="mega-menu"> <a class="level-top"><span>Perfume</span></a>
-              <div class="jtv-menu-block-wrapper">
-                <div class="jtv-menu-block-wrapper2">
-                  <div class="nav-block jtv-nav-block-center">
-                    <ul class="level0">
-                      <li class="parent item"> <a href="{{route('web.product.product-list')}}"><span>Leather Laptop</span></a>
-                        <ul class="level1">
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Hobo Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Fabric Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Backpack Bga</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Laptop Bga</span></a> </li>
-                        </ul>
-                      </li>
-                      <li class="parent item"> <a href="{{route('web.product.product-list')}}"><span>Brandvilla NewYork</span></a>
-                        <ul class="level1">
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Print Laptop Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Office Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>shoulder bags</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>leather totes</span></a> </li>
-                        </ul>
-                      </li>
-                      <li class="parent item"> <a href="{{route('web.product.product-list')}}"><span>Blue Laptop Bag </span></a>
-                        <ul class="level1">
-                          <li> <a href="{{route('web.product.product-list')}}"><span>leather totes</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Office Bag </span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Fabric Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>WallyBags</span></a> </li>
-                        </ul>
-                      </li>
-                      <li class="parent item"> <a href="{{route('web.product.product-list')}}"><span>Clownfish Synthetic</span></a>
-                        <ul class="level1">
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Clutches bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Genuine bag </span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>WallyBags </span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Leather Bags</span></a> </li>
-                        </ul>
-                      </li>
-                      <li class="parent item"> <a href="{{route('web.product.product-list')}}"><span>Tara Vintage </span></a>
-                        <ul class="level1">
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Crossbody Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Clutch Handbag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Hobo Shoulder</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Saddle Bag</span></a> </li>
-                        </ul>
-                      </li>
-                      <li class="parent item"> <a href="{{route('web.product.product-list')}}"><span>Goatter Denim</span></a>
-                        <ul class="level1">
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Toaster Crossbody</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Piper Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Leather Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Canvas Bag</span></a> </li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </li>
-            <li class="mega-menu"> <a class="level-top"><span>Kraft</span></a>
-              <div class="jtv-menu-block-wrapper">
-                <div class="jtv-menu-block-wrapper2">
-                  <div class="nav-block jtv-nav-block-center">
-                    <ul class="level0">
-                      <li class="parent item"> <a href="{{route('web.product.product-list')}}"><span>Leather Laptop</span></a>
-                        <ul class="level1">
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Hobo Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Fabric Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Backpack Bga</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Laptop Bga</span></a> </li>
-                        </ul>
-                      </li>
-                      <li class="parent item"> <a href="{{route('web.product.product-list')}}"><span>Brandvilla NewYork</span></a>
-                        <ul class="level1">
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Print Laptop Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Office Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>shoulder bags</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>leather totes</span></a> </li>
-                        </ul>
-                      </li>
-                      <li class="parent item"> <a href="{{route('web.product.product-list')}}"><span>Blue Laptop Bag </span></a>
-                        <ul class="level1">
-                          <li> <a href="{{route('web.product.product-list')}}"><span>leather totes</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Office Bag </span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Fabric Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>WallyBags</span></a> </li>
-                        </ul>
-                      </li>
-                      <li class="parent item"> <a href="{{route('web.product.product-list')}}"><span>Clownfish Synthetic</span></a>
-                        <ul class="level1">
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Clutches bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Genuine bag </span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>WallyBags </span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Leather Bags</span></a> </li>
-                        </ul>
-                      </li>
-                      <li class="parent item"> <a href="{{route('web.product.product-list')}}"><span>Tara Vintage </span></a>
-                        <ul class="level1">
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Crossbody Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Clutch Handbag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Hobo Shoulder</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Saddle Bag</span></a> </li>
-                        </ul>
-                      </li>
-                      <li class="parent item"> <a href="{{route('web.product.product-list')}}"><span>Goatter Denim</span></a>
-                        <ul class="level1">
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Toaster Crossbody</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Piper Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Leather Bag</span></a> </li>
-                          <li> <a href="{{route('web.product.product-list')}}"><span>Canvas Bag</span></a> </li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </li>
+                @endif
+              </li>
+              @endforeach
+            @endif
             <li class="mega-menu"> <a class="level-top" href="#"><span>Grocery</span></a> </li>
             <li class="mega-menu"> <a class="level-top" href="{{route('web.user.login')}}"><span>Login</span></a> </li>
             <li class="mega-menu"> <a class="level-top" href="{{route('web.user.register')}}"><span>Register</span></a> </li>

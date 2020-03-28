@@ -213,11 +213,14 @@
                         <div class="col-md-12 col-sm-12 col-xs-12 mb-3">
                                 @foreach ($colors as $key => $item)
                                 <div class="col-md-12 col-sm-12 col-xs-12 mb-3 multple_stock_div">
-                                    <div class="col-md-6 col-sm-12 col-xs-12 mb-3">
+                                    <div class="col-md-4 col-sm-12 col-xs-12 mb-3">
                                         <input type="hidden" name="color_id[]" required value="{{ $item->id }}">
                                         <input type="text" class="form-control"  placeholder="Enter Color" name="color[]" value="{{ $item->color }}" required>
                                     </div>
-                                    <div class="col-md-6 col-sm-12 col-xs-12 mb-3">
+                                    <div class="col-md-4 col-sm-12 col-xs-12 mb-3">
+                                        <input type="color" class="form-control"  placeholder="Enter Color Code" name="color_code[]" value="{{ $item->color_code }}" required>
+                                    </div>
+                                    <div class="col-md-4 col-sm-12 col-xs-12 mb-3">
                                         @if ($item->status == 1)
                                             <a class="btn btn-success">Active</a>
                                             <a class="btn btn-danger" href="{{ route('admin.update_product_color_status', ['color_id' => $item->id, 'status' => 2]) }}">In-Active</a>
@@ -346,7 +349,7 @@ $(document).ready(function(){
     $("#add_color_btn").click(function(){
 
         color_cnt++;
-        $("#color_div").append('<div class=\"col-md-12 col-sm-12 col-xs-12 mb-3\" id=\"color_row'+color_cnt+'\"> <div class=\"col-md-4 col-sm-12 col-xs-12 mb-3\"><input type=\"hidden\" name=\"color_id[]\" required> <input type=\"text\" class=\"form-control\" placeholder=\"Enter color\" name=\"color[]\" required> </div><div class=\"col-md-4 col-sm-12 col-xs-12 mb-3\"> <button type=\"button\" onclick=\"removeColorRow('+color_cnt+')\" class=\"btn btn-danger\">Remove</button> </div></div>');
+        $("#color_div").append('<div class=\"col-md-12 col-sm-12 col-xs-12 mb-3\" id=\"color_row'+color_cnt+'\"> <div class=\"col-md-4 col-sm-12 col-xs-12 mb-3\"> <input type=\"text\" class=\"form-control\" placeholder=\"Enter color\" name=\"color[]\" required> </div><div class=\"col-md-4 col-sm-12 col-xs-12 mb-3\"> <input type=\"color\" class=\"form-control\" placeholder=\"Enter color code\" name=\"color_code[]\" required> </div><div class=\"col-md-4 col-sm-12 col-xs-12 mb-3\"> <button type=\"button\" onclick=\"removeColorRow('+color_cnt+')\" class=\"btn btn-danger\">Remove</button> </div></div>');
     });
 });
 

@@ -20,7 +20,7 @@
                       <div class='tp-caption jtv-sub-title sft  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1100' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:2;max-width:auto;max-height:auto;white-space:nowrap;'><span>Fashion 2017</span> </div>
                       <div class='tp-caption jtv-large-title sfl  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1300' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:3;max-width:auto;max-height:auto;white-space:nowrap;'><span>Look Book</span> </div>
                       <div class='tp-caption Title sft  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1450' data-easing='Power2.easeInOut' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;'>Lorem ipsum dolor sit amet, consectetur adipiscing.</div>
-                      <div class='tp-caption sfb  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1500' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;'><a href='#' class="jtv-shop-now-btn">Shop Now</a> </div>
+                      <div class='tp-caption sfb  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1500' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;'><a href='{{ route('web.index') }}' class="jtv-shop-now-btn">Shop Now</a> </div>
                     </div>
                   </li>
                   <li data-transition='random' data-slotamount='7' data-masterspeed='1000' data-thumb='web/images/slider/slide-img2.jpg'><img src="web/images/slider/slide-img2.jpg" alt="slide-img" data-bgposition='left top' data-bgfit='cover' data-bgrepeat='no-repeat' />
@@ -28,7 +28,7 @@
                       <div class='tp-caption jtv-sub-title sft slide2  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1100' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:2;max-width:auto;max-height:auto;white-space:nowrap;padding-right:0px'><span>Designer Clothing</span> </div>
                       <div class='tp-caption jtv-large-title sfl  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1300' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:3;max-width:auto;max-height:auto;white-space:nowrap;'>Trendy colletions</div>
                       <div class='tp-caption Title sft  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1500' data-easing='Power2.easeInOut' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;'>Best offer of the month top brands.</div>
-                      <div class='tp-caption sfb  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1500' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;'><a href='#' class="jtv-shop-now-btn">View colletion</a> </div>
+                      <div class='tp-caption sfb  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1500' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;'><a href='{{ route('web.index') }}' class="jtv-shop-now-btn">View colletion</a> </div>
                     </div>
                   </li>
                   
@@ -37,7 +37,7 @@
                       <div class='tp-caption jtv-sub-title sft slide2  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1100' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:2;max-width:auto;max-height:auto;white-space:nowrap;padding-right:0px'><span>Save up to 45% off</span> </div>
                       <div class='tp-caption jtv-large-title sfl  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1300' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:3;max-width:auto;max-height:auto;white-space:nowrap;'>new season</div>
                       <div class='tp-caption Title sft  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1500' data-easing='Power2.easeInOut' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;'>Most Popular Ecommerce HTML Template.</div>
-                      <div class='tp-caption sfb  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1500' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;'><a href='#' class="jtv-shop-now-btn">Order now</a> </div>
+                      <div class='tp-caption sfb  tp-resizeme ' data-endspeed='500' data-speed='500' data-start='1500' data-easing='Linear.easeNone' data-splitin='none' data-splitout='none' data-elementdelay='0.1' data-endelementdelay='0.1' style='z-index:4;max-width:auto;max-height:auto;white-space:nowrap;'><a href='{{ route('web.index') }}' class="jtv-shop-now-btn">Order now</a> </div>
                     </div>
                   </li>
                 </ul>
@@ -88,6 +88,7 @@
     </div>
 
     <!-- Apprisal Slider -->
+    @if (!empty($apparel_record) && (count($apparel_record) > 0))
     <section>
       <div class="container">
         <div class="upsell-section">
@@ -95,7 +96,7 @@
             <div class="upsell-block">
               <div class="jtv-block-inner">
                 <div class="block-title">
-                  <h2>New Apprisal</h2>
+                  <h2>New {{ $apparel_record[0]->top_cate_name }}</h2>
                 </div>
               </div>
               <div class="row">
@@ -107,64 +108,33 @@
                 <div class="col-sm-6">
                   <div class="upsell-products-slider2 product-flexslider hidden-buttons">
                     <div class="slider-items slider-width-col4 products-grid block-content">
-                      <div class="item" onclick="window.location='{{route('web.product.single-product')}}">
-                        <div class="item-inner">
-                          <div class="item-img">
-                            <div class="item-img-info"> <a href="{{route('web.product.single-product')}}" class="product-image" title="Product Title Here"> <img alt="Product Title Here" src="web/images/products/img05.jpg"> </a>
-                            </div>
-                          </div>
-                          <div class="item-info">
-                            <div class="info-inner">
-                              <div class="item-title"> <a title="Product Title Here" href="{{route('web.product.single-product')}}"> Product Title Here </a> </div>
-                              <div class="item-content">
-                                <div class="item-price">
-                                  <div class="price-box"> <span class="regular-price"> <span class="price">$225.00</span> </span> </div>
-                                </div>
-                                <div class="action">
-                                  <a class="link-wishlist" href="{{route('web.wishlist.wishlist')}}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                                  <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      @foreach($apparel_record as $key => $item)
                       <div class="item">
                         <div class="item-inner">
                           <div class="item-img">
-                            <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img06.jpg"> </a>
+                            <div class="item-img-info"> <a href="{{ route('web.product_detail', ['slug' => $item->slug, 'product_id' => $item->id]) }}" class="product-image" title="{{ $item->product_name }}" target="_blank"> <img alt="{{ $item->product_name }}" src="{{ asset('assets/product_images/'.$item->banner.'') }}"> </a>
                             </div>
                           </div>
                           <div class="item-info">
                             <div class="info-inner">
-                              <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
+                              <div class="item-title"> <a title="{{ $item->product_name }}" href="{{ route('web.product_detail', ['slug' => $item->slug, 'product_id' => $item->id]) }}"> {{ $item->product_name }} </a> </div>
                               <div class="item-content">
                                 <div class="item-price">
-                                  <div class="price-box"> <span class="regular-price"> <span class="price">$99.00</span> </span> </div>
-                                </div>
-                                <div class="action">
-                                  <a class="link-wishlist" href="{{route('web.wishlist.wishlist')}}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                                  <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item">
-                        <div class="item-inner">
-                          <div class="item-img">
-                            <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img05.jpg"> </a>
-                            </div>
-                          </div>
-                          <div class="item-info">
-                            <div class="info-inner">
-                              <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
-                              <div class="item-content">
-                                <div class="item-price">
-                                  <div class="price-box">
-                                    <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $156.00 </span> </p>
-                                    <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $167.00 </span> </p>
+                                  <div class="price-box"> 
+                                    <span class="regular-price"> 
+                                      <span class="price">
+                                        @if (!empty($item->discount))
+                                          @php
+                                            $discount_amount = ($item->price * $item->discount) / 100;
+                                            $amount = ($item->price - $discount_amount);
+                                          @endphp
+                                          ₹{{ $item->price }}
+                                          ₹discount {{ $amount }}
+                                        @else
+                                          ₹{{ $item->price }}
+                                        @endif
+                                      </span> 
+                                    </span> 
                                   </div>
                                 </div>
                                 <div class="action">
@@ -176,28 +146,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="item">
-                        <div class="item-inner">
-                          <div class="item-img">
-                            <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img06.jpg"> </a>
-                            </div>
-                          </div>
-                          <div class="item-info">
-                            <div class="info-inner">
-                              <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
-                              <div class="item-content">
-                                <div class="item-price">
-                                  <div class="price-box"> <span class="regular-price"> <span class="price">$225.00</span> </span> </div>
-                                </div>
-                                <div class="action">
-                                  <a class="link-wishlist" href="{{route('web.wishlist.wishlist')}}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                                  <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      @endforeach
                     </div>
                   </div>
                 </div>
@@ -207,8 +156,10 @@
         </div>
       </div>
     </section>
+    @endif
 
     <!-- Cosmatic & Perfume Slider -->
+    @if ((!empty($f_cosmetics_record) || !empty($s_cosmetics_record)) && ((count($f_cosmetics_record) + count($s_cosmetics_record)) > 0))
     <section>
       <div class="container">
         <div class="upsell-section">
@@ -216,47 +167,49 @@
             <div class="upsell-block">
               <div class="jtv-block-inner">
                 <div class="block-title">
-                  <h2>Cosmatic & Perfume Product</h2>
+                  <h2>
+                    @php
+                      if (!empty($f_cosmetics_record) && (count($f_cosmetics_record) > 0))
+                        $top_category_name = $f_cosmetics_record[0]->top_cate_name;
+                      
+                      if (!empty($s_cosmetics_record) && (count($s_cosmetics_record) > 0))
+                        $top_category_name = $f_cosmetics_record[0]->top_cate_name;
+                    @endphp
+
+                    {{ $top_category_name }}
+                  </h2>
                 </div>
               </div>
               <div class="row">
                 <div class="col-sm-3">
+                  @if (!empty($f_cosmetics_record) && (count($f_cosmetics_record) > 0))
                   <div class="upsell-products-slider1 product-flexslider hidden-buttons">
                     <div class="slider-items slider-width-col4 products-grid block-content">
-                      <div class="item" onclick="window.location='{{route('web.product.single-product')}}">
-                        <div class="item-inner">
-                          <div class="item-img">
-                            <div class="item-img-info"> <a href="{{route('web.product.single-product')}}" class="product-image" title="Product Title Here"> <img alt="Product Title Here" src="web/images/products/img08.jpg"> </a>
-                            </div>
-                          </div>
-                          <div class="item-info">
-                            <div class="info-inner">
-                              <div class="item-title"> <a title="Product Title Here" href="{{route('web.product.single-product')}}"> Product Title Here </a> </div>
-                              <div class="item-content">
-                                <div class="item-price">
-                                  <div class="price-box"> <span class="regular-price"> <span class="price">$225.00</span> </span> </div>
-                                </div>
-                                <div class="action">
-                                  <a class="link-wishlist" href="{{route('web.wishlist.wishlist')}}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                                  <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      @foreach($f_cosmetics_record as $key => $item)
                       <div class="item">
                         <div class="item-inner">
                           <div class="item-img">
-                            <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img09.jpg"> </a>
+                            <div class="item-img-info"> <a href="{{route('web.product.single-product')}}" class="product-image" title="{{ $item->product_name }}"> <img alt="{{ $item->product_name }}" src="{{ asset('assets/product_images/'.$item->banner.'') }}"> </a>
                             </div>
                           </div>
                           <div class="item-info">
                             <div class="info-inner">
-                              <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
+                              <div class="item-title"> <a title="{{ $item->product_name }}" href="{{route('web.product.single-product')}}"> {{ $item->product_name }} </a> </div>
                               <div class="item-content">
                                 <div class="item-price">
-                                  <div class="price-box"> <span class="regular-price"> <span class="price">$99.00</span> </span> </div>
+                                  <div class="price-box"> <span class="regular-price"> 
+                                    <span class="price">
+                                      @if (!empty($item->discount))
+                                        @php
+                                          $discount_amount = ($item->price * $item->discount) / 100;
+                                          $amount = ($item->price - $discount_amount);
+                                        @endphp
+                                        ₹{{ $item->price }}
+                                        ₹discount {{ $amount }}
+                                      @else
+                                        ₹{{ $item->price }}
+                                      @endif
+                                    </span> </span> </div>
                                 </div>
                                 <div class="action">
                                   <a class="link-wishlist" href="{{route('web.wishlist.wishlist')}}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
@@ -267,55 +220,10 @@
                           </div>
                         </div>
                       </div>
-                      <div class="item">
-                        <div class="item-inner">
-                          <div class="item-img">
-                            <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img10.jpg"> </a>
-                            </div>
-                          </div>
-                          <div class="item-info">
-                            <div class="info-inner">
-                              <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
-                              <div class="item-content">
-                                <div class="item-price">
-                                  <div class="price-box">
-                                    <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $156.00 </span> </p>
-                                    <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $167.00 </span> </p>
-                                  </div>
-                                </div>
-                                <div class="action">
-                                  <a class="link-wishlist" href="{{route('web.wishlist.wishlist')}}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                                  <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item">
-                        <div class="item-inner">
-                          <div class="item-img">
-                            <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img08.jpg"> </a>
-                            </div>
-                          </div>
-                          <div class="item-info">
-                            <div class="info-inner">
-                              <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
-                              <div class="item-content">
-                                <div class="item-price">
-                                  <div class="price-box"> <span class="regular-price"> <span class="price">$225.00</span> </span> </div>
-                                </div>
-                                <div class="action">
-                                  <a class="link-wishlist" href="{{route('web.wishlist.wishlist')}}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                                  <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      @endforeach
                     </div>
                   </div>
+                  @endif
                 </div>
                 <div class="col-sm-3 col-xs-6">
                   <div>
@@ -328,42 +236,34 @@
                   </div>
                 </div>
                 <div class="col-sm-3">
+                  @if (!empty($s_cosmetics_record) && (count($s_cosmetics_record) > 0))
                   <div class="upsell-products-slider1 product-flexslider hidden-buttons">
                     <div class="slider-items slider-width-col4 products-grid block-content">
-                      <div class="item" onclick="window.location='{{route('web.product.single-product')}}">
-                        <div class="item-inner">
-                          <div class="item-img">
-                            <div class="item-img-info"> <a href="{{route('web.product.single-product')}}" class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img03.jpg"> </a>
-                            </div>
-                          </div>
-                          <div class="item-info">
-                            <div class="info-inner">
-                              <div class="item-title"> <a title="Product Title Here" href="{{route('web.product.single-product')}}"> Product Title Here </a> </div>
-                              <div class="item-content">
-                                <div class="item-price">
-                                  <div class="price-box"> <span class="regular-price"> <span class="price">$225.00</span> </span> </div>
-                                </div>
-                                <div class="action">
-                                  <a class="link-wishlist" href="{{route('web.wishlist.wishlist')}}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                                  <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      @foreach($s_cosmetics_record as $key => $item)
                       <div class="item">
                         <div class="item-inner">
                           <div class="item-img">
-                            <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img04.jpg"> </a>
+                            <div class="item-img-info"> <a href="{{route('web.product.single-product')}}" class="product-image" title="{{ $item->product_name }}"> <img alt="{{ $item->product_name }}" src="{{ asset('assets/product_images/'.$item->banner.'') }}"> </a>
                             </div>
                           </div>
                           <div class="item-info">
                             <div class="info-inner">
-                              <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
+                              <div class="item-title"> <a title="{{ $item->product_name }}" href="{{route('web.product.single-product')}}"> {{ $item->product_name }} </a> </div>
                               <div class="item-content">
                                 <div class="item-price">
-                                  <div class="price-box"> <span class="regular-price"> <span class="price">$99.00</span> </span> </div>
+                                  <div class="price-box"> <span class="regular-price"> 
+                                    <span class="price">
+                                      @if (!empty($item->discount))
+                                        @php
+                                          $discount_amount = ($item->price * $item->discount) / 100;
+                                          $amount = ($item->price - $discount_amount);
+                                        @endphp
+                                        ₹{{ $item->price }}
+                                        ₹discount {{ $amount }}
+                                      @else
+                                        ₹{{ $item->price }}
+                                      @endif
+                                    </span> </span> </div>
                                 </div>
                                 <div class="action">
                                   <a class="link-wishlist" href="{{route('web.wishlist.wishlist')}}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
@@ -374,55 +274,10 @@
                           </div>
                         </div>
                       </div>
-                      <div class="item">
-                        <div class="item-inner">
-                          <div class="item-img">
-                            <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img03.jpg"> </a>
-                            </div>
-                          </div>
-                          <div class="item-info">
-                            <div class="info-inner">
-                              <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
-                              <div class="item-content">
-                                <div class="item-price">
-                                  <div class="price-box">
-                                    <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $156.00 </span> </p>
-                                    <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $167.00 </span> </p>
-                                  </div>
-                                </div>
-                                <div class="action">
-                                  <a class="link-wishlist" href="{{route('web.wishlist.wishlist')}}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                                  <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item">
-                        <div class="item-inner">
-                          <div class="item-img">
-                            <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img04.jpg"> </a>
-                            </div>
-                          </div>
-                          <div class="item-info">
-                            <div class="info-inner">
-                              <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
-                              <div class="item-content">
-                                <div class="item-price">
-                                  <div class="price-box"> <span class="regular-price"> <span class="price">$225.00</span> </span> </div>
-                                </div>
-                                <div class="action">
-                                  <a class="link-wishlist" href="{{route('web.wishlist.wishlist')}}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                                  <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      @endforeach
                     </div>
                   </div>
+                  @endif
                 </div>
               </div>
             </div>
@@ -430,8 +285,10 @@
         </div>
       </div>
     </section>
+    @endif
 
     <!-- Kraft Slider -->
+    @if (!empty($craft_record) && (count($craft_record) > 0))
     <section>
       <div class="container">
         <div class="upsell-section">
@@ -439,47 +296,38 @@
             <div class="upsell-block">
               <div class="jtv-block-inner">
                 <div class="block-title">
-                  <h2>Kraft Product</h2>
+                  <h2>Kraft {{ $craft_record[0]->top_cate_name }}</h2>
                 </div>
               </div>
               <div class="row">
                 <div class="col-sm-6">
                   <div class="upsell-products-slider2 product-flexslider hidden-buttons">
                     <div class="slider-items slider-width-col4 products-grid block-content">
-                      <div class="item" onclick="window.location='{{route('web.product.single-product')}}">
-                        <div class="item-inner">
-                          <div class="item-img">
-                            <div class="item-img-info"> <a href="{{route('web.product.single-product')}}" class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img01.jpg"> </a>
-                            </div>
-                          </div>
-                          <div class="item-info">
-                            <div class="info-inner">
-                              <div class="item-title"> <a title="Product Title Here" href="{{route('web.product.single-product')}}"> Product Title Here </a> </div>
-                              <div class="item-content">
-                                <div class="item-price">
-                                  <div class="price-box"> <span class="regular-price"> <span class="price">$225.00</span> </span> </div>
-                                </div>
-                                <div class="action">
-                                  <a class="link-wishlist" href="{{route('web.wishlist.wishlist')}}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                                  <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      @foreach($craft_record as $key => $item)
                       <div class="item">
                         <div class="item-inner">
                           <div class="item-img">
-                            <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img02.jpg"> </a>
+                            <div class="item-img-info"> <a href="{{ route('web.product_detail', ['slug' => $item->slug, 'product_id' => $item->id]) }}" class="product-image" title="{{ $item->product_name }}" target="_blank"> <img alt="{{ $item->product_name }}" src="{{ asset('assets/product_images/'.$item->banner.'') }}"> </a>
                             </div>
                           </div>
                           <div class="item-info">
                             <div class="info-inner">
-                              <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
+                              <div class="item-title"> <a title="{{ $item->product_name }}" href="{{ route('web.product_detail', ['slug' => $item->slug, 'product_id' => $item->id]) }}" target="_blank"> {{ $item->product_name }} </a> </div>
                               <div class="item-content">
                                 <div class="item-price">
-                                  <div class="price-box"> <span class="regular-price"> <span class="price">$99.00</span> </span> </div>
+                                  <div class="price-box"> <span class="regular-price"> 
+                                    <span class="price">
+                                      @if (!empty($item->discount))
+                                        @php
+                                          $discount_amount = ($item->price * $item->discount) / 100;
+                                          $amount = ($item->price - $discount_amount);
+                                        @endphp
+                                        ₹{{ $item->price }}
+                                        ₹discount {{ $amount }}
+                                      @else
+                                        ₹{{ $item->price }}
+                                      @endif
+                                    </span> </span> </div>
                                 </div>
                                 <div class="action">
                                   <a class="link-wishlist" href="{{route('web.wishlist.wishlist')}}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
@@ -490,53 +338,7 @@
                           </div>
                         </div>
                       </div>
-                      <div class="item">
-                        <div class="item-inner">
-                          <div class="item-img">
-                            <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img01.jpg"> </a>
-                            </div>
-                          </div>
-                          <div class="item-info">
-                            <div class="info-inner">
-                              <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
-                              <div class="item-content">
-                                <div class="item-price">
-                                  <div class="price-box">
-                                    <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $156.00 </span> </p>
-                                    <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $167.00 </span> </p>
-                                  </div>
-                                </div>
-                                <div class="action">
-                                  <a class="link-wishlist" href="{{route('web.wishlist.wishlist')}}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                                  <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="item">
-                        <div class="item-inner">
-                          <div class="item-img">
-                            <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img02.jpg"> </a>
-                            </div>
-                          </div>
-                          <div class="item-info">
-                            <div class="info-inner">
-                              <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
-                              <div class="item-content">
-                                <div class="item-price">
-                                  <div class="price-box"> <span class="regular-price"> <span class="price">$225.00</span> </span> </div>
-                                </div>
-                                <div class="action">
-                                  <a class="link-wishlist" href="{{route('web.wishlist.wishlist')}}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                                  <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      @endforeach
                     </div>
                   </div>
                 </div>
@@ -551,8 +353,10 @@
         </div>
       </div>
     </section>
+    @endif
 
     <!-- New Arrival Slider -->
+    @if (!empty($latests_record) && (count($latests_record) > 0))
     <section>
       <div class="container">
         <div class="upsell-section">
@@ -565,251 +369,50 @@
               </div>
               <div id="" class="upsell-products-slider product-flexslider hidden-buttons">
                 <div class="slider-items slider-width-col4 products-grid block-content">
-                  <div class="item" onclick="window.location='{{route('web.product.single-product')}}">
-                    <div class="item-inner">
-                      <div class="item-img">
-                        <div class="item-img-info"> <a href="{{route('web.product.single-product')}}" class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img05.jpg"> </a>
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Product Title Here" href="{{route('web.product.single-product')}}"> Product Title Here </a> </div>
-                          <div class="item-content">
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$225.00</span> </span> </div>
-                            </div>
-                            <div class="action">
-                              <a class="link-wishlist" href="{{route('web.wishlist.wishlist')}}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                              <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
+                  @foreach($latests_record as $key => $item)
+                      <div class="item">
+                        <div class="item-inner">
+                          <div class="item-img">
+                            <div class="item-img-info"> <a href="{{route('web.product.single-product')}}" class="product-image" title="{{ $item->product_name }}"> <img alt="{{ $item->product_name }}" src="{{ asset('assets/product_images/'.$item->banner.'') }}"> </a>
                             </div>
                           </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="item">
-                    <div class="item-inner">
-                      <div class="item-img">
-                        <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img03.jpg"> </a>
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
-                          <div class="item-content">
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$99.00</span> </span> </div>
-                            </div>
-                            <div class="action">
-                              <a class="link-wishlist" href="{{route('web.wishlist.wishlist')}}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                              <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="item">
-                    <div class="item-inner">
-                      <div class="item-img">
-                        <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img02.jpg"> </a>
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
-                          <div class="item-content">
-                            <div class="item-price">
-                              <div class="price-box">
-                                <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $156.00 </span> </p>
-                                <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $167.00 </span> </p>
+                          <div class="item-info">
+                            <div class="info-inner">
+                              <div class="item-title"> <a title="{{ $item->product_name }}" href="{{route('web.product.single-product')}}"> {{ $item->product_name }} </a> </div>
+                              <div class="item-content">
+                                <div class="item-price">
+                                  <div class="price-box"> <span class="regular-price"> 
+                                    <span class="price">
+                                      @if (!empty($item->discount))
+                                        @php
+                                          $discount_amount = ($item->price * $item->discount) / 100;
+                                          $amount = ($item->price - $discount_amount);
+                                        @endphp
+                                        ₹{{ $item->price }}
+                                        ₹discount {{ $amount }}
+                                      @else
+                                        ₹{{ $item->price }}
+                                      @endif
+                                    </span> </span> </div>
+                                </div>
+                                <div class="action">
+                                  <a class="link-wishlist" href="{{route('web.wishlist.wishlist')}}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
+                                  <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
+                                </div>
                               </div>
                             </div>
-                            <div class="action">
-                              <a class="link-wishlist" href="{{route('web.wishlist.wishlist')}}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                              <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                  <div class="item">
-                    <div class="item-inner">
-                      <div class="item-img">
-                        <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img04.jpg"> </a>
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
-                          <div class="item-content">
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$225.00</span> </span> </div>
-                            </div>
-                            <div class="action">
-                              <a class="link-wishlist" href="{{route('web.wishlist.wishlist')}}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                              <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="item">
-                    <div class="item-inner">
-                      <div class="item-img">
-                        <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img01.jpg"> </a>
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
-                          <div class="item-content">
-                            <div class="item-price">
-                              <div class="price-box"> <span class="regular-price"> <span class="price">$99.00</span> </span> </div>
-                            </div>
-                            <div class="action">
-                              <a class="link-wishlist" href="{{route('web.wishlist.wishlist')}}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                              <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="item">
-                    <div class="item-inner">
-                      <div class="item-img">
-                        <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img06.jpg"> </a>
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
-                          <div class="item-content">
-                            <div class="item-price">
-                              <div class="price-box">
-                                <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $156.00 </span> </p>
-                                <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $167.00 </span> </p>
-                              </div>
-                            </div>
-                            <div class="action">
-                              <a class="link-wishlist" href="{{route('web.wishlist.wishlist')}}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                              <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="item">
-                    <div class="item-inner">
-                      <div class="item-img">
-                        <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img07.jpg"> </a>
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
-                          <div class="item-content">
-                            <div class="item-price">
-                              <div class="price-box">
-                                <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $156.00 </span> </p>
-                                <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $167.00 </span> </p>
-                              </div>
-                            </div>
-                            <div class="action">
-                              <a class="link-wishlist" href="{{route('web.wishlist.wishlist')}}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                              <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="item">
-                    <div class="item-inner">
-                      <div class="item-img">
-                        <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img08.jpg"> </a>
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
-                          <div class="item-content">
-                            <div class="item-price">
-                              <div class="price-box">
-                                <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $156.00 </span> </p>
-                                <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $167.00 </span> </p>
-                              </div>
-                            </div>
-                            <div class="action">
-                              <a class="link-wishlist" href="{{route('web.wishlist.wishlist')}}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                              <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="item">
-                    <div class="item-inner">
-                      <div class="item-img">
-                        <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img09.jpg"> </a>
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
-                          <div class="item-content">
-                            <div class="item-price">
-                              <div class="price-box">
-                                <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $156.00 </span> </p>
-                                <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $167.00 </span> </p>
-                              </div>
-                            </div>
-                            <div class="action">
-                              <a class="link-wishlist" href="{{route('web.wishlist.wishlist')}}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                              <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="item">
-                    <div class="item-inner">
-                      <div class="item-img">
-                        <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img10.jpg"> </a>
-                        </div>
-                      </div>
-                      <div class="item-info">
-                        <div class="info-inner">
-                          <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
-                          <div class="item-content">
-                            <div class="item-price">
-                              <div class="price-box">
-                                <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $156.00 </span> </p>
-                                <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $167.00 </span> </p>
-                              </div>
-                            </div>
-                            <div class="action">
-                              <a class="link-wishlist" href="{{route('web.wishlist.wishlist')}}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                              <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                      @endforeach
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>    
+    </section> 
+    @endif   
 
      <!-- Special Product slider -->  
     <section class="special-products">

@@ -11,104 +11,152 @@ use Response;
 
 class ProductController extends Controller
 {
-    public function bannerImage ($product_id) 
+    public function productList($slug, $top_category_id, $sub_category_id, $last_category_id, $sorted_by)
     {
-        try {
-            $product_id = decrypt($product_id);
-        }catch(DecryptException $e) {
-            return redirect()->back();
+        if ($top_category_id != 0) {
+
+            $products = DB::table('product')
+                ->leftJoin('top_category', 'product.top_category_id', '=', 'top_category.id')
+                ->where('top_category.id', $top_category_id)
+                ->where('product.status', 1)
+                ->where('product.deleted_at', NULL)
+                ->select('product.*', 'top_category.top_cate_name')
+                ->orderBy('product.id', 'DESC')
+                ->paginate(1);
         }
 
-        $product_record = DB::table('product')
-            ->where('id', $product_id)
+        if ($sub_category_id != 0) {
+
+            $products = DB::table('product')
+                ->leftJoin('top_category', 'product.top_category_id', '=', 'top_category.id')
+                ->leftJoin('sub_category', 'product.sub_category_id', '=', 'sub_category.id')
+                ->where('sub_category.id', $sub_category_id)
+                ->where('top_category.id', $top_category_id)
+                ->where('product.status', 1)
+                ->where('product.deleted_at', NULL)
+                ->select('product.*', 'top_category.top_cate_name', 'sub_category.sub_cate_name')
+                ->orderBy('product.id', 'DESC')
+                ->paginate(1);
+        }
+        
+        if ($last_category_id != 0) {
+
+            $products = DB::table('product')
+                ->leftJoin('top_category', 'product.top_category_id', '=', 'top_category.id')
+                ->leftJoin('sub_category', 'product.sub_category_id', '=', 'sub_category.id')
+                ->leftJoin('third_level_sub_category', 'product.third_level_sub_category_id', '=', 'third_level_sub_category.id')
+                ->where('third_level_sub_category.id', $last_category_id)
+                ->where('sub_category.id', $sub_category_id)
+                ->where('top_category.id', $top_category_id)
+                ->where('product.status', 1)
+                ->where('product.deleted_at', NULL)
+                ->select('product.*', 'top_category.top_cate_name', 'sub_category.sub_cate_name', 'third_level_sub_category.third_level_sub_category_name')
+                ->orderBy('product.id', 'DESC')
+                ->paginate(1);
+        }
+
+        $top_category = DB::table('top_category')
+            ->where('status', 1)
             ->get();
 
-        $path = public_path('assets/product/banner/'.$product_record[0]->banner);
+        $categories = [];
+        foreach ($top_category as $key => $item) {
+                
+            $sub_categories = DB::table('sub_category')
+                ->where('top_category_id', $item->id)
+                ->where('status', 1)
+                ->orderBy('id', 'ASC')
+                ->get();
 
-        if (!File::exists($path)) 
-            $response = 404;
+            if(!empty($sub_categories) && count($sub_categories) > 0){
 
-        $file     = File::get($path);
-        $type     = File::extension($path);
-        $response = Response::make($file, 200);
-        $response->header("Content-Type", $type);
+                foreach($sub_categories as $keys => $items){
 
-        return $response;
-    }
+                    $last_categories = DB::table('third_level_sub_category')
+                        ->where('sub_category_id', $items->id)
+                        ->where('status', 1)
+                        ->orderBy('id', 'ASC')
+                        ->get();
 
-    public function productAdditionalImage ($product_additional_img_id) 
-    {
-        try {
-            $product_additional_img_id = decrypt($product_additional_img_id);
-        }catch(DecryptException $e) {
-            return redirect()->back();
+                    $items->last_category = $last_categories;
+                }
+            }
+
+            $categories[] = [
+                'top_category_id' => $item->id,
+                'top_cate_name' => $item->top_cate_name,
+                'sub_categories' => $sub_categories
+            ];
         }
 
-        $product_additional_record = DB::table('product_additional_images')
-            ->where('id', $product_additional_img_id)
-            ->get();
+        // dd($products);
 
-        $path = public_path('assets/product/images/'.$product_additional_record[0]->additional_image);
-
-        if (!File::exists($path)) 
-            $response = 404;
-
-        $file     = File::get($path);
-        $type     = File::extension($path);
-        $response = Response::make($file, 200);
-        $response->header("Content-Type", $type);
-
-        return $response;
+        return view('web.product.product-list', compact('products', 'categories'));
     }
 
-
-    public function brandBanner ($brand_id) 
+    public function productDetail($slug, $product_id) 
     {
-        try {
-            $brand_id = decrypt($brand_id);
-        }catch(DecryptException $e) {
-            return redirect()->back();
-        }
-
-        $brand_record = DB::table('brand')
-            ->where('id', $brand_id)
-            ->get();
-
-        $path = public_path('assets/brand/'.$brand_record[0]->banner);
-
-        if (!File::exists($path)) 
-            $response = 404;
-
-        $file     = File::get($path);
-        $type     = File::extension($path);
-        $response = Response::make($file, 200);
-        $response->header("Content-Type", $type);
-
-        return $response;
-    }
-
-    public function themeBanner ($theme_id) 
-    {
-        try {
-            $theme_id = decrypt($theme_id);
-        }catch(DecryptException $e) {
-            return redirect()->back();
-        }
-
-        $theme_record = DB::table('theme')
-            ->where('id', $theme_id)
+        /** Product Details **/
+        $product_detail = DB::table('product')
+            ->where('product.id', $product_id)
+            ->where('product.status', 1)
+            ->where('product.deleted_at', NULL)
             ->first();
+            
+        /** Product Size Stock **/
+        $product_size_stock = DB::table('product_stock')
+            ->where('product_stock.product_id', $product_id)
+            ->where('product_stock.stock', '>', 0)
+            ->where('product_stock.status', 1)
+            ->get();
 
-        $path = public_path('assets/theme/'.$theme_record->banner);
+        /** Product Color **/
+        $product_color = DB::table('product_color_mapping')
+            ->where('product_color_mapping.product_id', $product_id)
+            ->where('product_color_mapping.status', 1)
+            ->get();
 
-        if (!File::exists($path)) 
-            $response = 404;
+        /** Product Slider Images **/
+        $product_slider_images = DB::table('product_additional_images')
+            ->where('product_id', $product_id)
+            ->get();
 
-        $file     = File::get($path);
-        $type     = File::extension($path);
-        $response = Response::make($file, 200);
-        $response->header("Content-Type", $type);
+        if(!empty($product_detail->top_category_id)){
+            $related_product = DB::table('product')
+                ->leftJoin('top_category', 'product.top_category_id', '=', 'top_category.id')
+                ->where('product.id', '!=', $product_id)
+                ->where('product.status', 1)
+                ->where('product.deleted_at', NULL)
+                ->where('product.top_category_id', $product_detail->top_category_id)
+                ->select('product.*', 'top_category.top_cate_name')
+                ->get();
+        }
 
-        return $response;
+        if(!empty($product_detail->sub_category_id)){
+            $related_product = DB::table('product')
+                ->leftJoin('top_category', 'product.top_category_id', '=', 'top_category.id')
+                ->leftJoin('sub_category', 'product.sub_category_id', '=', 'sub_category.id')
+                ->where('product.id', '!=', $product_id)
+                ->where('product.status', 1)
+                ->where('product.deleted_at', NULL)
+                ->where('product.sub_category_id', $product_detail->sub_category_id)
+                ->select('product.*', 'top_category.top_cate_name', 'sub_category.sub_cate_name')
+                ->get();
+        }
+
+        if(!empty($product_detail->third_level_sub_category_id)){
+            $related_product = DB::table('product')
+                ->leftJoin('top_category', 'product.top_category_id', '=', 'top_category.id')
+                ->leftJoin('sub_category', 'product.sub_category_id', '=', 'sub_category.id')
+                ->leftJoin('third_level_sub_category', 'product.third_level_sub_category_id', '=', 'third_level_sub_category.id')
+                ->where('product.id', '!=', $product_id)
+                ->where('product.status', 1)
+                ->where('product.deleted_at', NULL)
+                ->where('product.third_level_sub_category_id', $product_detail->third_level_sub_category_id)
+                ->select('product.*', 'top_category.top_cate_name', 'sub_category.sub_cate_name', 'third_level_sub_category.third_level_sub_category_name')
+                ->get();
+        }
+
+        return view('web.product.single-product', ['product_detail' => $product_detail, 'product_size_stock' => $product_size_stock, 'product_color' => $product_color, 'product_slider_images' => $product_slider_images, 'related_product' => $related_product]);
     }
 }

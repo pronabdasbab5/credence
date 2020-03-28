@@ -17,6 +17,7 @@ class CreateProductColorMappingTable extends Migration
             $table->bigIncrements('id');
             $table->integer('product_id')->nullable();
             $table->string('color', 191)->nullable();
+            $table->string('color_code', 191)->nullable();
             $table->integer('status')->default(1)->comment("1 = Active, 0 = Inactive");
             $table->timestamps();
         });

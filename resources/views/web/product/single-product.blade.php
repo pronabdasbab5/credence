@@ -1,4 +1,4 @@
-﻿  @extends('web.templet.master')
+﻿@extends('web.templet.master')
 
   {{-- @include('web.include.seo') --}}
 
@@ -19,16 +19,14 @@
                     <div class="product-img-box col-lg-5 col-sm-6 col-xs-12">
                       <div class="new-label new-top-left"> New </div>
                       <div class="product-image">
-                        <div class="product-full"> <img id="product-zoom" src="web/images/products/img05.jpg" data-zoom-image="web/images/products/img05.jpg" alt="product-image"/> </div>
+                        <div class="product-full"> <img id="product-zoom" src="{{ asset('assets/product_images/'.$product_detail->banner.'') }}" data-zoom-image="{{ asset('assets/product_images/'.$product_detail->banner.'') }}" alt="product-image"/> </div>
                         <div class="more-views">
                           <div class="slider-items-products">
                             <div id="gallery_01" class="product-flexslider hidden-buttons product-img-thumb">
                               <div class="slider-items slider-width-col4 block-content">
-                                <div class="more-views-items"> <a href="#" data-image="web/images/products/img02.jpg" data-zoom-image="web/images/products/img02.jpg"> <img id="product-zoom"  src="web/images/products/img02.jpg" alt="product-image"/> </a></div>
-                                <div class="more-views-items"> <a href="#" data-image="web/images/products/img03.jpg" data-zoom-image="web/images/products/img03.jpg"> <img id="product-zoom"  src="web/images/products/img03.jpg" alt="product-image"/> </a></div>
-                                <div class="more-views-items"> <a href="#" data-image="web/images/products/img04.jpg" data-zoom-image="web/images/products/img04.jpg"> <img id="product-zoom"  src="web/images/products/img04.jpg" alt="product-image"/> </a></div>
-                                <div class="more-views-items"> <a href="#" data-image="web/images/products/img05.jpg" data-zoom-image="web/images/products/img05.jpg"> <img id="product-zoom"  src="web/images/products/img05.jpg" alt="product-image"/> </a> </div>
-                                <div class="more-views-items"> <a href="#" data-image="web/images/products/img06.jpg" data-zoom-image="web/images/products/img06.jpg"> <img id="product-zoom"  src="web/images/products/img06.jpg" alt="product-image" /> </a></div>
+                                @foreach ($product_slider_images as $key => $item)
+                                <div class="more-views-items"> <a href="#" data-image="{{ asset('assets/product_images/'.$item->additional_image.'') }}" data-zoom-image="{{ asset('assets/product_images/'.$item->additional_image.'') }}"> <img id="product-zoom"  src="{{ asset('assets/product_images/'.$item->additional_image.'') }}" alt="product-image"/> </a></div>
+                                @endforeach
                               </div>
                             </div>
                           </div>
@@ -38,70 +36,88 @@
                     </div>
                     <div class="product-shop col-lg-7 col-sm-6 col-xs-12">
                       <div class="product-name">
-                        <h1>Lorem ipsum dolor sit amet</h1>
+                        <h1>{{ $product_detail->product_name }}</h1>
                       </div>
                       <div class="price-block">
                         <div class="price-box">
-                          <p class="special-price"> <span class="price-label">Special Price</span> <span id="product-price-48" class="price"> $599.99 </span> </p>
-                          <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $499.99 </span> </p>
+                          @if (!empty($product_detail->discount))
+                            @php
+                              $discount_amount = ($product_detail->price * $product_detail->discount) / 100;
+                              $amount = ($product_detail->price - $discount_amount);
+                            @endphp
+                            <p class="special-price"> <span class="price-label">Special Price</span> <span id="product-price-48" class="price"> ₹{{ $product_detail->price }} </span> </p>
+
+                            <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> ₹{{ $amount }} </span> </p>
+                          @else
+                            <p class="special-price"> <span class="price-label">Special Price</span> <span id="product-price-48" class="price"> ₹{{ $product_detail->price }} </span> </p>
+                          @endif
                         </div>
                       </div>
                       <div class="info-orther">
-                        <p>Item Code: #12345678</p>
-                        <p>Availability: <span class="in-stock">In stock</span></p>
+                        {{-- <p>Item Code: #12345678</p> --}}
+                        <p>Availability: <span class="in-stock">
+                          @if ($product_detail->stock > 0)
+                            In Stock
+                          @elseif(!empty($product_size_stock))
+                            In Stock
+                          @else
+                            Out of Stock
+                          @endif
+                        </span></p>
                       </div>
-                      <div class="short-description">
+                      {{-- <div class="short-description">
                         <h2>Quick Overview</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id nulla. Donec a neque libero. Pellentesque aliquet, sem eget laoreet ultrices, ipsum metus feugiat sem, quis fermentum turpis eros eget velit. Donec ac tempus ante. </p>
-                      </div>
+                        <p>{{ $product_detail->desc }}</p>
+                      </div> --}}
                       <div class="form-option">
                         <p class="form-option-title">Available Options:</p>
+
+                        @if (!empty($product_color) && (count($product_color) > 0))
                         <div class="attributes">
                           <div class="attribute-label">Color:</div>
                           <div class="attribute-list">
                             <ul class="list-color" id="list-color">
-                              <li class="col-sel color-sel">
-                                <span style="background:#db7878;"></span>
-                                <input type="radio" name="product_color_id" value="13" checked="" hidden="">
-                              </li>
-                              <li class="col-sel color-sel selected">
-                                <span style="background:#d91899;"></span>
-                                <input type="radio" name="product_color_id" value="14" hidden="">
-                              </li>
+                              @foreach ($product_color as $key => $item)
+                                @if ($key == 0)
+                                <li class="col-sel color-sel selected">
+                                  <span style="background:{{ $item->color_code }};"></span>
+                                  <input type="radio" name="product_color_id" value="{{ $item->id }}" checked="" hidden="">
+                                </li>
+                                @else
+                                <li class="col-sel color-sel">
+                                  <span style="background:{{ $item->color_code }};"></span>
+                                  <input type="radio" name="product_color_id" value="{{ $item->id }}" hidden="">
+                                </li>
+                                @endif
+                              @endforeach
                             </ul>
                           </div>
-                        </div>                      
+                        </div>  
+                        @endif
+
+                        @if (!empty($product_size_stock) && (count($product_size_stock) > 0))
                         <div class="attributes">
                           <div class="attribute-label">Size:</div>
                           <div class="attribute-list">
                             <ul class="list-size" id="list-size">
-                              <li class="col-sel size-sel">
-                                <span>XS</span>
-                                <input type="radio" name="product_size_id" value="13" checked="" hidden="">
-                              </li>
-                              <li class="col-sel size-sel">
-                                <span>S</span>
-                                <input type="radio" name="product_size_id" value="13" checked="" hidden="">
-                              </li>
-                              <li class="col-sel size-sel">
-                                <span>M</span>
-                                <input type="radio" name="product_size_id" value="13" checked="" hidden="">
-                              </li>
-                              <li class="col-sel size-sel selected">
-                                <span>L</span>
-                                <input type="radio" name="product_size_id" value="13" checked="" hidden="">
-                              </li>
-                              <li class="col-sel size-sel">
-                                <span>XL</span>
-                                <input type="radio" name="product_size_id" value="13" checked="" hidden="">
-                              </li>
-                              <li class="col-sel size-sel">
-                                <span>XXL</span>
-                                <input type="radio" name="product_size_id" value="14" hidden="">
-                              </li>
+                              @foreach ($product_size_stock as $key => $item)
+                                @if ($key == 0)
+                                <li class="col-sel size-sel selected">
+                                  <span>{{ $item->size }}</span>
+                                  <input type="radio" name="product_size_id" value="{{ $item->id }}" checked="" hidden="">
+                                </li>
+                                @else 
+                                <li class="col-sel size-sel">
+                                  <span>{{ $item->size }}</span>
+                                  <input type="radio" name="product_size_id" value="{{ $item->id }}" checked="" hidden="">
+                                </li>
+                                @endif
+                              @endforeach
                             </ul>
                           </div>
                         </div>
+                        @endif
+
                         <div class="add-to-box">
                           <div class="add-to-cart" >
                             <div class="pull-left">
@@ -134,8 +150,7 @@
                 <div id="productTabContent" class="tab-content">
                   <div class="tab-pane fade in active" id="product_tabs_description">
                     <div class="std">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam fringilla augue nec est tristique auctor. Donec non est at libero vulputate rutrum. Morbi ornare lectus quis justo gravida semper. Nulla tellus mi, vulputate adipiscing cursus eu, suscipit id nulla. Donec a neque libero. Pellentesque aliquet, sem eget laoreet ultrices, ipsum metus feugiat sem, quis fermentum turpis eros eget velit. Donec ac tempus ante. Fusce ultricies massa massa. Fusce aliquam, purus eget sagittis vulputate, sapien libero hendrerit est, sed commodo augue nisi non neque. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor, lorem et placerat vestibulum, metus nisi posuere nisl, in accumsan elit odio quis mi. Cras neque metus, consequat et blandit et, luctus a nunc. Etiam gravida vehicula tellus, in imperdiet ligula euismod eget. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam erat mi, rutrum at sollicitudin rhoncus, ultricies posuere erat. Duis convallis, arcu nec aliquam consequat, purus felis vehicula felis, a dapibus enim lorem nec augue.</p>
-                      <p> Nunc facilisis sagittis ullamcorper. Proin lectus ipsum, gravida et mattis vulputate, tristique ut lectus. Sed et lorem nunc. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean eleifend laoreet congue. Vivamus adipiscing nisl ut dolor dignissim semper. Nulla luctus malesuada tincidunt. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer enim purus, posuere at ultricies eu, placerat a felis. Suspendisse aliquet urna pretium eros convallis interdum. Quisque in arcu id dui vulputate mollis eget non arcu. Aenean et nulla purus. Mauris vel tellus non nunc mattis lobortis.</p>
+                      <p>{{ $product_detail->desc }}</p>
                     </div>
                   </div>
                 </div>
@@ -146,7 +161,8 @@
       </div>
     </section>
     <!-- Main Container End --> 
-    
+
+    @if (!empty($related_product) && (count($related_product) > 0))
     <!-- Related Products Slider -->  
     <div class="container">
       <div class="upsell-section">
@@ -159,43 +175,34 @@
             </div>
             <div id="" class="upsell-products-slider product-flexslider hidden-buttons">
               <div class="slider-items slider-width-col4 products-grid block-content">
-                <div class="item" onclick="window.location='single_product.html';">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a href="#" class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img05.jpg"> </a>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
-                        <div class="item-content">
-                          <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">$225.00</span> </span> </div>
-                          </div>
-                          <div class="action">
-                            <a class="link-wishlist" href="wishlist.html"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                @foreach ($related_product as $key => $item)
                 <div class="item">
                   <div class="item-inner">
                     <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img03.jpg"> </a>
+                      <div class="item-img-info"> <a href="{{ route('web.product_detail', ['slug' => $item->slug, 'product_id' => $item->id]) }}" class="product-image" title="{{ $item->product_name }}"> <img alt="{{ $item->product_name }}" src="{{ asset('assets/product_images/'.$item->banner.'') }}"> </a>
                       </div>
                     </div>
                     <div class="item-info">
                       <div class="info-inner">
-                        <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
+                        <div class="item-title"> <a title="{{ $item->product_name }}" href="{{ route('web.product_detail', ['slug' => $item->slug, 'product_id' => $item->id]) }}"> {{ $item->product_name }} </a> </div>
                         <div class="item-content">
                           <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">$99.00</span> </span> </div>
+                            <div class="price-box"> <span class="regular-price"> 
+                              <span class="price">
+                                @if (!empty($item->discount))
+                                  @php
+                                    $discount_amount = ($item->price * $item->discount) / 100;
+                                    $amount = ($item->price - $discount_amount);
+                                  @endphp
+                                  ₹{{ $item->price }}
+                                  ₹discount {{ $amount }}
+                                @else
+                                  ₹{{ $item->price }}
+                                @endif
+                              </span> </span> </div>
                           </div>
                           <div class="action">
-                            <a class="link-wishlist" href="wishlist.html"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
+                            <a class="link-wishlist" href="{{route('web.wishlist.wishlist')}}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
                             <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
                           </div>
                         </div>
@@ -203,200 +210,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="item">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img02.jpg"> </a>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
-                        <div class="item-content">
-                          <div class="item-price">
-                            <div class="price-box">
-                              <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $156.00 </span> </p>
-                              <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $167.00 </span> </p>
-                            </div>
-                          </div>
-                          <div class="action">
-                            <a class="link-wishlist" href="wishlist.html"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img04.jpg"> </a>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
-                        <div class="item-content">
-                          <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">$225.00</span> </span> </div>
-                          </div>
-                          <div class="action">
-                            <a class="link-wishlist" href="wishlist.html"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img01.jpg"> </a>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
-                        <div class="item-content">
-                          <div class="item-price">
-                            <div class="price-box"> <span class="regular-price"> <span class="price">$99.00</span> </span> </div>
-                          </div>
-                          <div class="action">
-                            <a class="link-wishlist" href="wishlist.html"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img06.jpg"> </a>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
-                        <div class="item-content">
-                          <div class="item-price">
-                            <div class="price-box">
-                              <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $156.00 </span> </p>
-                              <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $167.00 </span> </p>
-                            </div>
-                          </div>
-                          <div class="action">
-                            <a class="link-wishlist" href="wishlist.html"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img07.jpg"> </a>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
-                        <div class="item-content">
-                          <div class="item-price">
-                            <div class="price-box">
-                              <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $156.00 </span> </p>
-                              <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $167.00 </span> </p>
-                            </div>
-                          </div>
-                          <div class="action">
-                            <a class="link-wishlist" href="wishlist.html"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img08.jpg"> </a>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
-                        <div class="item-content">
-                          <div class="item-price">
-                            <div class="price-box">
-                              <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $156.00 </span> </p>
-                              <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $167.00 </span> </p>
-                            </div>
-                          </div>
-                          <div class="action">
-                            <a class="link-wishlist" href="wishlist.html"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img09.jpg"> </a>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
-                        <div class="item-content">
-                          <div class="item-price">
-                            <div class="price-box">
-                              <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $156.00 </span> </p>
-                              <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $167.00 </span> </p>
-                            </div>
-                          </div>
-                          <div class="action">
-                            <a class="link-wishlist" href="wishlist.html"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="item">
-                  <div class="item-inner">
-                    <div class="item-img">
-                      <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img10.jpg"> </a>
-                      </div>
-                    </div>
-                    <div class="item-info">
-                      <div class="info-inner">
-                        <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
-                        <div class="item-content">
-                          <div class="item-price">
-                            <div class="price-box">
-                              <p class="special-price"> <span class="price-label">Special Price</span> <span class="price"> $156.00 </span> </p>
-                              <p class="old-price"> <span class="price-label">Regular Price:</span> <span class="price"> $167.00 </span> </p>
-                            </div>
-                          </div>
-                          <div class="action">
-                            <a class="link-wishlist" href="wishlist.html"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                @endforeach
               </div>
             </div>
           </div>
@@ -404,6 +218,7 @@
       </div>
     </div>
     <!-- Related Products Slider End --> 
+    @endif
   
   @endsection
 

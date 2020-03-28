@@ -216,26 +216,31 @@ class ProductController extends Controller
             }
 
             /** Product Stock and Size **/
-            for($i = 0; $i < count($request->input('size')); $i++) 
-            {
-                DB::table('product_stock')
-                    ->insert([ 
-                        'product_id' => $product_id,
-                        'size' => $request->input('size')[$i], 
-                        'stock' => $request->input('stock')[$i], 
-                        'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(), 
-                    ]);
+            if($request->has('size')){
+                for($i = 0; $i < count($request->input('size')); $i++) 
+                {
+                    DB::table('product_stock')
+                        ->insert([ 
+                            'product_id' => $product_id,
+                            'size' => $request->input('size')[$i], 
+                            'stock' => $request->input('stock')[$i], 
+                            'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(), 
+                        ]);
+                }
             }
 
             /** Product Color **/
-            for($i = 0; $i < count($request->input('color')); $i++) 
-            {
-                DB::table('product_color_mapping')
-                    ->insert([ 
-                        'product_id' => $product_id,
-                        'color' => $request->input('color')[$i], 
-                        'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(), 
-                    ]);
+            if($request->has('color')){
+                for($i = 0; $i < count($request->input('color')); $i++) 
+                {
+                    DB::table('product_color_mapping')
+                        ->insert([ 
+                            'product_id' => $product_id,
+                            'color' => $request->input('color')[$i], 
+                            'color_code' => $request->input('color_code')[$i], 
+                            'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(), 
+                        ]);
+                }
             }
 
             return redirect()->back()->with('msg', 'Product has added successfully');
@@ -589,6 +594,7 @@ class ProductController extends Controller
                         ->insert([ 
                             'product_id' => $product_id,
                             'color' => $request->input('color')[$i], 
+                            'color_code' => $request->input('color_code')[$i], 
                             'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(), 
                         ]);
                 }

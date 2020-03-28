@@ -29,6 +29,7 @@ class CreateProductTable extends Migration
             $table->string('banner', 191);
             $table->integer('status')->default(1)->comment("1 = Active, 2 = Inactive");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
