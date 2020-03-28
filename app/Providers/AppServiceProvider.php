@@ -29,6 +29,7 @@ class AppServiceProvider extends ServiceProvider
     {
         View::composer('web.include.header', function ($view) {
 
+            /******  Categories *****/
             $top_category = DB::table('top_category')
                 ->where('status', 1)
                 ->get();
@@ -61,6 +62,19 @@ class AppServiceProvider extends ServiceProvider
                     'top_cate_name' => $item->top_cate_name,
                     'sub_categories' => $sub_categories
                 ];
+            }
+
+            /****** Wish List ********/
+            $wish_list_data = [];
+            if( Auth::guard('users')->user() && !empty(Auth::guard('users')->user()->id))
+            {
+                $wish_list_data = DB::table('wishlist')
+                ->join('product', 'wishlist.product_id', '=', 'product.id')
+                ->where('user_id', Auth::guard('users')->user()->id)
+                ->where('product.status', 1)
+                ->where('product.deleted_at', NULL)
+                ->select('product.*')
+                ->get();
             }
 
             // dd($categories);
@@ -253,7 +267,8 @@ class AppServiceProvider extends ServiceProvider
             // }
 
             $data = [
-                'categories' => $categories
+                'categories' => $categories,
+                'wish_list_data' => $wish_list_data
             ];
            
             $view->with('header_data', $data);

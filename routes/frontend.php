@@ -19,19 +19,9 @@ Route::group(['namespace'=>'Web'],function(){
 	/** Update Cart **/
 	Route::post('update-cart', 'CartController@updateCart')->name('web.update_cart');
 	
-	/** Metal Product List **/ 
-	Route::get('bell-brass-metal-product-list/{slug}/{sub_category_id}', 'ProductController@bellBrassProductList')->name('web.bell_brass_metal_product_list');
-	/** Metal Product Detail **/ 
-	Route::get('bell-brass-metal-product-detail/{slug}/{product_id}', 'ProductController@bellBrassProductDetail')->name('web.bell_brass_metal_product_detail');
-
-	/** Metal Product Banner URL Generate **/
-    Route::get('metal-product-banner/{product_id}', 'ProductController@metalBannerImage')->name('admin.metal_product_banner');
-	/** Product Banner URL Generate **/
-    Route::get('product-banner/{product_id}', 'ProductController@bannerImage')->name('admin.product_banner');
-
     /** User Registration Routes **/
-    Route::get('registration-page', 'RegisterController@registrationPage')->name('user.registration_page');
-    Route::get('registration', 'RegisterController@registration')->name('user.registration');
+    Route::get('registration-page', 'RegisterController@registrationPage')->name('web.registration_page');
+    Route::get('registration', 'RegisterController@registration')->name('web.registration');
 
     /** User Login Route */
 	Route::get('login', 'UsersLoginController@showUserLoginForm')->name('web.login');
@@ -60,13 +50,14 @@ Route::group(['namespace'=>'Web'],function(){
 		/** Coupon Check **/
 		Route::post('check-coupon', 'CheckoutController@checkCoupon')->name('web.check_coupon');
 
+		/** Address List **/
+		Route::get('address-list', 'AddressController@addressList')->name('web.address_list');
 		/** Add Address **/
-		Route::post('address', 'AddressController@addAddress')->name('web.add_address');
+		Route::post('add-address', 'AddressController@addAddress')->name('web.add_address');
+		/** Update Address **/
+		Route::post('update-address/{address_id}', 'AddressController@updateAddress')->name('web.update_address');
 		/** Delete Address **/
-		Route::get('delete-address/{address_id}', 'AddressController@deleteAddress')->name('web.delete_address');
-
-		/** Add Review **/
-		// Route::post('add-review', 'ReviewController@addReview')->name('web.add_review');
+		Route::get('edit-address/{address_id}', 'AddressController@editAddress')->name('web.edit_address');
 
 		/** Add to Wish List **/
 		Route::get('add-wish-list/{product_id}', 'WishListController@addWishList')->name('web.add_wish_list');
@@ -79,9 +70,11 @@ Route::group(['namespace'=>'Web'],function(){
 		Route::get('order-history', 'OrdersController@orderHistory')->name('web.order_history');
 
 		/** My Profile **/
-		// Route::get('my-profile', 'UsersController@myProfile')->name('web.my_profile'); 
+		Route::get('my-profile', 'UsersController@myProfile')->name('web.my_profile'); 
+		/** Edit My Profile **/
+		Route::get('edit-my-profile', 'UsersController@editMyProfile')->name('web.edit_my_profile'); 
 		/** Update My Profile **/
-		// Route::post('update-my-profile', 'UsersController@updateMyProfile')->name('web.update_my_profile');
+		Route::post('update-my-profile', 'UsersController@updateMyProfile')->name('web.update_my_profile');
 	});
 });
 

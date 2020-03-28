@@ -17,6 +17,7 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('name', 191);
             $table->string('email', 191);
+            $table->integer('1 = Active, 2 = In-Active')->default(1)->comment('1 = Active, 2 = In-Active');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password', 191);
             $table->rememberToken();

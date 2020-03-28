@@ -16,24 +16,38 @@
               <div class="container-fluid">
                   <div class="row">
                     <div class="category-products">
+                      @if(!empty($wishlist) && (count($wishlist) > 0))
                   <ul class="products-grid row">
+                    @foreach($wishlist as $key => $item) 
                     <li class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
                       <div class="item">
                         <div class="item-inner">
                           <div class="item-img">
-                            <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img06.jpg"> </a>
+                            <div class="item-img-info"> <a class="product-image" title="{{ $item->product_name }}" href="{{ route('web.product_detail', ['slug' => $item->slug, 'product_id' => $item->id]) }}"> <img alt="{{ $item->product_name }}" src="{{ asset('assets/product_images/'.$item->banner.'') }}"> </a>
                             </div>
                           </div>
                           <div class="item-info">
                             <div class="info-inner">
-                              <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
+                              <div class="item-title"> <a title="{{ $item->product_name }}" href="{{ route('web.product_detail', ['slug' => $item->slug, 'product_id' => $item->id]) }}"> {{ $item->product_name }} </a> </div>
                               <div class="item-content">
                                 <div class="item-price">
-                                  <div class="price-box"> <span class="regular-price"> <span class="price">$99.00</span> </span> </div>
+                                  <div class="price-box"> <span class="regular-price"> 
+                                    <span class="price">
+                                      @if (!empty($item->discount))
+                                        @php
+                                          $discount_amount = ($item->price * $item->discount) / 100;
+                                          $amount = ($item->price - $discount_amount);
+                                        @endphp
+                                        ₹{{ $item->price }}
+                                        ₹discount {{ $amount }}
+                                      @else
+                                        ₹{{ $item->price }}
+                                      @endif
+                                    </span> </span> </div>
                                 </div>
                                 <div class="action">
-                                  <a class="link-wishlist" href="wishlist.html"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                                  <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>View Detail</span> </button>
+                                  <a class="link-wishlist" href="{{ route('web.remove_wish_list', ['product_id' => encrypt($item->id)]) }}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
+                                  <a class="button btn-cart" href="{{ route('web.product_detail', ['slug' => $item->slug, 'product_id' => $item->id]) }}" type="button" title="" data-original-title="Add to Cart"><span>View Detail</span> </a>
                                 </div>
                               </div>
                             </div>
@@ -41,103 +55,9 @@
                         </div>
                       </div>
                     </li>
-                    <li class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                      <div class="item">
-                        <div class="item-inner">
-                          <div class="item-img">
-                            <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img02.jpg"> </a>
-                            </div>
-                          </div>
-                          <div class="item-info">
-                            <div class="info-inner">
-                              <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
-                              <div class="item-content">
-                                <div class="item-price">
-                                  <div class="price-box"> <span class="regular-price"> <span class="price">$99.00</span> </span> </div>
-                                </div>
-                                <div class="action">
-                                  <a class="link-wishlist" href="wishlist.html"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                                  <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>View Detail</span> </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                      <div class="item">
-                        <div class="item-inner">
-                          <div class="item-img">
-                            <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img03.jpg"> </a>
-                            </div>
-                          </div>
-                          <div class="item-info">
-                            <div class="info-inner">
-                              <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
-                              <div class="item-content">
-                                <div class="item-price">
-                                  <div class="price-box"> <span class="regular-price"> <span class="price">$99.00</span> </span> </div>
-                                </div>
-                                <div class="action">
-                                  <a class="link-wishlist" href=""><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                                  <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>View Detail</span> </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                      <div class="item">
-                        <div class="item-inner">
-                          <div class="item-img">
-                            <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img01.jpg"> </a>
-                            </div>
-                          </div>
-                          <div class="item-info">
-                            <div class="info-inner">
-                              <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
-                              <div class="item-content">
-                                <div class="item-price">
-                                  <div class="price-box"> <span class="regular-price"> <span class="price">$99.00</span> </span> </div>
-                                </div>
-                                <div class="action">
-                                  <a class="link-wishlist" href=""><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                                  <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>View Detail</span> </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="item col-lg-3 col-md-3 col-sm-4 col-xs-6">
-                      <div class="item">
-                        <div class="item-inner">
-                          <div class="item-img">
-                            <div class="item-img-info"> <a class="product-image" title="Product Title Here" href="#"> <img alt="Product Title Here" src="web/images/products/img10.jpg"> </a>
-                            </div>
-                          </div>
-                          <div class="item-info">
-                            <div class="info-inner">
-                              <div class="item-title"> <a title="Product Title Here" href="#"> Product Title Here </a> </div>
-                              <div class="item-content">
-                                <div class="item-price">
-                                  <div class="price-box"> <span class="regular-price"> <span class="price">$99.00</span> </span> </div>
-                                </div>
-                                <div class="action">
-                                  <a class="link-wishlist" href=""><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                                  <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>View Detail</span> </button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
+                    @endforeach
                   </ul>
+                  @endif
                 </div>
                   </div>
               </div>

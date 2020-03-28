@@ -6,34 +6,81 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use DB;
+use Carbon\Carbon;
 
 class AddressController extends Controller
 {
+    public function addressList(){
+
+        $address = DB::table('address')
+            ->where('user_id', Auth::guard('users')->user()->id)
+            ->get();
+
+        return view('web.address.address', ['address' => $address]);
+    }
+
     public function addAddress(Request $request)
     {
     	$request->validate([
-            'first_name'    => 'required',
-            'last_name' => 'required',
+            'name'    => 'required',
             'address' => 'required',
+            'email' => 'required|email',
             'city' => 'required',
             'state' => 'required',
-            'pin_code' => 'required',
-            'mobile_no' => 'required',
+            'pin_code' => 'required|numeric',
+            'mobile_no' => 'required|numeric',
         ]);
 
         DB::table('address')
         	->insert([
         		'user_id' => Auth()->user()->id,
-        		'first_name'    => $request->input('first_name'),
-	            'last_name' => $request->input('last_name'),
+        		'name'    => ucwords(strtolower($request->input('name'))),
 	            'address' => $request->input('address'),
 	            'city' => $request->input('city'),
 	            'state' => $request->input('state'),
 	            'pin_code' => $request->input('pin_code'),
 	            'email' => $request->input('email'),
-	            'mobile_no' => $request->input('mobile_no'),
+                'mobile_no' => $request->input('mobile_no'),
+                'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
         	]);
 
         return redirect()->back();
+    }
+
+    public function editAddress($address_id){
+
+        $address = DB::table('address')
+            ->where('id', $address_id)
+            ->first();
+
+        return view('web.address.edit-address', ['address' => $address]);
+    }
+
+    public function updateAddress(Request $request, $address_id)
+    {
+    	$request->validate([
+            'name'    => 'required',
+            'address' => 'required',
+            'email' => 'required|email',
+            'city' => 'required',
+            'state' => 'required',
+            'pin_code' => 'required|numeric',
+            'mobile_no' => 'required|numeric',
+        ]);
+
+        DB::table('address')
+            ->where('id', $address_id)
+        	->update([
+        		'name'    => ucwords(strtolower($request->input('name'))),
+	            'address' => $request->input('address'),
+	            'city' => $request->input('city'),
+	            'state' => $request->input('state'),
+	            'pin_code' => $request->input('pin_code'),
+	            'email' => $request->input('email'),
+                'mobile_no' => $request->input('mobile_no'),
+                'updated_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
+        	]);
+
+        return redirect()->back()->with('msg', 'Address has been saved');
     }
 }

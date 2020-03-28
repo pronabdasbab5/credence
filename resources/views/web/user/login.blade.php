@@ -17,14 +17,18 @@
                   <fieldset class="col2-set">
                       <div class="new-users"><strong>Login</strong>
                           <div class="content">
+                            @if (session()->has('login_error'))
+                              <p style="font-weight: bolder; color: blue;">{{ session()->get('login_error') }}</p>
+                            @else
                               <p>If you have an account with us, please log in.</p>
-                              <form action="http://assamproducts.webinfotechghy.xyz/login" autocomplete="off" method="POST">
-                                  <input type="hidden" name="_token" value="SbcrwxGNI8nsUjuCOLRqrFVYCwSHDcTxbYEnbBCi">
+                            @endif
+                              <form action="{{ url('login') }}" autocomplete="off" method="POST">
+                                @csrf
                                   <ul class="form-list">
                                       <li>
-                                          <label for="email">Mobile No <span class="required">*</span></label>
+                                          <label for="email">Email or Mobile No  <span class="required">*</span></label>
                                           <br>
-                                          <input type="text" title="Mobile No" class="input-text required-entry" id="email" value="" name="username">
+                                          <input type="text" title="Mobile No" class="input-text required-entry" id="email" value="{{ old('username') }}" name="username">
                                       </li>
                                       <li>
                                           <label for="pass">Password <span class="required">*</span></label>
@@ -40,7 +44,7 @@
                               </form>
                               <hr>
                               <p>If you don't have an account with us, please register in.</p>
-                              <a class="button login " href="{{route('web.user.register')}}">CREATE AN ACCOUNT</a>
+                              <a class="button login " href="{{route('web.registration_page')}}">CREATE AN ACCOUNT</a>
                           </div>
                       </div>
                   </fieldset>

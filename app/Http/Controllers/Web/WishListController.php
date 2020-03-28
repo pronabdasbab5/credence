@@ -37,7 +37,9 @@ class WishListController extends Controller
     {
         $wishlist = DB::table('wishlist')
         	->leftJoin('product', 'wishlist.product_id', '=', 'product.id')
-        	->where('wishlist.user_id', Auth()->user()->id)
+        	->where('user_id', Auth::guard('users')->user()->id)
+            ->where('product.status', 1)
+            ->where('product.deleted_at', NULL)
         	->select('product.*')
         	->get();
 

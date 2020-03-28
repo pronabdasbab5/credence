@@ -24,10 +24,11 @@ class UsersLoginController extends Controller
     public function userLogin(Request $request){
 
         $this->validate($request, [
-            'username'   => 'required|numeric',
+            'username'   => 'required',
             'password' => 'required'
         ]);
-        if (Auth::guard('users')->attempt(['contact_no' => $request->username, 'password' => $request->password])) {
+
+        if ((Auth::guard('users')->attempt(['contact_no' => $request->username, 'password' => $request->password])) || (Auth::guard('users')->attempt(['email' => $request->username, 'password' => $request->password]))) {
 
             /** If Cart is Present **/
             if (Session::has('cart') && !empty(Session::get('cart'))) {
@@ -56,6 +57,7 @@ class UsersLoginController extends Controller
             
             return redirect()->intended('/');
         }
+
         return back()->withInput($request->only('username'))->with('login_error','Username or password incorrect');
     }
 

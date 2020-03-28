@@ -17,16 +17,23 @@
                   <fieldset class="col2-set">
                       <div class="new-users"><strong>Register</strong>
                           <div class="content">
-                            <p>If you don't have an account with us, please register in.</p>
 
-                            <form action="http://assamproducts.webinfotechghy.xyz/registration" autocomplete="off">
+                            @if(session()->has('msg'))
+                              <p style="font-weight: bolder; color: blue;">{{ session()->get('msg') }}</p>
+                            @else
+                                <p>If you don't have an account with us, please register in.</p>
+                            @endif 
+                            <form action="{{ route('web.registration') }}" autocomplete="off">
                               <ul class="form-list">
                                 <li>
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <label for="name">Name <span class="required">*</span></label>
                                             <br>
-                                            <input type="text" name="name" value="" class="input-text required-entry" required="">
+                                            <input type="text" name="name" value="{{ old('name') }}" class="input-text required-entry">
+                                            @error('name')
+                                              <span style="color: red;">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </li>
@@ -35,13 +42,18 @@
                                         <div class="col-sm-6">
                                             <label for="email">Email Address <span class="required">*</span></label>
                                             <br>
-                                            <input type="email" class="input-text required-entry" value="" name="email" required="">
+                                            <input type="email" class="input-text required-entry" value="{{ old('email') }}" name="email">
+                                            @error('email')
+                                              <span style="color: red;">{{ $message }}</span>
+                                            @enderror
                                         </div>
                                         <div class="col-sm-6">
-                                            <label for="email">Phone Number <span class="required">*</span></label>
+                                            <label for="contact_no">Phone Number <span class="required">*</span></label>
                                             <br>
-                                            <input type="number" class="input-text required-entry" value="" name="contact_no">
-
+                                            <input type="number" class="input-text required-entry" value="{{ old('contact_no') }}" name="contact_no">
+                                            @error('contact_no')
+                                              <span style="color: red;">{{ $message }}</span>
+                                            @enderror 
                                         </div>
                                     </div>
                                 </li>
@@ -57,6 +69,9 @@
                                             <label for="pass">Confirm Password <span class="required">*</span></label>
                                             <br>
                                             <input type="password" title="Confirm Password" name="confirm_password" class="input-text required-entry validate-password">
+                                            @error('password')
+                                              <span style="color: red;">{{ $message }}</span>
+                                            @enderror 
                                         </div>
                                     </div>
                                 </li>

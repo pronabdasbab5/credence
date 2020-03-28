@@ -19,9 +19,9 @@
               <div class="footer-links">
                 <h4>Service</h4>
                 <ul class="links">
-                  <li><a href="account_page.html">Account</a></li>
-                  <li><a href="wishlist.html">Wishlist</a></li>
-                  <li><a href="shopping_cart.html">Shopping Cart</a></li>
+                  <li><a href="{{route('web.my_profile')}}">Account</a></li>
+                  <li><a href="{{ route('web.wish_list') }}">Wishlist</a></li>
+                  <li><a href="#">Shopping Cart</a></li>
                   <li><a href="#">Return Policy</a></li>
                   <li><a href="#">Special</a></li>
                   <li><a href="#">Lookbook</a></li>
@@ -105,7 +105,44 @@
 
     <!-- main js --> 
     <script type="text/javascript" src="{{asset('web/js/main.js')}}"></script> 
+
+    <script type="text/javascript">
+      $(document).ready(function(){
+          $('#search').keyup(function(){
+              var keyword = $('#search').val();
+  
+              if (keyword.length == 0) {
+                  $('#livesearch').hide();
+              } else {
+                  $.ajaxSetup({
+                      headers: {
+                          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                      },
+                  });
+  
+                  $.ajax({
+                      method: "GET",
+                      url   : "{{ url('/product-search/') }}/"+keyword,
+                      success: function(response) {
+  
+                          if (response == ""){
+  
+                            
+                                 $('#livesearch').html("<div style='background: #ffffff05; text-lign: center;'><img src='{{asset('web/images/not-found.jpg')}}' style='max-width: 100%'><strong>Sorry !!</strong> couldn\'t find what your are looking for...</div>");
+                          }
+                          else
+                              $('#livesearch').html(response);
+  
+                          $('#livesearch').show();
+                      }
+                  });
+              }
+          });
+      });
+    </script>
 </body>
 
 </html>
+
+
     

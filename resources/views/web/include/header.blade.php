@@ -194,10 +194,11 @@
           <div class="row">
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 hidden-xs">
               <div class="search-box">
-                <form action="http://htmlmystore.justthemevalley.com/bigstart/cat" method="POST" id="search_mini_form" name="Categories">
-                  <input type="text" placeholder="Search entire store here..." value="Search" maxlength="70" name="search" id="search">
-                  <button type="button" class="search-btn-bg"><span class="glyphicon glyphicon-search"></span>&nbsp;</button>
-                </form>
+                <input type="text" placeholder="Search entire store here..." maxlength="70" name="search" id="search">
+              </div>
+              <div class="col-md-12" id="livesearch"> 
+                <!-- if no product fount on search  --> 
+                
               </div>
             </div>
             <div class="col-lg-6 col-md-4 col-sm-4 col-xs-11 jtv-logo-box"> 
@@ -209,7 +210,17 @@
               <div class="jtv-top-cart-box hidden-xs"> 
                 <!-- Top Wishlist -->
                 <div class="mini-cart">
-                  <div class="basket1"> <a href="{{route('web.wishlist.wishlist')}}"> <span class="cart_count">2</span></a> </div>
+                  <div class="basket1"> 
+                    <a href="{{ route('web.wish_list') }}"> 
+                      <span class="cart_count">
+                        @if(!empty($header_data['wish_list_data']) && (count($header_data['wish_list_data']) > 0))
+                          {{ count($header_data['wish_list_data']) }}
+                        @else
+                          0
+                        @endif
+                      </span>
+                    </a>
+                  </div>
                 </div>
               </div>
               <div class="jtv-top-cart-box"> 
@@ -313,16 +324,20 @@
               @endforeach
             @endif
             <li class="mega-menu"> <a class="level-top" href="#"><span>Grocery</span></a> </li>
-            <li class="mega-menu"> <a class="level-top" href="{{route('web.user.login')}}"><span>Login</span></a> </li>
-            <li class="mega-menu"> <a class="level-top" href="{{route('web.user.register')}}"><span>Register</span></a> </li>
-            <li class="drop-menu"> <a href="#"> <span>My Account <i class="fa fa-angle-down"></i></span> </a>
+            @auth('users')
+            <li class="drop-menu"> <a href="#"> <span>Welcome, {{Auth::guard('users')->user()->name}} <i class="fa fa-angle-down"></i></span> </a>
               <ul>
-                <li> <a href="{{route('web.wishlist.wishlist')}}"> <span>Wishlist</span> </a> </li>
+                <li> <a href="{{ route('web.wish_list') }}"> <span>Wishlist</span> </a> </li>
                 <li><a href="{{route('web.order.order')}}"><span>My Orders</span></a> </li>
-                <li><a href="{{route('web.profile.profile')}}"><span>My Profile</span></a> </li>
-                <li><a href="{{route('web.address.address')}}"><span>My Address</span></a> </li>
+                <li><a href="{{ route('web.my_profile') }}"><span>My Profile</span></a> </li>
+                <li><a href="{{route('web.address_list')}}"><span>My Address</span></a> </li>
+                <li><a href="{{ route('web.logout') }}"><span>Logout</span></a> </li>
               </ul>
             </li>
+            @else
+            <li class="mega-menu"> <a class="level-top" href="{{route('web.login')}}"><span>Login</span></a> </li>
+            <li class="mega-menu"> <a class="level-top" href="{{ route('web.registration_page') }}"><span>Register</span></a> </li>
+            @endauth
           </ul>
         </div>
       </div>

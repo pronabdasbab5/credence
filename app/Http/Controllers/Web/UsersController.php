@@ -11,11 +11,6 @@ use DB;
 
 class UsersController extends Controller
 {
-    public function showUserRegisterForm()
-    {
-        return view('web.user.register', ['url' => 'users']);
-    }
-
     protected function createUser(Request $request)
     {
         
@@ -42,29 +37,44 @@ class UsersController extends Controller
             ->where('id', Auth()->user()->id)
             ->first();
 
-        return view('web.user.my_profile', ['my_account' => $my_account]);
+        return view('web.profile.profile', ['my_account' => $my_account]);
+    }
+
+    public function editMyProfile()
+    {
+        $my_account = DB::table('users')
+            ->where('id', Auth()->user()->id)
+            ->first();
+
+        return view('web.profile.edit-profile', ['my_account' => $my_account]);
     }
 
     public function updateMyProfile(Request $request)
     {
         $mobile_no_cnt = DB::table('users')
-            ->where('contact_no', $request->input('mobile_no'))
+            ->where('contact_no', $request->input('contact_no'))
             ->where('id', '!=', Auth()->user()->id)
             ->count();
 
         if ($mobile_no_cnt > 0)
             return redirect()->back()->with('msg', 'Mobile already used. Try Another');
-        else
-        {
-            DB::table('users')
-                ->where('id', Auth()->user()->id)
-                ->update([
-                    'name' => $request->input('name'),
-                    'email' => $request->input('email'),
-                    'contact_no' => $request->input('mobile_no')
-                ]);
 
-            return redirect()->back()->with('msg', 'Account has been updated');
-        }
+        $email_cnt = DB::table('users')
+            ->where('email', $request->input('email'))
+            ->where('id', '!=', Auth()->user()->id)
+            ->count();
+
+        if ($email_cnt > 0)
+            return redirect()->back()->with('msg', 'Email already used. Try Another');
+
+        DB::table('users')
+            ->where('id', Auth()->user()->id)
+            ->update([
+                'name' => $request->input('name'),
+                'email' => $request->input('email'),
+                'contact_no' => $request->input('contact_no')
+            ]);
+
+        return redirect()->back()->with('msg', 'Profile has been updated');
     }
 }

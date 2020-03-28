@@ -128,11 +128,15 @@
                                 <button onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="increase items-count" type="button"><i class="fa fa-plus">&nbsp;</i></button>
                               </div>
                             </div>
-                            <button onClick="productAddToCartForm.submit(this)" class="button btn-cart" title="Add to Cart" type="button">Add to Cart</button>
+                            @if (($product_detail->stock > 0) || ((count($product_size_stock) > 0)))
+                              <button onClick="productAddToCartForm.submit(this)" class="button btn-cart" title="Add to Cart" type="button">Add to Cart</button>
+                            @else
+                              <button class="button btn-cart" title="Out of Stock" type="button">Out of Stock</button>
+                            @endif
                           </div>
                           <div class="email-addto-box">
                             <ul class="add-to-links">
-                              <li> <a class="link-wishlist" href="wishlist.html"><span>Add to Wishlist</span></a></li>
+                              <li> <a class="link-wishlist" href="{{ route('web.add_wish_list', ['product_id' => encrypt($product_detail->id)]) }}"><span>Add to Wishlist</span></a></li>
                             </ul>
                           </div>
                         </div>
@@ -202,7 +206,7 @@
                               </span> </span> </div>
                           </div>
                           <div class="action">
-                            <a class="link-wishlist" href="{{route('web.wishlist.wishlist')}}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
+                            <a class="link-wishlist" href="{{ route('web.add_wish_list', ['product_id' => encrypt($item->id)]) }}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
                             <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
                           </div>
                         </div>

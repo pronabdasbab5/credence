@@ -159,4 +159,86 @@ class ProductController extends Controller
 
         return view('web.product.single-product', ['product_detail' => $product_detail, 'product_size_stock' => $product_size_stock, 'product_color' => $product_color, 'product_slider_images' => $product_slider_images, 'related_product' => $related_product]);
     }
+
+    public function productSearch ($keyword)
+    {
+        $keyword = ucfirst($keyword);
+        $keyword = explode(" ", $keyword);
+
+        $product_list = "";
+        $products = DB::table('product')
+            ->join('product_stock', 'product.id', '=', 'product_stock.product_id')
+            ->where('product.stock_type', 2)
+            ->where('product_stock.stock', '>', 0)
+            ->where('product_stock.status', 1)
+            ->Where(function ($query) use($keyword) {
+
+                for ($i = 0; $i < count($keyword); $i++){
+                    $query->orWhere('product.product_name', 'like',  '%'.$keyword[$i].'%');
+                }      
+            });
+
+        $products = $products
+            ->where('product.status', 1)
+            ->where('product.deleted_at', NULL)
+            ->select('product.*')
+            ->distinct('product.product_name')
+            ->get();
+
+        if (!empty($products)) {
+
+            foreach ($products as $key => $item) {
+
+                $url = asset('assets/product_images/'.$item->banner);
+
+                if (!empty($item->discount)){
+                    $discount_amount = ($item->price * $item->discount) / 100;
+                    $amount = ($item->price - $discount_amount);
+                } else
+                    $amount = $item->price;
+                                          
+                $product_list = $product_list."<div class=\"row\"><span class=\"triup glyphicon glyphicon-triangle-top\"></span></div> <div class=\"row livesrc\"><div class=\"col-md-3\"><img src=\"".$url."\" width=\"100\"></div><div class=\"col-md-9\"><p style=\"font-weight: bold;\"><a href=\"".route('web.product_detail', ['slug' => $item->slug, 'product_id' => $item->id])."\">".$item->product_name."</a></p><p>₹".$amount."</p></div></div>";
+            }
+        } 
+
+        $products = DB::table('product')
+            ->where('product.stock_type', 1)
+            ->Where(function ($query) use($keyword) {
+
+                for ($i = 0; $i < count($keyword); $i++){
+                    $query->orWhere('product.product_name', 'like',  '%'.$keyword[$i].'%');
+                }      
+            });
+
+        $products = $products
+            ->where('product.status', 1)
+            ->where('product.deleted_at', NULL)
+            ->select('product.*')
+            ->distinct('product.product_name')
+            ->get();
+
+        if (!empty($products)) {
+
+            foreach ($products as $key => $item) {
+
+                $url = asset('assets/product/banner/'.$item->banner);
+    
+                if (!empty($item->discount)){
+                    $discount_amount = ($item->price * $item->discount) / 100;
+                    $amount = ($item->price - $discount_amount);
+                } else
+                    $amount = $item->price;
+
+                $product_list = $product_list."<div class=\"row\"><span class=\"triup glyphicon glyphicon-triangle-top\"></span></div> <div class=\"row livesrc\"><div class=\"col-md-3\"><img src=\"".$url."\" width=\"100\"></div><div class=\"col-md-9\"><p style=\"font-weight: bold;\"><a href=\"".route('web.bell_brass_metal_product_detail', ['slug' => $item->slug, 'product_id' => $item->id])."\">".$item->product_name."</a></p><p>₹".$amount."</p></div></div>";
+            }
+        }
+        
+        if(!empty($product_list))
+            print $product_list;  
+        else {
+            $product_list = "";
+            
+            print $product_list;
+        }
+    }
 }
