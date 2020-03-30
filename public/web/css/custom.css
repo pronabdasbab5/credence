@@ -1,3 +1,17 @@
+body::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+body::-webkit-scrollbar-track {
+  background: #323d61; 
+}
+ 
+/* Handle */
+body::-webkit-scrollbar-thumb {
+  background: #ee2265; 
+}
+
 .flex {
     display: flex;
 }
@@ -571,4 +585,64 @@ a.button:hover {
   text-decoration: underline;
   padding-left: 5px;
   transition: .2s ease-in-out;
+}
+/*======== Swarch ========*/
+#livesearch .row img {
+  width: 120%;
+}
+.livesrc {
+  border-bottom: 1px solid #ddd;
+  padding: 3px;
+}
+.livesrc:last-child {
+  border-bottom: 0;
+  padding: 0;
+}
+#livesearch {
+  color: black;
+  z-index: 1111;
+  position: absolute;
+  background: white;
+  display: none;
+  padding: 10px;
+  width: 89.9%;
+  margin-top: 10px;
+  border: 1px solid #dedbdc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 #dedbdc;
+  max-height: 450px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+#livesearch::-webkit-scrollbar {
+  width: 5px;
+  border-radius: 0 10px 10px 0
+}
+
+/* Track */
+#livesearch::-webkit-scrollbar-track {
+  background: transparent; 
+  border-radius: 0 10px 10px 0
+}
+ 
+/* Handle */
+#livesearch::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 10px
+}
+
+/* Handle on hover */
+#livesearch::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+.triup {
+  position: absolute;
+  margin-top: -15px;
+    left: 49%;
+    z-index: 999;
+    color: #fff;
+    font-size: 20px;
+}
+#livesearch .col-md-9 {
+  padding-left: 0
 }
