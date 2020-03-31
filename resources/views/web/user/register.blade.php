@@ -83,7 +83,7 @@
                             </form>
                             <hr>
                             <p>If you have an account with us, please log in.</p>
-                            <a class="button login " href="{{route('web.user.login')}}">LOGIN TO ACCOUNT</a>
+                            <a class="button login " href="{{ route('web.login') }}">LOGIN TO ACCOUNT</a>
                             </div>
                       </div>
                   </fieldset>

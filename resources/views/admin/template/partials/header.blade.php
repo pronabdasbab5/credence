@@ -109,7 +109,7 @@
                       <li><a href="{{ route('admin.canceled_orders_list') }}">Cancel Orders</a></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-edit"></i> Manage Reports <span class="fa fa-chevron-down"></span></a>
+                  <!-- <li><a><i class="fa fa-edit"></i> Manage Reports <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="#">Stock Reports</a></li>
                       <li><a href="#">Sales Reports</a></li>
@@ -120,7 +120,7 @@
                       <li><a href="{{ route('admin.new_reviews_list') }}">New Reviews</a></li>
                       <li><a href="{{ route('admin.verified_reviews_list') }}">Verified Reviews</a></li>
                     </ul>
-                  </li>
+                  </li> -->
                   <li><a><i class="fa fa-edit"></i> Manage Brands <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="{{ route('admin.new_brand') }}">New Brand</a></li>

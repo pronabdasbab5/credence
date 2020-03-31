@@ -34,18 +34,26 @@ class UsersLoginController extends Controller
             if (Session::has('cart') && !empty(Session::get('cart'))) {
                 $cart = Session::get('cart');
                 if (count($cart) > 0) {
-                    foreach ($cart as $stock_id => $item) {
+                    foreach ($cart as $product_id => $item) {
+
+                        $product = explode(',', $item);
+                        $quantity = $product[0];
+                        $size_id1 = $product[1];
+                        $color_id1 = $product[2];
+
                         $check_cart_product = DB::table('cart')
                             ->where('user_id', Auth::guard('users')->user()->id)
-                            ->where('stock_id', $stock_id)
+                            ->where('product_id', $product_id)
                             ->count();
 
                         if ($check_cart_product < 1 ) {
                             DB::table('cart')
                                 ->insert([
                                     'user_id' => Auth::guard('users')->user()->id,
-                                    'stock_id' =>  $stock_id,
-                                    'quantity' => (int)$item,
+                                    'product_id' =>  $product_id,
+                                    'size_id' =>  $size_id1,
+                                    'color_id' =>  $color_id1,
+                                    'quantity' => (int)$quantity,
                                     'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
                                 ]);
                         }

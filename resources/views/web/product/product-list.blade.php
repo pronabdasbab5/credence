@@ -1,4 +1,4 @@
- @extends('web.templet.master')
+@extends('web.templet.master')
 
   {{-- @include('web.include.seo') --}}
 
@@ -19,22 +19,7 @@
                   <div class="col-md-7 col-sm-5">
                     <h2 class="page-heading"> 
                       <span class="page-heading-title">
-
-                        @if (isset($products[0]->third_level_sub_category_name))
-                          @php
-                            $product_label = $products[0]->third_level_sub_category_name;
-                          @endphp
-                        @elseif (isset($products[0]->sub_cate_name))
-                          @php
-                            $product_label = $products[0]->sub_cate_name;
-                          @endphp
-                        @else
-                          @php
-                            $product_label = $products[0]->top_cate_name;
-                          @endphp
-                        @endif
-
-                        {{ $product_label }}
+                        {{ $label }}
                       </span> 
                     </h2>
                   </div>
@@ -82,7 +67,7 @@
                                 </div>
                                 <div class="action">
                                   <a class="link-wishlist" href="{{ route('web.add_wish_list', ['product_id' => encrypt($item->id)]) }}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                                  <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
+                                  <a class="button btn-cart" type="button" title="" data-original-title="Add to Cart" href="{{ route('web.product_detail', ['slug' => $item->slug, 'product_id' => $item->id]) }}"><span>View Detail</span> </a>
                                 </div>
                               </div>
                             </div>
@@ -103,7 +88,13 @@
                   </div>
                 </div>
               </div>
-              @endif
+              @else
+                  <div style="background: #ffffff05; text-align: center;">
+                    <img src="{{asset('web/images/not-found.jpg')}}" style="max-width: 100%"> <br>
+                      <h4><strong>Sorry !!</strong> No Product Available...</h4>
+                      <div class="action"><a href="{{ route('web.index') }}" type="button" class="button btn-cart"><span>Continue Shopping</span></a></div>
+                  </div>    
+                @endif
             </article>
             <!--  ///*///======    End article  ========= //*/// --> 
           </div>
@@ -112,21 +103,21 @@
               <div class="block-title">Shop By Catagories</div>
               <div class="block block-layered-nav">
                 <div class="block-content" id="sidebar">
-                  	<p class="block-subtitle">Shopping Options</p> 
-	                <div class="list-group">
+                    <p class="block-subtitle">Shopping Options</p> 
+                    <!-- <div class="list-group">
                     <a href="#menu5" class="list-group-item ji collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false">
                       <span class="hidden-sm-down">Apparelnew</span> 
                     </a>
                     <div class="sub-cat-1 list-group-item ji collapsed" id="menu5" href="#menu5a" data-toggle="collapse" data-parent="#sidebar" style="height: 0px;" aria-expanded="false">
-	                    <a class="list-group-item" data-parent="#menu5"><span class="hidden-sm-down">Men<i class="fa fa-angle-down"></i></span></a>
-	                    <div class="sub-cat collapse" id="menu5a" aria-expanded="false">
-		                    <a href="#" class="list-group-item" data-parent="#menu5a">Topware</a>			                    
-		                    <a href="#" class="list-group-item" data-parent="#menu5a">Bottomware</a>
-			                </div>
-	                    <a href="#" class="list-group-item" data-parent="#menu1">Women</a>
-	                </div>
-                      
+                        <a class="list-group-item" data-parent="#menu5"><span class="hidden-sm-down">Men<i class="fa fa-angle-down"></i></span></a>
+                        <div class="sub-cat collapse" id="menu5a" aria-expanded="false">
+                            <a href="#" class="list-group-item" data-parent="#menu5a">Topware</a>                               
+                            <a href="#" class="list-group-item" data-parent="#menu5a">Bottomware</a>
+                        </div>
+                        <a href="#" class="list-group-item" data-parent="#menu1">Women</a>
                     </div>
+                      
+                    </div> -->
                   @if(!empty($categories) && (count($categories) > 0))
                     @php
                       $collapse_id = 0;
@@ -143,7 +134,16 @@
                         </a>
                         <div class="collapse sub-cat" id="menu{{ $collapse_id }}" style="border-bottom: 1px solid rgb(221, 221, 221);}">
                         @foreach($item['sub_categories'] as $keys => $items) 
+                            @if (!empty($items->last_category) && (count($items->last_category) > 0))
+                            <a class="list-group-item" data-parent="#menu{{ $collapse_id }}"><span class="hidden-sm-down">{{ $items->sub_cate_name }}<i class="fa fa-angle-down"></i></span></a>
+                            <div class="sub-cat collapse" id="menu{{ $collapse_id }}a" aria-expanded="false">
+                                @foreach($items->last_category as $keyss => $itemss) 
+                                <a href="{{ route('web.product_list', ['slug' => $itemss->third_level_sub_category_name, 'top_category_id' => $item['top_category_id'], 'sub_category_id' => $items->id, 'last_category_id' => $itemss->id, 'sorted_by' => 0]) }}" class="list-group-item" data-parent="#menu{{ $collapse_id }}a">{{ $itemss->third_level_sub_category_name }}</a>
+                                @endforeach
+                            </div>
+                            @else
                             <a href="{{ route('web.product_list', ['slug' => $items->sub_cate_name, 'top_category_id' => $item['top_category_id'], 'sub_category_id' => $items->id, 'last_category_id' => 0, 'sorted_by' => 0]) }}" class="list-group-item" data-parent="#menu{{ $collapse_id }}">{{ $items->sub_cate_name }}</a>
+                            @endif
                         @endforeach
                         </div>
                       @else

@@ -139,7 +139,7 @@
                                 </div>
                                 <div class="action">
                                   <a class="link-wishlist" href="{{ route('web.add_wish_list', ['product_id' => encrypt($item->id)]) }}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                                  <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
+                                  <a class="button btn-cart" type="button" title="" data-original-title="Add to Cart" href="{{ route('web.product_detail', ['slug' => $item->slug, 'product_id' => $item->id]) }}"><span>View Detail</span> </a>
                                 </div>
                               </div>
                             </div>
@@ -204,8 +204,8 @@
                                           $discount_amount = ($item->price * $item->discount) / 100;
                                           $amount = ($item->price - $discount_amount);
                                         @endphp
-                                        ₹{{ $item->price }}
-                                        ₹discount {{ $amount }}
+                                        <span class="old-price"> ₹{{ $item->price }}</span>
+                                          <span class="special-price">₹{{ $amount }}</span>
                                       @else
                                         ₹{{ $item->price }}
                                       @endif
@@ -213,7 +213,7 @@
                                 </div>
                                 <div class="action">
                                   <a class="link-wishlist" href="{{ route('web.add_wish_list', ['product_id' => encrypt($item->id)]) }}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                                  <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
+                                  <a class="button btn-cart" type="button" title="" data-original-title="Add to Cart" href="{{ route('web.product_detail', ['slug' => $item->slug, 'product_id' => $item->id]) }}"><span>View Detail</span> </a>
                                 </div>
                               </div>
                             </div>
@@ -258,8 +258,8 @@
                                           $discount_amount = ($item->price * $item->discount) / 100;
                                           $amount = ($item->price - $discount_amount);
                                         @endphp
-                                        ₹{{ $item->price }}
-                                        ₹discount {{ $amount }}
+                                        <span class="old-price"> ₹{{ $item->price }}</span>
+                                          <span class="special-price">₹{{ $amount }}</span>
                                       @else
                                         ₹{{ $item->price }}
                                       @endif
@@ -267,7 +267,7 @@
                                 </div>
                                 <div class="action">
                                   <a class="link-wishlist" href="{{ route('web.add_wish_list', ['product_id' => encrypt($item->id)]) }}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                                  <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
+                                  <a class="button btn-cart" type="button" title="" data-original-title="Add to Cart" href="{{ route('web.product_detail', ['slug' => $item->slug, 'product_id' => $item->id]) }}"><span>View Detail</span> </a>
                                 </div>
                               </div>
                             </div>
@@ -322,8 +322,8 @@
                                           $discount_amount = ($item->price * $item->discount) / 100;
                                           $amount = ($item->price - $discount_amount);
                                         @endphp
-                                        ₹{{ $item->price }}
-                                        ₹discount {{ $amount }}
+                                        <span class="old-price"> ₹{{ $item->price }}</span>
+                                          <span class="special-price">₹{{ $amount }}</span>
                                       @else
                                         ₹{{ $item->price }}
                                       @endif
@@ -331,7 +331,7 @@
                                 </div>
                                 <div class="action">
                                   <a class="link-wishlist" href="{{ route('web.add_wish_list', ['product_id' => encrypt($item->id)]) }}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                                  <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
+                                  <a class="button btn-cart" type="button" title="" data-original-title="Add to Cart" href="{{ route('web.product_detail', ['slug' => $item->slug, 'product_id' => $item->id]) }}"><span>View Detail</span> </a>
                                 </div>
                               </div>
                             </div>
@@ -388,8 +388,8 @@
                                           $discount_amount = ($item->price * $item->discount) / 100;
                                           $amount = ($item->price - $discount_amount);
                                         @endphp
-                                        ₹{{ $item->price }}
-                                        ₹discount {{ $amount }}
+                                        <span class="old-price"> ₹{{ $item->price }}</span>
+                                          <span class="special-price">₹{{ $amount }}</span>
                                       @else
                                         ₹{{ $item->price }}
                                       @endif
@@ -397,7 +397,7 @@
                                 </div>
                                 <div class="action">
                                   <a class="link-wishlist" href="{{ route('web.add_wish_list', ['product_id' => encrypt($item->id)]) }}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                                  <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
+                                  <a class="button btn-cart" type="button" title="" data-original-title="Add to Cart" href="{{ route('web.product_detail', ['slug' => $item->slug, 'product_id' => $item->id]) }}"><span>View Detail</span> </a>
                                 </div>
                               </div>
                             </div>

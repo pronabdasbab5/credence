@@ -15,7 +15,7 @@
             <div class="col-main">
               <div class="product-view">
                 <div class="product-essential">
-                  <form action="#" method="post" id="product">
+                  
                     <div class="product-img-box col-lg-5 col-sm-6 col-xs-12">
                       <div class="new-label new-top-left"> New </div>
                       <div class="product-image">
@@ -72,6 +72,9 @@
                       <div class="form-option">
                         <p class="form-option-title">Available Options:</p>
 
+                        <form action="{{ route('web.add_cart') }}" method="POST" autocomplete="off" id="product">
+                        @csrf
+
                         @if (!empty($product_color) && (count($product_color) > 0))
                         <div class="attributes">
                           <div class="attribute-label">Color:</div>
@@ -118,18 +121,23 @@
                         </div>
                         @endif
 
+                        @if (session()->has('msg'))
+                            <span style="color: red;">{{session()->get('msg')}}</span>
+                        @endif
+
                         <div class="add-to-box">
                           <div class="add-to-cart" >
                             <div class="pull-left">
                               <div class="custom pull-left">
                                 <label>Qty :</label>
                                 <button onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="fa fa-minus">&nbsp;</i></button>
-                                <input type="text" class="input-text qty" title="Qty" value="1" maxlength="12" id="qty" name="qty">
+                                <input type="number" class="input-text qty" title="Qty" value="1" maxlength="12" id="qty" name="qty">
                                 <button onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="increase items-count" type="button"><i class="fa fa-plus">&nbsp;</i></button>
                               </div>
                             </div>
                             @if (($product_detail->stock > 0) || ((count($product_size_stock) > 0)))
-                              <button onClick="productAddToCartForm.submit(this)" class="button btn-cart" title="Add to Cart" type="button">Add to Cart</button>
+                                <input type="hidden" value="{{ $product_detail->id }}" name="product_id">
+                              <button class="button btn-cart" title="Add to Cart" type="submit">Add to Cart</button>
                             @else
                               <button class="button btn-cart" title="Out of Stock" type="button">Out of Stock</button>
                             @endif
@@ -198,8 +206,8 @@
                                     $discount_amount = ($item->price * $item->discount) / 100;
                                     $amount = ($item->price - $discount_amount);
                                   @endphp
-                                  ₹{{ $item->price }}
-                                  ₹discount {{ $amount }}
+                                  <span class="old-price"> ₹{{ $item->price }}</span>
+                                          <span class="special-price">₹{{ $amount }}</span>
                                 @else
                                   ₹{{ $item->price }}
                                 @endif
@@ -207,7 +215,7 @@
                           </div>
                           <div class="action">
                             <a class="link-wishlist" href="{{ route('web.add_wish_list', ['product_id' => encrypt($item->id)]) }}"><i class="icon-heart icons"></i><span class="hidden">Wishlist</span></a>
-                            <button class="button btn-cart" type="button" title="" data-original-title="Add to Cart"><span>Add to Cart</span> </button>
+                              <a class="button btn-cart" type="button" title="" data-original-title="Add to Cart" href="{{ route('web.product_detail', ['slug' => $item->slug, 'product_id' => $item->id]) }}"><span>View Detail</span> </a>
                           </div>
                         </div>
                       </div>

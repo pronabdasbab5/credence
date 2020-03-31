@@ -15,6 +15,12 @@ class ProductController extends Controller
     {
         if ($top_category_id != 0) {
 
+            $label = DB::table('top_category')
+                ->where('id', $top_category_id)
+                ->first();
+
+            $label = $label->top_cate_name;
+
             $products = DB::table('product')
                 ->leftJoin('top_category', 'product.top_category_id', '=', 'top_category.id')
                 ->where('top_category.id', $top_category_id)
@@ -26,6 +32,12 @@ class ProductController extends Controller
         }
 
         if ($sub_category_id != 0) {
+
+            $label = DB::table('sub_category')
+                ->where('id', $sub_category_id)
+                ->first();
+
+            $label = $label->sub_cate_name;
 
             $products = DB::table('product')
                 ->leftJoin('top_category', 'product.top_category_id', '=', 'top_category.id')
@@ -40,6 +52,12 @@ class ProductController extends Controller
         }
         
         if ($last_category_id != 0) {
+
+            $label = DB::table('third_level_sub_category')
+                ->where('id', $last_category_id)
+                ->first();
+
+            $label = $label->third_level_sub_category_name;
 
             $products = DB::table('product')
                 ->leftJoin('top_category', 'product.top_category_id', '=', 'top_category.id')
@@ -91,7 +109,7 @@ class ProductController extends Controller
 
         // dd($products);
 
-        return view('web.product.product-list', compact('products', 'categories'));
+        return view('web.product.product-list', compact('products', 'categories', 'label'));
     }
 
     public function productDetail($slug, $product_id) 

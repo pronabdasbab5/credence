@@ -226,42 +226,56 @@
               <div class="jtv-top-cart-box"> 
                 <!-- Top Cart -->
                 <div class="mini-cart">
-                  <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"> <a href="{{route('web.checkout.cart')}}"> <span class="cart_count">12</span></a> </div>
+                  <div data-toggle="dropdown" data-hover="dropdown" class="basket dropdown-toggle"> 
+                    <a href="{{ route('web.view_cart') }}"> 
+                        <span class="cart_count">
+                        @if(!empty($header_data['cart_data']) && count($header_data['cart_data']) > 0)
+                              {{ count($header_data['cart_data']) }}
+                          @else
+                              {{ 0 }}
+                          @endif
+                        </span>
+                    </a> 
+                </div>
                   <div>
                     <div class="jtv-top-cart-content"> 
                       
-                      
+                      @if(!empty($header_data['cart_data']) && (count($header_data['cart_data']) > 0))
                       <ul class="mini-products-list" id="cart-sidebar">
+                        @foreach($header_data['cart_data'] as $product_id => $item)
                         <li class="item first">
-                          <div class="item-inner"> <a class="product-image" title="Product Title Here" ref="#"><img alt="Product Title Here" src="{{asset('web/images/products/img01.jpg')}}"> </a>
+                          <div class="item-inner"> <a class="product-image" title="{{ $item['product_name'] }}" href="{{ route('web.product_detail', ['slug' => $item['slug'], 'product_id' => $item['product_id']]) }}" target="_blank"><img alt="{{ $item['product_name'] }}" src="{{ asset('assets/product_images/'.$item['banner'].'') }}"> </a>
                             <div class="product-details">
-                              <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
-                              <p class="product-name"><a href="#">Product Title Here</a> </p>
-                              <strong>1</strong> x <span class="price">$79.99</span> </div>
+                              <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="{{ route('web.remove_cart_item', ['product_id' => $item['product_id']]) }}">Remove</a> </div>
+                              <p class="product-name"><a href="{{ route('web.product_detail', ['slug' => $item['slug'], 'product_id' => $item['product_id']]) }}" target="_blank">{{ $item['product_name'] }}</a> </p>
+                              <strong>{{ $item['quantity'] }}</strong> x <span class="price">
+                                @if (!empty($item['discount']))
+                                    @php
+                                        $discount_amount = ($item['price'] * $item['discount']) / 100;
+                                        $amount = ($item['price'] - $discount_amount);;
+                                    @endphp
+                                    ₹{{ $amount }}  
+                                @else
+                                    ₹{{ $item['price'] }}
+                                @endif
+                            </span> </div>
                           </div>
                         </li>
-                        <li class="item">
-                          <div class="item-inner"> <a class="product-image" title="Product Title Here" ref="single_product.html"><img alt="Product Title Here" src="{{asset('web/images/products/img02.jpg')}}"> </a>
-                            <div class="product-details">
-                              <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
-                              <p class="product-name"><a href="#">Product Title Here</a> </p>
-                              <strong>1</strong> x <span class="price">$88.89</span> </div>
-                          </div>
-                        </li>
-                        <li class="item last">
-                          <div class="item-inner"> <a class="product-image" title="Product Title Here" ref="single_product.html"><img alt="Product Title Here" src="{{asset('web/images/products/img04.jpg')}}"> </a>
-                            <div class="product-details">
-                              <div class="access"><a class="jtv-btn-remove" title="Remove This Item" href="#">Remove</a> <a class="btn-edit" title="Edit item" href="#"><i class="icon-pencil"></i><span class="hidden">Edit item</span></a> </div>
-                              <p class="product-name"><a href="#">Product Title Here</a> </p>
-                              <strong>1</strong> x <span class="price">$85.99</span> </div>
-                          </div>
-                        </li>
+                        @endforeach
                       </ul>
                       
                       
                       <div class="actions">
-                        <button class="btn-checkout" title="Checkout" type="button" onClick="{{route('web.checkout.checkout')}}"><span>Checkout</span> </button>
-                        <a href="{{route('web.checkout.cart')}}" class="view-cart"><span>View Cart</span></a> </div>
+                        <button class="btn-checkout" title="Checkout" type="button" onClick="#"><span>Checkout</span> </button>
+                        <a href="{{ route('web.view_cart') }}" class="view-cart"><span>View Cart</span></a> </div>
+                        @else
+                        <center>
+                            <div class="emptycrt">
+                              <img src="{{ asset('web/images/no-product.jpg') }}" alt="">
+                                <p style="margin: 10px 0 0">Cart is Empty</p>
+                            </div>
+                        </center>
+                    @endif
                     </div>
                   </div>
                 </div>
