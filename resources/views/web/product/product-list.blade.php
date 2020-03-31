@@ -130,11 +130,12 @@
 
                       @if(!empty($item['sub_categories']) && (count($item['sub_categories']) > 0))
                         <a href="#menu{{ $collapse_id }}" class="list-group-item ji" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false">
-                          <span class="hidden-sm-down">{{ $item['top_cate_name'] }}</span> 
+                          <span class="hidden-sm-down">{{ $item['top_cate_name'] }}</span> appresal
                         </a>
-                        <div class="collapse sub-cat" id="menu{{ $collapse_id }}" style="border-bottom: 1px solid rgb(221, 221, 221);}">
+                        <div class="sub-cat-1 list-group-item ji collapsed" id="menu{{ $collapse_id }}" href="#menu{{ $collapse_id }}a" data-toggle="collapse" data-parent="#sidebar" style="height: 0px;" aria-expanded="false">
                         @foreach($item['sub_categories'] as $keys => $items) 
                             @if (!empty($items->last_category) && (count($items->last_category) > 0))
+                            
                             <a class="list-group-item" data-parent="#menu{{ $collapse_id }}"><span class="hidden-sm-down">{{ $items->sub_cate_name }}<i class="fa fa-angle-down"></i></span></a>
                             <div class="sub-cat collapse" id="menu{{ $collapse_id }}a" aria-expanded="false">
                                 @foreach($items->last_category as $keyss => $itemss) 
