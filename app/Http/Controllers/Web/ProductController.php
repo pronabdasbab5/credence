@@ -28,7 +28,7 @@ class ProductController extends Controller
                 ->where('product.deleted_at', NULL)
                 ->select('product.*', 'top_category.top_cate_name')
                 ->orderBy('product.id', 'DESC')
-                ->paginate(1);
+                ->paginate(18);
         }
 
         if ($sub_category_id != 0) {
@@ -48,7 +48,7 @@ class ProductController extends Controller
                 ->where('product.deleted_at', NULL)
                 ->select('product.*', 'top_category.top_cate_name', 'sub_category.sub_cate_name')
                 ->orderBy('product.id', 'DESC')
-                ->paginate(1);
+                ->paginate(18);
         }
         
         if ($last_category_id != 0) {
@@ -70,7 +70,7 @@ class ProductController extends Controller
                 ->where('product.deleted_at', NULL)
                 ->select('product.*', 'top_category.top_cate_name', 'sub_category.sub_cate_name', 'third_level_sub_category.third_level_sub_category_name')
                 ->orderBy('product.id', 'DESC')
-                ->paginate(1);
+                ->paginate(18);
         }
 
         $top_category = DB::table('top_category')
