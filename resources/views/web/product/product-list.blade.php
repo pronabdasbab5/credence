@@ -104,56 +104,34 @@
               <div class="block block-layered-nav">
                 <div class="block-content" id="sidebar">
                     <p class="block-subtitle">Shopping Options</p> 
-                    <!-- <div class="list-group">
-                    <a href="#menu5" class="list-group-item ji collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false">
-                      <span class="hidden-sm-down">Apparelnew</span> 
-                    </a>
-                    <div class="sub-cat-1 list-group-item ji collapsed" id="menu5" href="#menu5a" data-toggle="collapse" data-parent="#sidebar" style="height: 0px;" aria-expanded="false">
-                        <a class="list-group-item" data-parent="#menu5"><span class="hidden-sm-down">Men<i class="fa fa-angle-down"></i></span></a>
-                        <div class="sub-cat collapse" id="menu5a" aria-expanded="false">
-                            <a href="#" class="list-group-item" data-parent="#menu5a">Topware</a>                               
-                            <a href="#" class="list-group-item" data-parent="#menu5a">Bottomware</a>
-                        </div>
-                        <a href="#" class="list-group-item" data-parent="#menu1">Women</a>
-                    </div>
-                      
-                    </div> -->
-                  @if(!empty($categories) && (count($categories) > 0))
-                    @php
-                      $collapse_id = 0;
-                    @endphp
-                    @foreach($categories as $key => $item)   
-                      @php
-                        $collapse_id++;
-                      @endphp           
                     <div class="list-group">
-
-                      @if(!empty($item['sub_categories']) && (count($item['sub_categories']) > 0))
-                        <a href="#menu{{ $collapse_id }}" class="list-group-item ji" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false">
-                          <span class="hidden-sm-down">{{ $item['top_cate_name'] }}</span> appresal
+                        <a href="#menu5" class="list-group-item ji collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false">
+                          <span class="hidden-sm-down">Apparelnew</span> 
                         </a>
-                        <div class="sub-cat-1 list-group-item ji collapsed" id="menu{{ $collapse_id }}" href="#menu{{ $collapse_id }}a" data-toggle="collapse" data-parent="#sidebar" style="height: 0px;" aria-expanded="false">
-                        @foreach($item['sub_categories'] as $keys => $items) 
-                            @if (!empty($items->last_category) && (count($items->last_category) > 0))
-                            
-                            <a class="list-group-item" data-parent="#menu{{ $collapse_id }}"><span class="hidden-sm-down">{{ $items->sub_cate_name }}<i class="fa fa-angle-down"></i></span></a>
-                            <div class="sub-cat collapse" id="menu{{ $collapse_id }}a" aria-expanded="false">
-                                @foreach($items->last_category as $keyss => $itemss) 
-                                <a href="{{ route('web.product_list', ['slug' => $itemss->third_level_sub_category_name, 'top_category_id' => $item['top_category_id'], 'sub_category_id' => $items->id, 'last_category_id' => $itemss->id, 'sorted_by' => 0]) }}" class="list-group-item" data-parent="#menu{{ $collapse_id }}a">{{ $itemss->third_level_sub_category_name }}</a>
-                                @endforeach
+                        <div class="sub-cat-1 list-group-item ji collapsed" id="menu5" data-toggle="collapse" data-parent="#sidebar" style="height: 0px;" aria-expanded="false">
+                            <a href="#menu5a" class="list-group-item" data-parent="#menu5"><span class="hidden-sm-down">Men<i class="fa fa-angle-down"></i></span></a>
+                            <div class="sub-cat collapse" id="menu5a" aria-expanded="false">
+                                <a href="#" class="list-group-item" data-parent="#menu5a">Topware</a>                               
+                                <a href="#" class="list-group-item" data-parent="#menu5a">Bottomware</a>
                             </div>
-                            @else
-                            <a href="{{ route('web.product_list', ['slug' => $items->sub_cate_name, 'top_category_id' => $item['top_category_id'], 'sub_category_id' => $items->id, 'last_category_id' => 0, 'sorted_by' => 0]) }}" class="list-group-item" data-parent="#menu{{ $collapse_id }}">{{ $items->sub_cate_name }}</a>
-                            @endif
-                        @endforeach
-                        </div>
-                      @else
-                        <a class="list-group-item ji" href="{{ route('web.product_list', ['slug' => $item['top_cate_name'], 'top_category_id' => $item['top_category_id'], 'sub_category_id' => 0, 'last_category_id' => 0, 'sorted_by' => 0]) }}"><span class="hidden-sm-down">{{ $item['top_cate_name'] }}</span></a>
-                      @endif
 
+
+                            <a href="#menu5b"class="list-group-item" data-parent="#menu5"><span class="hidden-sm-down">Men11<i class="fa fa-angle-down"></i></span></a>
+                            <div class="sub-cat collapse" id="menu5b" aria-expanded="false">
+                                <a href="#" class="list-group-item" data-parent="#menu5b">Topware11</a>                               
+                                <a href="#" class="list-group-item" data-parent="#menu5b">Bottomware11</a>
+                            </div>
+
+                            <a href="#" class="list-group-item" data-parent="#menu1">Women</a>
+                        </div>
+                          
                     </div>
-                    @endforeach
-                  @endif
+                    <div class="list-group">
+                        <a href="#menu5" class="list-group-item ji">
+                          <span class="hidden-sm-down">Perfumeries</span> 
+                        </a>
+                          
+                    </div>
                 </div>
               </div>
             </aside>
