@@ -86,7 +86,7 @@
                                 <div class="col-md-12" style=""><hr style="margin: 0"></div>
                                 <div class="col-md-12 singleordercontent" style="padding: 10px 15px;">                                
                                     
-                                    <a href="{{ route('web.add_wish_list', ['product_id' => $item['product_id']]) }}" class="editproduct">Move to whishlist</a>
+                                    <!-- <a href="{{ route('web.add_wish_list', ['product_id' => $item['product_id']]) }}" class="editproduct">Move to whishlist</a> -->
                                     <a href="{{ route('web.remove_cart_item', ['product_id' => $item['product_id']]) }}" class="editproduct oth">Remove</a>
                                 </div>
                             </div>

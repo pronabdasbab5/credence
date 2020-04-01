@@ -128,8 +128,8 @@
                             <label for="stock_type">Stock Type</label>
                             <select class="form-control" name="stock_type" id="stock_type">
                                 <option value="" disabled selected>Choose Stock Type</option>
-                                <option value="1">Single</option>
-                                <option value="2">Size By</option>
+                                <option value="2">Cloths</option>
+                                <option value="1">Other</option>
                             </select>
                             @error('stock_type')
                                 {{ $message }}
@@ -206,7 +206,14 @@ $(document).ready(function(){
                 'category_id': top_category_id
             },
             success: function(response) {
-                $('#sub_cate_name').html(response);
+
+                if (response == "<option value=\"\" disabled selected>Choose Sub-Category</option>") {
+                    $("#sub_cate_name").prop('required', false);
+                    $('#sub_cate_name').html(response);
+                } else {
+                    $("#sub_cate_name").prop('required', true);
+                    $('#sub_cate_name').html(response);
+                }
             }
         }); 
     });
@@ -229,7 +236,14 @@ $(document).ready(function(){
                 'sub_category_id': sub_category_id
             },
             success: function(response) {
-                $('#third_level_sub_cate_name').html(response);
+
+                if (response == "<option value=\"\" disabled selected>Choose Sub-Category</option>") {
+                    $("#third_level_sub_cate_name").prop('required', false);
+                    $('#third_level_sub_cate_name').html(response);
+                } else {
+                    $("#third_level_sub_cate_name").prop('required', true);
+                    $('#third_level_sub_cate_name').html(response);
+                }
             }
         }); 
     });

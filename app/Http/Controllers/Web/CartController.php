@@ -57,7 +57,7 @@ class CartController extends Controller
                         'product_id' =>  $request->input('product_id'),
                         'size_id' =>  $size_id,
                         'color_id' =>  $color_id,
-                        'quantity' => (int)$request->input('quantity'),
+                        'quantity' => (int)$request->input('qty'),
                         'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(),
                     ]);
             } else {
@@ -201,6 +201,38 @@ class CartController extends Controller
                                 ->where('cart.product_id', $cart[$i]->product_id)
                                 ->delete();
                         }
+
+                        if (!empty($cart[$i]->size_id)) {
+
+                            $product_size_cnt = DB::table('product_stock')
+                                ->where('product_stock.id', $cart[$i]->size_id)
+                                ->where('product_stock.status', 2)
+                                ->count();
+
+                            if($product_size_cnt > 0) {
+
+                                DB::table('cart')
+                                    ->where('user_id', $user_id)
+                                    ->where('cart.product_id', $cart[$i]->product_id)
+                                    ->delete();
+                            }
+                        }
+
+                        if (!empty($cart[$i]->color_id)) {
+
+                            $product_size_cnt = DB::table('product_color_mapping')
+                                ->where('product_color_mapping.id', $cart[$i]->color_id)
+                                ->where('product_color_mapping.status', 2)
+                                ->count();
+
+                            if($product_size_cnt > 0) {
+                                
+                                DB::table('cart')
+                                    ->where('user_id', $user_id)
+                                    ->where('cart.product_id', $cart[$i]->product_id)
+                                    ->delete();
+                            }
+                        }
                     }
                 }
 
@@ -289,15 +321,45 @@ class CartController extends Controller
                     foreach ($cart as $product_id => $item) {
                                 
                         if (!empty($product_id)) {
+
                             $product_cnt = DB::table('product')
                                 ->where('product.id', $product_id)
                                 ->where('product.status', 2)
                                 ->count();
 
-                                // dd($product_cnt);
-
                             if($product_cnt > 0){
                                 Session::forget('cart.'.$product_id);
+                            }
+
+                            $product = explode(',', $item);
+                            $quantity = $product[0];
+                            $size_id = $product[1];
+                            $color_id = $product[2];
+
+                            if ($size_id != 0) {
+
+                                $product_size_cnt = DB::table('product_stock')
+                                    ->where('product_stock.id', $size_id)
+                                    ->where('product_stock.status', 2)
+                                    ->count();
+
+                                if($product_size_cnt > 0) {
+
+                                    Session::forget('cart.'.$product_id);
+                                }
+                            }
+
+                            if ($color_id != 0) {
+
+                                $product_size_cnt = DB::table('product_color_mapping')
+                                    ->where('product_color_mapping.id', $color_id)
+                                    ->where('product_color_mapping.status', 2)
+                                    ->count();
+
+                                if($product_size_cnt > 0) {
+                                    
+                                    Session::forget('cart.'.$product_id);
+                                }
                             }
                         }
                     }

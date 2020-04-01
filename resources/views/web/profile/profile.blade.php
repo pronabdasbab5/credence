@@ -17,7 +17,7 @@
                 <h2>My profile</h2>
               </div>
               <div class="static-contain">
-                <h2>Vishal Nag</h2><hr>
+                <h2>{{ $my_account->name }}</h2><hr>
                 <div class="row">
                   <div class="col-xs-6">
                     <p><strong>Name : </strong>{{ $my_account->name }}</p> 

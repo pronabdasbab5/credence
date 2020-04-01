@@ -345,6 +345,13 @@ class ProductController extends Controller
                     $product_status = "<button type=\"button\" class=\"btn btn-danger btn-xs\">In-Active</button>";
                 }
 
+
+                if ($single_data->order_status == 1) {
+                    $order_status = "<a href=\"".route('admin.delete_product', ['product_id' => $single_data->id])."\" class=\"btn btn-default\">Delete</a>";
+                } else {
+                    $order_status = "";
+                }
+
                 $nestedData['id']            = $cnt;
                 $nestedData['image']  = "&emsp;<img src=\"".asset('assets/product_images/'.$single_data->banner)."\" width=\"60px\">";
                 $nestedData['product_name']  = $single_data->product_name;
@@ -359,7 +366,7 @@ class ProductController extends Controller
 
                 $nestedData['product_images']  = "&emsp;<a href=\"".route('admin.additional_product_image_list', ['product_id' => $single_data->id])."\" class=\"btn btn-primary\" target=\"_blank\">Product Images List</a>";
 
-                $nestedData['action']  = "&emsp;$val&emsp;<a href=\"".route('admin.view_product', ['product_id' => $single_data->id])."\" class=\"btn btn-primary\" target=\"_blank\">View</a>&emsp;<a href=\"".route('admin.edit_product', ['product_id' => $single_data->id])."\" class=\"btn btn-warning\" target=\"_blank\">Edit</a>";
+                $nestedData['action']  = "&emsp;$val&emsp;<a href=\"".route('admin.view_product', ['product_id' => $single_data->id])."\" class=\"btn btn-primary\" target=\"_blank\">View</a>&emsp;<a href=\"".route('admin.edit_product', ['product_id' => $single_data->id])."\" class=\"btn btn-warning\" target=\"_blank\">Edit</a>&emsp;$order_status";
 
                 $data[] = $nestedData;
 
@@ -419,7 +426,7 @@ class ProductController extends Controller
             $img = Image::make($additional_image->getRealPath());
             $img->save($destinationPath.'/'.$file);
 
-            File::delete(public_path('assets/product/images/'.$additional_image_record->additional_image));
+            File::delete(public_path('assets/product_images/'.$additional_image_record->additional_image));
             DB::table('product_additional_images')
                 ->where('id', $additional_image_id)
                 ->update([ 
@@ -707,6 +714,12 @@ class ProductController extends Controller
                     $val = "<a href=\"".route('admin.update_product_status', ['product_id' => $single_data->id, 'status' => 1])."\" class=\"btn btn-success\">Active</a>";
                 }
 
+                if ($single_data->order_status == 1) {
+                    $order_status = "<a href=\"".route('admin.delete_product', ['product_id' => $single_data->id])."\" class=\"btn btn-default\">Delete</a>";
+                } else {
+                    $order_status = "";
+                }
+
                 $nestedData['id']            = $cnt;
                 $nestedData['image']  = "&emsp;<img src=\"".asset('assets/product_images/'.$single_data->banner)."\" width=\"60px\">";
                 $nestedData['product_name']  = $single_data->product_name;
@@ -720,7 +733,7 @@ class ProductController extends Controller
 
                 $nestedData['product_images']  = "&emsp;<a href=\"".route('admin.additional_product_image_list', ['product_id' => $single_data->id])."\" class=\"btn btn-primary\" target=\"_blank\">Product Images List</a>";
 
-                $nestedData['action']  = "&emsp;$val&emsp;<a href=\"".route('admin.view_product', ['product_id' => $single_data->id])."\" class=\"btn btn-primary\" target=\"_blank\">View</a>&emsp;<a href=\"".route('admin.edit_product', ['product_id' => $single_data->id])."\" class=\"btn btn-warning\" target=\"_blank\">Edit</a>";
+                $nestedData['action']  = "&emsp;$val&emsp;<a href=\"".route('admin.view_product', ['product_id' => $single_data->id])."\" class=\"btn btn-primary\" target=\"_blank\">View</a>&emsp;<a href=\"".route('admin.edit_product', ['product_id' => $single_data->id])."\" class=\"btn btn-warning\" target=\"_blank\">Edit</a>&emsp;$order_status";
 
                 $data[] = $nestedData;
 
@@ -736,5 +749,40 @@ class ProductController extends Controller
                     );
             
         print json_encode($json_data); 
+    }
+
+    public function deleteProduct($product_id)
+    {
+        $additional_image_record = DB::table('product_additional_images')
+            ->where('product_id', $product_id)
+            ->get();
+
+        foreach ($additional_image_record as $key => $item) {
+            File::delete(public_path('assets/product_images/'.$item->additional_image));
+        }
+
+        DB::table('product_additional_images')
+            ->where('product_id', $product_id)
+            ->delete();
+
+        DB::table('product_stock')
+            ->where('product_id', $product_id)
+            ->delete();
+
+        DB::table('product_color_mapping')
+            ->where('product_id', $product_id)
+            ->delete();
+
+        $product_record = DB::table('product')
+            ->where('id', $product_id)
+            ->first();
+
+        File::delete(public_path('assets/product_images/'.$product_record->banner));
+
+        DB::table('product')
+            ->where('id', $product_id)
+            ->delete();
+
+        return redirect()->back();
     }
 }

@@ -199,6 +199,9 @@ Route::group(['middleware'=>'auth:admin','prefix'=>'admin','namespace'=>'Admin']
         /** Product Stock Status **/
         Route::get('update-product-stock-status/{stock_id}/{status}', 'ProductController@updateProductStockStatus')->name('admin.update_product_stock_status');
 
+        /** Delete Product **/
+        Route::get('delete-product/{product_id}', 'ProductController@deleteProduct')->name('admin.delete_product');
+
         /** Product Color Status **/
         Route::get('update-product-color-status/{color_id}/{status}', 'ProductController@updateProductColorStatus')->name('admin.update_product_color_status');
 

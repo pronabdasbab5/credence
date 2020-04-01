@@ -38,8 +38,8 @@
                                           $discount_amount = ($item->price * $item->discount) / 100;
                                           $amount = ($item->price - $discount_amount);
                                         @endphp
-                                        ₹{{ $item->price }}
-                                        ₹discount {{ $amount }}
+                                        <span class="old-price">₹{{ $item->price }}</span>
+                                        <span class="special-price">₹{{ $amount }}</span>
                                       @else
                                         ₹{{ $item->price }}
                                       @endif

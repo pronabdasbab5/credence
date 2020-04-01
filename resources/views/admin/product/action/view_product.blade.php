@@ -42,9 +42,9 @@
                       <th style="width:150px;">Stock Type : </th>
                       <td>
                           @if($product_record->stock_type == 1)
-                            Single
+                            Other
                           @else
-                            Size By
+                            Cloths
                           @endif
                       </td>
                     </tr>

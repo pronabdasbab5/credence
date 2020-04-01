@@ -130,8 +130,8 @@
                             <div class="pull-left">
                               <div class="custom pull-left">
                                 <label>Qty :</label>
-                                <button onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 0 ) result.value--;return false;" class="reduced items-count" type="button"><i class="fa fa-minus">&nbsp;</i></button>
-                                <input type="number" class="input-text qty" title="Qty" value="1" maxlength="12" id="qty" name="qty">
+                                <button onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty ) &amp;&amp; qty &gt; 1 ) result.value--;return false;" class="reduced items-count" type="button"><i class="fa fa-minus">&nbsp;</i></button>
+                                <input type="number" class="input-text qty" title="Qty" value="1" maxlength="12" id="qty" min="1" name="qty">
                                 <button onClick="var result = document.getElementById('qty'); var qty = result.value; if( !isNaN( qty )) result.value++;return false;" class="increase items-count" type="button"><i class="fa fa-plus">&nbsp;</i></button>
                               </div>
                             </div>

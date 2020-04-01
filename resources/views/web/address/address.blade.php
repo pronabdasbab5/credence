@@ -40,7 +40,7 @@
                                 </div>
                                 @endforeach
                               @endif
-                              <div class="manage_add" onclick="myFunction()"><h5 class="text-center">Add New Shipping Addresses</h5> </div>
+                              <div class="manage_add" onclick="myFunction()"><h5 class="text-center" style="cursor: -webkit-grab; cursor: grab;">Add New Shipping Addresses</h5> </div>
                             </div>
                             <div class="checkout-page" id="add-address" style="display: none;">
                               <h5 class="text-center">Add New Address</h5>   

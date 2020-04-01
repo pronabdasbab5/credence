@@ -26,17 +26,15 @@ class BrandController extends Controller
             ->count();
 
         if ($count > 0)
-            $msg = "Brand already added";
+            return redirect()->back()->with('error', 'Brand already added');
         else {
             DB::table('brand')
             ->insert([ 
                 'brand_name' => ucwords(strtolower($request->input('brand_name')))
             ]);
-
-            $msg = "Brand has been added successfully";
         }
 
-        return redirect()->back()->with('msg', $msg);
+        return redirect()->back()->with('msg', 'Brand has been added successfully');
     }
 
     public function allBrand() 

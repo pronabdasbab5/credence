@@ -28,6 +28,7 @@ class CreateProductTable extends Migration
             $table->double('price', 8, 2);
             $table->string('banner', 191);
             $table->integer('status')->default(1)->comment("1 = Active, 2 = Inactive");
+            $table->integer('order_status')->default(1)->comment("1 = No order yet, 2 = Ordered");
             $table->timestamps();
             $table->softDeletes();
         });

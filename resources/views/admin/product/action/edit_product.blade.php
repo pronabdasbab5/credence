@@ -138,10 +138,10 @@
                             <label for="stock_type">Stock Type</label>
                             @if($product_record->stock_type == 1)
                                 <input type="hidden" value="1" class="form-control col-md-7 col-xs-12" name="stock_type" required readonly>
-                                <input type="text" value="Single" class="form-control col-md-7 col-xs-12" required readonly disabled>
+                                <input type="text" value="Other" class="form-control col-md-7 col-xs-12" required readonly disabled>
                             @else
                                 <input type="hidden" value="2" class="form-control col-md-7 col-xs-12" name="stock_type" required readonly>
-                                <input type="text" value="Size By" class="form-control col-md-7 col-xs-12" required readonly disabled>
+                                <input type="text" value="Cloths" class="form-control col-md-7 col-xs-12" required readonly disabled>
                             @endif
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12 mb-3">
@@ -299,7 +299,13 @@ $(document).ready(function(){
             },
             success: function(response) {
 
-                $('#sub_cate_name').html(response);
+                if (response == "<option value=\"\" disabled selected>Choose Sub-Category</option>") {
+                    $("#sub_cate_name").prop('required', false);
+                    $('#sub_cate_name').html(response);
+                } else {
+                    $("#sub_cate_name").prop('required', true);
+                    $('#sub_cate_name').html(response);
+                }
             }
         }); 
     });
@@ -322,7 +328,14 @@ $(document).ready(function(){
                 'sub_category_id': sub_category_id
             },
             success: function(response) {
-                $('#third_level_sub_cate_name').html(response);
+                
+                if (response == "<option value=\"\" disabled selected>Choose Sub-Category</option>") {
+                    $("#third_level_sub_cate_name").prop('required', false);
+                    $('#third_level_sub_cate_name').html(response);
+                } else {
+                    $("#third_level_sub_cate_name").prop('required', true);
+                    $('#third_level_sub_cate_name').html(response);
+                }
             }
         }); 
     });
