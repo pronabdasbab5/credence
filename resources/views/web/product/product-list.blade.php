@@ -25,11 +25,11 @@
                   </div>
                   <div class="col-sm-5 text-right sort-by">
                     <label class="control-label" for="input-sort">Sort By:</label>
-                    <select name="">
-                      <option value="">Newest</option>
-                      <option value="">Popularty</option>
-                      <option value="">Price low to high</option>                      
-                      <option value="">Price high to low</option>
+                    <select name="" onchange="javascript:location.href = this.value;">
+                      <option selected disabled>Sort By</option>
+                      <option value="1">Newest</option>
+                      <option value="2">Price low to high</option>                      
+                      <option value="3">Price high to low</option>
                     </select>
                   </div>
                 </div>
@@ -105,44 +105,49 @@
                 <div class="block-content" id="sidebar">
                     <p class="block-subtitle">Shopping Options</p> 
                     <ul class="cd-accordion-menu animated">
-                      
+                    @if(!empty($categories) && (count($categories) > 0))
+
+                      @foreach($categories as $key => $item) 
+
+                        @if(!empty($item['sub_categories']) && (count($item['sub_categories']) > 0))
                       <!-- For 3 Level Catagory -->
                       <li class="has-children">
-                        <input type="checkbox" name="group-1" id="group-1">
-                        <label for="group-1">APPAREL</label>
+                        <input type="checkbox" name="group-{{ $key }}" id="group-{{ $key }}">
+                        <label for="group-{{ $key }}">{{ $item['top_cate_name'] }}</label>
                         <ul>
+                            @foreach($item['sub_categories'] as $keys => $items) 
+                            @if (!empty($items->last_category) && (count($items->last_category) > 0))
                           <li class="has-children">
-                            <input type="checkbox" name="sub-group-1" id="sub-group-1">
-                            <label for="sub-group-1">MEN</label>
+                            <input type="checkbox" name="sub-group-{{ $keys }}" id="sub-group-{{ $keys }}">
+                            <label for="sub-group-{{ $keys }}">{{ $items->sub_cate_name }}</label>
                             <ul>
-                              <li><a href="#0">Topwear</a></li>
-                              <li><a href="#0">Bottomwear</a></li>
+                                @foreach($items->last_category as $keyss => $itemss)
+                              <li><a href="{{ route('web.product_list', ['slug' => $itemss->third_level_sub_category_name, 'top_category_id' => $item['top_category_id'], 'sub_category_id' => $items->id, 'last_category_id' => $itemss->id, 'sorted_by' => 0]) }}">{{ $itemss->third_level_sub_category_name }}</a></li>
+                              @endforeach
                             </ul>
                           </li>
-                          <li class="has-children">
-                            <input type="checkbox" name="sub-group-2" id="sub-group-2">
-                            <label for="sub-group-2">WOMEN</label>
-                            <ul>
-                              <li><a href="#0">Topwear</a></li>
-                              <li><a href="#0">Bottomwear</a></li>
-                            </ul>
-                          </li>
+                          @else
+                            <li><a href="{{ route('web.product_list', ['slug' => $items->sub_cate_name, 'top_category_id' => $item['top_category_id'], 'sub_category_id' => $items->id, 'last_category_id' => 0, 'sorted_by' => 0]) }}">{{ $items->sub_cate_name }}</a></li>
+                            @endif
+                            @endforeach
                         </ul>
                       </li>
 
                       <!-- For 2 Level Catagory -->
-                      <li class="has-children">
+                   <!--    <li class="has-children">
                         <input type="checkbox" name="group-4" id="group-4">
                         <label for="group-4">COSMETICS</label>
                         <ul>
                           <li><a href="#0">Men</a></li>
                           <li><a href="#0">Women</a></li>
                         </ul>
-                      </li>
-
+                      </li> -->
+                      @else
                       <!-- For Single Level Catagory -->
-                      <li><a href="#0">PERFUMERIES</a></li>
-
+                      <li><a href="{{ route('web.product_list', ['slug' => $item['top_cate_name'], 'top_category_id' => $item['top_category_id'], 'sub_category_id' => 0, 'last_category_id' => 0, 'sorted_by' => 0]) }}">{{ $item['top_cate_name'] }}</a></li>
+                      @endif
+                       @endforeach
+                    @endif
                     </ul>
                 </div>
               </div>

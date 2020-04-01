@@ -131,7 +131,7 @@
                                           <span class="old-price"> ₹{{ $item->price }}</span>
                                           <span class="special-price">₹{{ $amount }}</span>
                                         @else
-                                          <span class="special-price">₹{{ $amount }}</span>
+                                          <span class="special-price">₹{{ $item->price }}</span>
                                         @endif
                                       </span> 
                                     </span> 

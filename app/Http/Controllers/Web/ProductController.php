@@ -26,8 +26,27 @@ class ProductController extends Controller
                 ->where('top_category.id', $top_category_id)
                 ->where('product.status', 1)
                 ->where('product.deleted_at', NULL)
-                ->select('product.*', 'top_category.top_cate_name')
-                ->orderBy('product.id', 'DESC')
+                ->select('product.*', 'top_category.top_cate_name');
+
+            if (($sorted_by == 0) || ($sorted_by == 1)) {
+
+                $products = $products
+                    ->orderBy('product.id', 'DESC');
+            }
+
+            if ($sorted_by == 2) {
+
+                $products = $products
+                    ->orderBy('product.price', 'ASC');
+            }
+
+            if ($sorted_by == 3) {
+
+                $products = $products
+                    ->orderBy('product.price', 'DESC');
+            }
+
+            $products = $products
                 ->paginate(18);
         }
 
@@ -46,8 +65,27 @@ class ProductController extends Controller
                 ->where('top_category.id', $top_category_id)
                 ->where('product.status', 1)
                 ->where('product.deleted_at', NULL)
-                ->select('product.*', 'top_category.top_cate_name', 'sub_category.sub_cate_name')
-                ->orderBy('product.id', 'DESC')
+                ->select('product.*', 'top_category.top_cate_name', 'sub_category.sub_cate_name');
+
+            if (($sorted_by == 0) || ($sorted_by == 1)) {
+
+                $products = $products
+                    ->orderBy('product.id', 'DESC');
+            }
+
+            if ($sorted_by == 2) {
+
+                $products = $products
+                    ->orderBy('product.price', 'ASC');
+            }
+
+            if ($sorted_by == 3) {
+
+                $products = $products
+                    ->orderBy('product.price', 'DESC');
+            }
+
+            $products = $products
                 ->paginate(18);
         }
         
@@ -68,8 +106,27 @@ class ProductController extends Controller
                 ->where('top_category.id', $top_category_id)
                 ->where('product.status', 1)
                 ->where('product.deleted_at', NULL)
-                ->select('product.*', 'top_category.top_cate_name', 'sub_category.sub_cate_name', 'third_level_sub_category.third_level_sub_category_name')
-                ->orderBy('product.id', 'DESC')
+                ->select('product.*', 'top_category.top_cate_name', 'sub_category.sub_cate_name', 'third_level_sub_category.third_level_sub_category_name');
+
+            if (($sorted_by == 0) || ($sorted_by == 1)) {
+
+                $products = $products
+                    ->orderBy('product.id', 'DESC');
+            }
+
+            if ($sorted_by == 2) {
+
+                $products = $products
+                    ->orderBy('product.price', 'ASC');
+            }
+
+            if ($sorted_by == 3) {
+
+                $products = $products
+                    ->orderBy('product.price', 'DESC');
+            }
+
+            $products = $products
                 ->paginate(18);
         }
 
