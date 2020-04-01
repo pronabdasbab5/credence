@@ -104,34 +104,46 @@
               <div class="block block-layered-nav">
                 <div class="block-content" id="sidebar">
                     <p class="block-subtitle">Shopping Options</p> 
-                    <div class="list-group">
-                        <a href="#menu5" class="list-group-item ji collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false">
-                          <span class="hidden-sm-down">Apparelnew</span> 
-                        </a>
-                        <div class="sub-cat-1 list-group-item ji collapsed" id="menu5" data-toggle="collapse" data-parent="#sidebar" style="height: 0px;" aria-expanded="false">
-                            <a href="#menu5a" class="list-group-item" data-parent="#menu5"><span class="hidden-sm-down">Men<i class="fa fa-angle-down"></i></span></a>
-                            <div class="sub-cat collapse" id="menu5a" aria-expanded="false">
-                                <a href="#" class="list-group-item" data-parent="#menu5a">Topware</a>                               
-                                <a href="#" class="list-group-item" data-parent="#menu5a">Bottomware</a>
-                            </div>
+                    <ul class="cd-accordion-menu animated">
+                      
+                      <!-- For 3 Level Catagory -->
+                      <li class="has-children">
+                        <input type="checkbox" name="group-1" id="group-1">
+                        <label for="group-1">APPAREL</label>
+                        <ul>
+                          <li class="has-children">
+                            <input type="checkbox" name="sub-group-1" id="sub-group-1">
+                            <label for="sub-group-1">MEN</label>
+                            <ul>
+                              <li><a href="#0">Topwear</a></li>
+                              <li><a href="#0">Bottomwear</a></li>
+                            </ul>
+                          </li>
+                          <li class="has-children">
+                            <input type="checkbox" name="sub-group-2" id="sub-group-2">
+                            <label for="sub-group-2">WOMEN</label>
+                            <ul>
+                              <li><a href="#0">Topwear</a></li>
+                              <li><a href="#0">Bottomwear</a></li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </li>
 
+                      <!-- For 2 Level Catagory -->
+                      <li class="has-children">
+                        <input type="checkbox" name="group-4" id="group-4">
+                        <label for="group-4">COSMETICS</label>
+                        <ul>
+                          <li><a href="#0">Men</a></li>
+                          <li><a href="#0">Women</a></li>
+                        </ul>
+                      </li>
 
-                            <a href="#menu5b"class="list-group-item" data-parent="#menu5"><span class="hidden-sm-down">Men11<i class="fa fa-angle-down"></i></span></a>
-                            <div class="sub-cat collapse" id="menu5b" aria-expanded="false">
-                                <a href="#" class="list-group-item" data-parent="#menu5b">Topware11</a>                               
-                                <a href="#" class="list-group-item" data-parent="#menu5b">Bottomware11</a>
-                            </div>
+                      <!-- For Single Level Catagory -->
+                      <li><a href="#0">PERFUMERIES</a></li>
 
-                            <a href="#" class="list-group-item" data-parent="#menu1">Women</a>
-                        </div>
-                          
-                    </div>
-                    <div class="list-group">
-                        <a href="#menu5" class="list-group-item ji">
-                          <span class="hidden-sm-down">Perfumeries</span> 
-                        </a>
-                          
-                    </div>
+                    </ul>
                 </div>
               </div>
             </aside>
