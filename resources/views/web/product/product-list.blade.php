@@ -3,7 +3,7 @@
   {{-- @include('web.include.seo') --}}
 
   @section('seo')
-    <meta name="description" content="Credence">
+    <link rel="stylesheet" href="{{asset('web/css/ion.rangeSlider.min.css')}}"/>  
   @endsection
 
   @section('content')
@@ -150,6 +150,47 @@
                     @endif
                     </ul>
                 </div>
+              </div> 
+
+              <div class="block product-price-range ">
+                <div class="block-content">
+                  <p class="block-subtitle">Price</p>
+                  <div class="slider-range">
+                    <div class="demo__body">
+                        <input type="text" class="js-range-slider" name="my_range" value="" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="block product-price-range">
+                <div class="block-content">
+                  <div>                    
+                    <p class="block-subtitle">Brand</p>
+                    <ul class="check-box-list">
+                      <li>
+                        <input type="checkbox" id="p1" name="cc">
+                        <label for="p1"> <span class="button"></span>Brand 1<span class="count">(5)</span> </label>
+                      </li>
+                      <li>
+                        <input type="checkbox" id="p2" name="cc">
+                        <label for="p2"> <span class="button"></span>Brand 3<span class="count">(10)</span> </label>
+                      </li>
+                      <li>
+                        <input type="checkbox" id="p3" name="cc">
+                        <label for="p3"> <span class="button"></span>Brand 2<span class="count">(12)</span> </label>
+                      </li>
+                      <li>
+                        <input type="checkbox" id="p4" name="cc">
+                        <label for="p4"> <span class="button"></span>Brand 3<span class="count">(10)</span> </label>
+                      </li>
+                      <li>
+                        <input type="checkbox" id="p5" name="cc">
+                        <label for="p5"> <span class="button"></span>Brand 2<span class="count">(12)</span> </label>
+                      </li>
+                    </ul>                    
+                  </div>
+                </div>
               </div>
             </aside>
           </div>
@@ -159,5 +200,21 @@
         
   @endsection
 
-  @section('script')
+  @section('script')  
+    <!--jQuery-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>    
+    <!--Plugin JavaScript file-->
+    <script src="{{asset('web/js/ion.rangeSlider.js')}}"></script>
+
+    <!-- Custom Range Price slide JavaScript file-->
+    <script type="text/javascript">
+      $(".js-range-slider").ionRangeSlider({
+        type: "double",
+        min: 400,
+        max: 2000,
+        from: 500,
+        to: 1000,
+        grid: false
+    });
+  </script>
   @endsection
