@@ -236,7 +236,7 @@
 
   @section('script') 
     <!--cloud-zoom js --> 
-    <script type="text/javascript" src="web/js/cloud-zoom.js"></script>
+    <script type="text/javascript" src="{{asset('web/js/cloud-zoom.js')}}"></script>
 
     <script>
       $(document).on('click','#list-color li',function(){

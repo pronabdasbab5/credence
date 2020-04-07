@@ -773,11 +773,14 @@ a.button:hover {
 .triup {
   position: absolute;
   margin-top: -15px;
-    left: 49%;
-    z-index: 999;
-    color: #fff;
-    font-size: 20px;
+  left: 49%;
+  z-index: 999;
+  color: #fff;
+  font-size: 20px;
 }
 #livesearch .col-md-9 {
   padding-left: 0
 }
+.jtv-mobile-menu li:nth-child(1) { 
+  margin-top: 50px;
+} 

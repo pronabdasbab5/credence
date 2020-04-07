@@ -16,6 +16,7 @@
   <!-- CSS Style -->
   <link rel="stylesheet" href="{{asset('web/css/link-style.css')}}">
   <link rel="stylesheet" href="">
+  @yield('seo')
 </head>
 
 <body class="cms-index-index cms-home-page">
@@ -23,22 +24,6 @@
   <!-- mobile menu -->
   <div id="jtv-mobile-menu">
     <ul>
-      <li>
-        <div class="jtv-search-mob">
-          <form id="search1" name="search">
-            <div class="input-group">
-              <div class="input-group-btn">
-                <button class="btn btn-default" type="submit"><i class="fa fa-search"></i> </button>
-              </div>
-              <input type="text" class="form-control simple" placeholder="Search ..." name="srch-term" id="search">
-              <div class="col-md-12" id="livesearch"> 
-                <!-- if no product fount on search  --> 
-                
-              </div>
-            </div>
-          </form>
-        </div>
-      </li>
       <li><a href="{{ route('web.index') }}">Home</a></li>
       @if(!empty($header_data['categories']) && (count($header_data['categories']) > 0))
         @foreach($header_data['categories'] as $key => $item)  
@@ -89,7 +74,10 @@
       <div class="header-container">
         <div class="container">
           <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 hidden-xs">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 srch">              
+              <div class="mm-toggle-wrap" style="z-index: 9999999">
+                <button class="mm-toggle1" id="this-togg"><i class="fa fa-search"></i></button>
+              </div>
               <div class="search-box">
                 <input type="text" placeholder="Search entire store here..." maxlength="70" name="search" id="search">
               </div>
@@ -100,11 +88,11 @@
             </div>
             <div class="col-lg-6 col-md-4 col-sm-4 col-xs-11 jtv-logo-box"> 
               <!-- Header Logo -->
-              <div class="logo"> <a title="eCommerce" href="{{route('web.index')}}"><h1>credence ever llpp</h1> </a> </div>
+              <div class="logo"> <a title="eCommerce" href="{{route('web.index')}}"><h1>credence llpp</h1> </a> </div>
               <!-- End Header Logo --> 
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-1">
-              <div class="jtv-top-cart-box hidden-xs"> 
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-1 jtv-top-xs">
+              <div class="jtv-top-cart-box"> 
                 <!-- Top Wishlist -->
                 <div class="mini-cart">
                   <div class="basket1"> 

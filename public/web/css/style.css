@@ -3349,6 +3349,7 @@ ul.products-grid {
 	font-weight: normal;
 	letter-spacing: 0.5px;
 	color: #333;
+    padding: 0 5px;
 }
 .products-grid .item .item-inner:hover .item-info .info-inner .item-title a {
 	color: #394771; cursor:pointer;
@@ -4084,7 +4085,7 @@ figure.effect p {
 /*18.a product price range*/
 
 .block.product-price-range .block-content {
-	padding: 28px 15px 10px
+	padding: 15px 15px 15px
 }
 .product-price-range .amount-range-price {
 	padding: 15px 0
@@ -4140,7 +4141,8 @@ figure.effect p {
 }
 .check-box-list label span.count {
 	color: #a4a4a4;
-	margin-left: 2px
+	margin-left: 5px;
+	font-weight: 300;
 }
 .sidebar-left {
 	margin-left: 0 !important;
@@ -4187,7 +4189,7 @@ figure.effect p {
 	font-size: 13px;
 	font-weight: normal;
 }
-.block-layered-nav .block-subtitle, .block-layered-nav dt {
+.block-layered-nav .block-subtitle, .product-price-range .block-subtitle, .block-layered-nav dt {
 	color: #333;
 	font-weight: 600;
 	font-size: 12px;
@@ -4286,7 +4288,7 @@ figure.effect p {
 	background-color: #FFFFFF;
 }
 .block.block-layered-nav .block-content {
-	padding: 15px 15px 0px
+	padding: 15px 15px 15px
 }
 .block-layered-nav .block-content {
 	padding: 0;
@@ -8397,7 +8399,7 @@ button.subscribe:before {
 	overflow: hidden
 }
 .social h4 {
-	margin: 28px 0 0px 0px;
+	margin: 0px;
 }
 .social ul.inline-mode li a:before {
 	content: "";
