@@ -40,6 +40,21 @@ class ProductController extends Controller
         print $data;
     }
 
+    public function retriveBrand(Request $request)
+    {
+        $brand_list = DB::table('brand')
+            ->where('top_category_id', $request->input('top_category_id'))
+            ->where('sub_category_id', $request->input('sub_category_id'))
+            ->where('status', 1)
+            ->get();
+
+        $brand = "<option value=\"\" disabled selected>Choose Brand</option>";
+        foreach ($brand_list as $key => $value)
+            $brand = $brand."<option value=\"".$value->id."\">".$value->brand_name."</option>";
+
+        print $brand;
+    }
+
     // public function bannerImage ($product_id) 
     // {
     //     $product_record = DB::table('product')
@@ -141,12 +156,8 @@ class ProductController extends Controller
         $top_category = DB::table('top_category')
             ->where('status', 1)
             ->get();
-
-        $all_brand = DB::table('brand')
-            ->where('status', 1)
-            ->get();
             
-        return view('admin.product.new_product', ['top_category' => $top_category, 'brand' => $all_brand]);
+        return view('admin.product.new_product', ['top_category' => $top_category]);
     }
 
     public function addProduct(Request $request) 
@@ -155,14 +166,25 @@ class ProductController extends Controller
         	'top_cate_name' => 'required',
             'product_name'  => 'required',
             'slug'  => 'required',
-            'price'         => 'required',
             'desc'          => 'required',
-            'product_images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10240|dimensions:max_width=264,max_height=264',
-            'stock_type'       => 'required'
+            'product_images.*' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:10240|dimensions:max_width=700,max_height=700',
+            'product_type'       => 'required'
         ]);
+
+        // dd($request);
 
         if($request->hasFile('product_images'))
         {
+            
+            /** If Product name already exist **/
+            $count_product_name = DB::table('product')
+                ->where('product_name', ucwords(strtolower($request->input('product_name'))))
+                ->count();
+
+            if ($count_product_name > 0) {
+                return redirect()->back()->with('error', 'Product Name already exist');
+            }
+
             /** Creating folder **/
             if(!File::exists(public_path()."/assets"))
                 File::makeDirectory(public_path()."/assets");
@@ -178,25 +200,134 @@ class ProductController extends Controller
             $img = Image::make($original_file->getRealPath());
             $img->save($destinationPath.'/'.$file);
 
-            /** Product Info. Inserting **/
-            DB::table('product')
-	            ->insert([ 
-                    'product_name' => $request->input('product_name'), 
-                    'slug' => strtolower(Str::slug($request->input('slug'), '-')),
-                    'top_category_id' => $request->input('top_cate_name'), 
-                    'sub_category_id' => $request->input('sub_cate_name'),
-                    'third_level_sub_category_id' => $request->input('third_level_sub_cate_name'), 
-                    'brand_id' => $request->input('brand'), 
-                    'discount' => $request->input('discount'), 
-                    'stock' => $request->input('single_stock'),
-                    'stock_type' => $request->input('stock_type'),
-                    'desc' => $request->desc, 
-                    'price' => $request->input('price'), 
-                    'banner' => $file, 
-                    'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(), 
-                ]);
+            if ($request->input('product_type') == 1) {
 
-            $product_id = DB::getPdo()->lastInsertId();
+                if($request->hasFile('size_chart')){
+
+                    /** Creating folder **/
+                    if(!File::exists(public_path()."/assets"))
+                        File::makeDirectory(public_path()."/assets");
+
+                    if(!File::exists(public_path()."/assets/product_size_chart"))
+                        File::makeDirectory(public_path()."/assets/product_size_chart");
+
+                    /** Banner inserting **/
+                    $original_file = $request->file('size_chart');
+                    $size_chart_file   = time().'.'.$original_file->getClientOriginalExtension();
+                        
+                    $destinationPath = public_path('/assets/product_size_chart');
+                    $img = Image::make($original_file->getRealPath());
+                    $img->save($destinationPath.'/'.$size_chart_file);
+                }
+
+                /** Product Info. Inserting **/
+                DB::table('product')
+                    ->insert([ 
+                        'product_name' => ucwords(strtolower($request->input('product_name'))), 
+                        'slug' => strtolower(Str::slug($request->input('slug'), '-')),
+                        'sku_id' => $request->input('sku_id'),
+                        'product_type' => $request->input('product_type'), 
+                        'top_category_id' => $request->input('top_cate_name'), 
+                        'sub_category_id' => $request->input('sub_cate_name'),
+                        'third_level_sub_category_id' => $request->input('third_level_sub_cate_name'), 
+                        'brand_id' => $request->input('brand'), 
+                        'desc' => $request->desc, 
+                        'price' => $request->input('price'), 
+                        'discount' => $request->input('discount'), 
+                        'banner' => $file, 
+                        'size_chart' => $size_chart_file,
+                        'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(), 
+                    ]);
+
+                $product_id = DB::getPdo()->lastInsertId();
+            
+                /** Product Stock and Size **/
+                if($request->has('size')){
+                    for($i = 0; $i < count($request->input('size')); $i++) 
+                    {
+                        DB::table('product_stock')
+                            ->insert([ 
+                                'product_id' => $product_id,
+                                'size' => $request->input('size')[$i], 
+                                'stock' => $request->input('stock')[$i], 
+                                'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(), 
+                            ]);
+                    }
+                }
+
+                /** Product Color **/
+                if($request->has('color')){
+                    for($i = 0; $i < count($request->input('color')); $i++) 
+                    {
+                        DB::table('product_color_mapping')
+                            ->insert([ 
+                                'product_id' => $product_id,
+                                'color' => $request->input('color')[$i], 
+                                'color_code' => $request->input('color_code')[$i], 
+                                'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(), 
+                            ]);
+                    }
+                }
+            } 
+            elseif ($request->input('product_type') == 2) {
+
+                /** Product Info. Inserting **/
+                DB::table('product')
+                    ->insert([ 
+                        'product_name' => ucwords(strtolower($request->input('product_name'))), 
+                        'slug' => strtolower(Str::slug($request->input('slug'), '-')),
+                        'sku_id' => $request->input('sku_id'),
+                        'product_type' => $request->input('product_type'), 
+                        'top_category_id' => $request->input('top_cate_name'), 
+                        'sub_category_id' => $request->input('sub_cate_name'),
+                        'third_level_sub_category_id' => $request->input('third_level_sub_cate_name'), 
+                        'brand_id' => $request->input('brand'), 
+                        'desc' => $request->desc,  
+                        'banner' => $file, 
+                        'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(), 
+                    ]);
+
+                $product_id = DB::getPdo()->lastInsertId();
+
+                /** Product Stock and Size **/
+                if($request->has('size')){
+                    for($i = 0; $i < count($request->input('size')); $i++) 
+                    {
+                        DB::table('product_stock')
+                            ->insert([ 
+                                'product_id' => $product_id,
+                                'size' => $request->input('size')[$i], 
+                                'stock' => $request->input('stock')[$i], 
+                                'price' => $request->input('price')[$i],
+                                'discount' => $request->input('discount')[$i],
+                                'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(), 
+                            ]);
+                    }
+                }
+            } 
+            else {
+
+                /** Product Info. Inserting **/
+                DB::table('product')
+                    ->insert([ 
+                        'product_name' => ucwords(strtolower($request->input('product_name'))), 
+                        'slug' => strtolower(Str::slug($request->input('slug'), '-')),
+                        'sku_id' => $request->input('sku_id'),
+                        'product_type' => $request->input('product_type'), 
+                        'top_category_id' => $request->input('top_cate_name'), 
+                        'sub_category_id' => $request->input('sub_cate_name'),
+                        'third_level_sub_category_id' => $request->input('third_level_sub_cate_name'), 
+                        'brand_id' => $request->input('brand'), 
+                        'stock' => $request->input('stock'),
+                        'desc' => $request->desc, 
+                        'price' => $request->input('price'), 
+                        'discount' => $request->input('discount'), 
+                        'banner' => $file, 
+                        'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(), 
+                    ]);
+
+                $product_id = DB::getPdo()->lastInsertId();
+            }
 
             /** Product Images **/
             for($i = 0; $i < count($request->file('product_images')); $i++) 
@@ -213,34 +344,6 @@ class ProductController extends Controller
                         'product_id' => $product_id,
                         'additional_image' => $file, 
                     ]);
-            }
-
-            /** Product Stock and Size **/
-            if($request->has('size')){
-                for($i = 0; $i < count($request->input('size')); $i++) 
-                {
-                    DB::table('product_stock')
-                        ->insert([ 
-                            'product_id' => $product_id,
-                            'size' => $request->input('size')[$i], 
-                            'stock' => $request->input('stock')[$i], 
-                            'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(), 
-                        ]);
-                }
-            }
-
-            /** Product Color **/
-            if($request->has('color')){
-                for($i = 0; $i < count($request->input('color')); $i++) 
-                {
-                    DB::table('product_color_mapping')
-                        ->insert([ 
-                            'product_id' => $product_id,
-                            'color' => $request->input('color')[$i], 
-                            'color_code' => $request->input('color_code')[$i], 
-                            'created_at' => Carbon::now()->setTimezone('Asia/Kolkata')->toDateTimeString(), 
-                        ]);
-                }
             }
 
             return redirect()->back()->with('msg', 'Product has added successfully');
@@ -264,10 +367,8 @@ class ProductController extends Controller
                             5 => 'sub_category',
                             6 => 'third_sub_category',
                             7 => 'brand',
-                            8 => 'price',
-                            9 => 'discount',
-                            10=> 'product_images',
-                            11=> 'action',
+                            8 => 'product_images',
+                            9 => 'action',
                         );
 
         $totalData = DB::table('product')->count();
@@ -289,7 +390,7 @@ class ProductController extends Controller
                 ->select('product.*', 'sub_category.sub_cate_name', 'top_category.top_cate_name', 'brand.brand_name', 'third_level_sub_category.third_level_sub_category_name')
                 ->offset($start)
                 ->limit($limit)
-                ->orderBy($order,$dir)
+                ->orderBy('product.id', 'DESC')
                 ->get();
         }
         else {
@@ -309,7 +410,7 @@ class ProductController extends Controller
                 ->orWhere('product.product_name', 'LIKE',"%{$search}%")
                 ->offset($start)
                 ->limit($limit)
-                ->orderBy($order,$dir)
+                ->orderBy('product.id', 'DESC')
                 ->get();
 
             $totalFiltered = DB::table('product')
@@ -360,8 +461,6 @@ class ProductController extends Controller
                 $nestedData['sub_category']  = $single_data->sub_cate_name;
                 $nestedData['third_sub_category']  = $single_data->third_level_sub_category_name;
                 $nestedData['brand']         = $single_data->brand_name;
-                $nestedData['price']         = $single_data->price;
-                $nestedData['discount']      = $single_data->discount;
                 $nestedData['status']      = $product_status;
 
                 $nestedData['product_images']  = "&emsp;<a href=\"".route('admin.additional_product_image_list', ['product_id' => $single_data->id])."\" class=\"btn btn-primary\" target=\"_blank\">Product Images List</a>";
@@ -632,10 +731,8 @@ class ProductController extends Controller
                             5 => 'sub_category',
                             6 => 'third_sub_category',
                             7 => 'brand',
-                            8 => 'price',
-                            9 => 'discount',
-                            10=> 'product_images',
-                            11=> 'action',
+                            8 => 'product_images',
+                            9 => 'action',
                         );
 
         $totalData = DB::table('product')
@@ -660,7 +757,7 @@ class ProductController extends Controller
                 ->where('product.status', $request->input('status'))
                 ->offset($start)
                 ->limit($limit)
-                ->orderBy($order,$dir)
+                ->orderBy('product.id', 'DESC')
                 ->get();
         }
         else {
@@ -681,7 +778,7 @@ class ProductController extends Controller
                 ->orWhere('product.product_name', 'LIKE',"%{$search}%")
                 ->offset($start)
                 ->limit($limit)
-                ->orderBy($order,$dir)
+                ->orderBy('product.id', 'DESC')
                 ->get();
 
             $totalFiltered = DB::table('product')
@@ -728,8 +825,7 @@ class ProductController extends Controller
                 $nestedData['sub_category']  = $single_data->sub_cate_name;
                 $nestedData['third_sub_category']  = $single_data->third_level_sub_category_name;
                 $nestedData['brand']         = $single_data->brand_name;
-                $nestedData['price']         = $single_data->price;
-                $nestedData['discount']      = $single_data->discount;
+
 
                 $nestedData['product_images']  = "&emsp;<a href=\"".route('admin.additional_product_image_list', ['product_id' => $single_data->id])."\" class=\"btn btn-primary\" target=\"_blank\">Product Images List</a>";
 

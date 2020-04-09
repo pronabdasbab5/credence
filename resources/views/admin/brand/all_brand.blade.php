@@ -24,6 +24,8 @@
                       <thead>
                         <tr>
                             <th>Sl No</th>
+                            <th>Top-Category</th>
+                            <th>Sub-Category</th>
                             <th>Brand Name</th>
                             <th>Action</th>
                         </tr>
@@ -33,6 +35,8 @@
                             @foreach ($data as $key => $value)
                                 <tr>
                                     <td>{{ $value->id }}</td>
+                                    <td>{{ $value->top_cate_name }}</td>
+                                    <td>{{ $value->sub_cate_name }}</td>
                                     <td>{{ $value->brand_name }}</td>
                                     <td>
                                         <a href="{{ route('admin.edit_brand', ['brand_id' => $value->id]) }}" class="btn btn-warning">Edit</a>

@@ -24,9 +24,32 @@
                 <div class="well" style="overflow: auto">
                     <div class="form-row mb-3">
                         <div class="col-md-6 col-sm-12 col-xs-12 mb-3">
+                            <label for="product_type">Product Type</label>
+                            <select name="product_type" id="product_type"  class="form-control col-md-7 col-xs-12" required>
+                                <option disabled selected></option>
+                                <option value="1">Cloths</option>
+                                <option value="2">Cosmetic/Perfumes</option>
+                                <option value="3">Other</option>
+                            </select>
+                            @error('top_cate_name')
+                                {{ $message }}
+                            @enderror
+                        </div>
+
+                        <div class="col-md-6 col-sm-12 col-xs-12 mb-3">
+                            <label for="sku_id">SKU Id</label>
+                            <input type="text" name="sku_id" class="form-control col-md-7 col-xs-12">
+                            @error('sku_id')
+                                {{ $message }}
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="form-row mb-3">
+                        <div class="col-md-6 col-sm-12 col-xs-12 mb-3">
                             <label for="top_cate_name">Top-Category</label>
-                            <select name="top_cate_name" id="top_cate_name"  class="form-control col-md-7 col-xs-12">
-                                <option value="" disabled selected>Choose Top-Category</option>
+                            <select name="top_cate_name" id="top_cate_name"  class="form-control col-md-7 col-xs-12" required>
+                                <option disabled selected>Choose Top-Category</option>
                                 @if(count($top_category) > 0)
                                     @foreach($top_category as $key => $value)
                                         <option value="{{ $value->id }}">{{ $value->top_cate_name }}</option>
@@ -40,7 +63,7 @@
 
                         <div class="col-md-6 col-sm-12 col-xs-12 mb-3">
                             <label for="sub_cate_name">Sub-Category</label>
-                            <select name="sub_cate_name" id="sub_cate_name"  class="form-control col-md-7 col-xs-12">
+                            <select name="sub_cate_name" id="sub_cate_name" class="form-control col-md-7 col-xs-12">
                                 <option value="" disabled selected>Choose Sub-Category</option>
                             </select>
                             @error('sub_cate_name')
@@ -64,11 +87,6 @@
                             <label for="brand">Brand</label>
                             <select name="brand" id="brand" class="form-control col-md-7 col-xs-12">
                                 <option value="" disabled selected>Choose Brand</option>
-                                @if(count($brand) > 0)
-                                    @foreach($brand as $key => $value)
-                                        <option value="{{ $value->id }}">{{ $value->brand_name }}</option>
-                                    @endforeach
-                                @endif
                             </select>
                             @error('brand')
                                 {{ $message }}
@@ -79,7 +97,7 @@
                     <div class="form-row mb-3">
                         <div class="col-md-6 col-sm-12 col-xs-12 mb-3">
                             <label for="product_name">Product Name</label>
-                            <input type="text" class="form-control" name="product_name" id="product_name" value="{{ old('product_name') }}">
+                            <input type="text" class="form-control" name="product_name" id="product_name" value="{{ old('product_name') }}" required>
                             </select>
                             @error('product_name')
                                 {{ $message }}
@@ -87,7 +105,7 @@
                         </div>
                         <div class="col-md-6 col-sm-12 col-xs-12 mb-3">
                             <label for="slug">Slug</label>
-                            <input type="text" class="form-control" name="slug" id="slug" value="{{ old('slug') }}" readonly>
+                            <input type="text" class="form-control" name="slug" id="slug" value="{{ old('slug') }}" readonly required>
                             </select>
                             @error('slug')
                                 {{ $message }}
@@ -95,18 +113,27 @@
                         </div>
                     </div>
 
-                    <div class="form-row mb-3">
+                    <div class="form-row mb-3" id="single_price_div" style="display: none;">
 
-                        <div class="col-md-6 col-sm-12 col-xs-12 mb-3">
+                        <div class="col-md-4 col-sm-12 col-xs-12 mb-3">
+                            <label for="stock">Stock</label>
+                            <input type="number" min="0" class="form-control" name="stock" value="{{ old('stock') }}" id="input_stock">
+                            </select>
+                            @error('stock')
+                                {{ $message }}
+                            @enderror
+                        </div>
+
+                        <div class="col-md-4 col-sm-12 col-xs-12 mb-3">
                             <label for="price">Price</label>
-                            <input type="number" min="1" step="0.01" class="form-control" name="price" value="{{ old('price') }}">
+                            <input type="number" min="1" step="0.01" class="form-control" name="price" value="{{ old('price') }}" id="input_price">
                             </select>
                             @error('price')
                                 {{ $message }}
                             @enderror
                         </div>
 
-                        <div class="col-md-6 col-sm-12 col-xs-12 mb-3">
+                        <div class="col-md-4 col-sm-12 col-xs-12 mb-3">
                             <label for="discount">Discount (In %)</label>
                             <input type="number" min="0" class="form-control" name="discount" value="{{ old('discount') }}">
                             </select>
@@ -118,19 +145,15 @@
 
                     <div class="form-row mb-3">
                         <div class="col-md-6 col-sm-12 col-xs-12 mb-3">
-                            <label for="product_images">Product Images (Max 264 * Max 264)</label>
-                            <input type="file" class="form-control" name="product_images[]" multiple>
+                            <label for="product_images">Product Images (Max 700 * Max 700)</label>
+                            <input type="file" class="form-control" name="product_images[]" multiple required>
                             @error('product_images[]')
                                 {{ $message }}
                             @enderror
                         </div>
-                        <div class="col-md-6 col-sm-12 col-xs-12 mb-3">
-                            <label for="stock_type">Stock Type</label>
-                            <select class="form-control" name="stock_type" id="stock_type">
-                                <option value="" disabled selected>Choose Stock Type</option>
-                                <option value="2">Cloths</option>
-                                <option value="1">Other</option>
-                            </select>
+                        <div class="col-md-6 col-sm-12 col-xs-12 mb-3" style="display: none;" id="size_chart">
+                            <label for="stock_type">Size Chart (In Image)</label>
+                            <input type="file" class="form-control" name="size_chart" id="input_size_cart">
                             @error('stock_type')
                                 {{ $message }}
                             @enderror
@@ -138,7 +161,7 @@
                     </div>
                 </div>
 
-                <div class="well" style="overflow: auto">
+                <div class="well" style="overflow: auto; display: none;" id="whole_stock_div">
                     <div class="form-row mb-3">
                         <div class="col-md-12 col-sm-12 col-xs-12 mb-3" id="stock_div">
                             
@@ -146,10 +169,20 @@
                     </div>
                 </div>
 
-                <div class="well" style="overflow: auto">
+                <div class="well" style="overflow: auto; display: none;" id="whole_color_div">
                     <div class="form-row mb-3">
                         <div class="col-md-12 col-sm-12 col-xs-12 mb-3" id="color_div">
                             <button type="button" id="add_color_btn" class="btn btn-primary" >Add Color</button>
+                            <div class="col-md-12 col-sm-12 col-xs-12 mb-3"> 
+                                <div class="col-md-4 col-sm-12 col-xs-12 mb-3"> 
+                                    <input type="text" class="form-control" placeholder="Enter color" name="color[]" id="input_color"> 
+                                </div>
+                                <div class="col-md-4 col-sm-12 col-xs-12 mb-3"> 
+                                    <input type="color" class="form-control" placeholder="Enter color code" name="color_code[]" id="input_color_code"> 
+                                </div>
+                                <div class="col-md-4 col-sm-12 col-xs-12 mb-3">  
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -188,7 +221,6 @@
 <script src="{{ asset('/vendor/unisharp/laravel-ckeditor/adapters/jquery.js') }}"></script>
 <script type="text/javascript">
 $('.ckeditor').ckeditor();
-color_cnt = 0;
 $(document).ready(function(){
     $('#top_cate_name').change(function(){
         var top_category_id = $('#top_cate_name').val();
@@ -219,7 +251,7 @@ $(document).ready(function(){
     });
 
     $('#sub_cate_name').change(function(){
-        var category_id = $('#top_cate_name').val();
+        var top_category_id = $('#top_cate_name').val();
         var sub_category_id = $('#sub_cate_name').val();
 
         $.ajaxSetup({
@@ -232,7 +264,7 @@ $(document).ready(function(){
             method: "POST",
             url   : "{{ url('/admin/retrive-third-level-sub-category') }}",
             data  : {
-                'top_category_id': category_id,
+                'top_category_id': top_category_id,
                 'sub_category_id': sub_category_id
             },
             success: function(response) {
@@ -245,6 +277,19 @@ $(document).ready(function(){
                     $('#third_level_sub_cate_name').html(response);
                 }
             }
+        });
+
+        $.ajax({
+            method: "POST",
+            url   : "{{ url('/admin/retrive-brand') }}",
+            data  : {
+                'top_category_id': top_category_id,
+                'sub_category_id': sub_category_id
+            },
+            success: function(response) {
+
+                $('#brand').html(response);
+            }
         }); 
     });
 
@@ -252,13 +297,56 @@ $(document).ready(function(){
         $("#slug").val($("#product_name").val().toLowerCase());
     });
 
-    $("#stock_type").change(function(){
-        var stock_type = $("#stock_type").val();
+    $("#product_type").change(function(){
+        var product_type = $("#product_type").val();
 
-        if(stock_type == 1) {
-            $("#stock_div").html('<div class=\"col-md-12 col-sm-12 col-xs-12 mb-3\"> <label for=\"stock\">Stock</label> <input type=\"number\" min=\"0\" class=\"form-control\" name=\"single_stock\" required></div>');
-        } else if(stock_type == 2) {
-            $("#stock_div").html('<div class=\"col-md-12 col-sm-12 col-xs-12 mb-3\"> <button type=\"button\" class=\"btn btn-primary\" onclick=\"addRow();\">Add</button></div><div class=\"col-md-12 col-sm-12 col-xs-12 mb-3\"> <div class=\"col-md-4 col-sm-12 col-xs-12 mb-3\"> <label for=\"size\">Size</label> <input type=\"text\" class=\"form-control\" name=\"size[]\" required> </div><div class=\"col-md-4 col-sm-12 col-xs-12 mb-3\"> <label for=\"stock\">Stock</label> <input type=\"number\" min=\"0\" class=\"form-control\" name=\"stock[]\" required> </div><div class=\"col-md-4 col-sm-12 col-xs-12 mb-3\"></div></div>');
+        color_cnt = 0;
+        cnt = 0;
+
+        if (product_type == 1) {
+
+            $('#whole_stock_div').show();
+            $('#whole_color_div').show();
+            $('#single_price_div').show();
+            $('#size_chart').show();
+
+            $("#input_price").prop('required', true);
+            $("#input_stock").prop('required', true);
+            $("#input_color").prop('required', true);
+            $("#input_color_code").prop('required', true);
+            $("#input_size_cart").prop('required', true);
+
+            $("#stock_div").html('<div class=\"col-md-12 col-sm-12 col-xs-12 mb-3\"> <button type=\"button\" class=\"btn btn-primary\" onclick=\"addClothRow();\">Add</button></div><div class=\"col-md-12 col-sm-12 col-xs-12 mb-3\"><div class=\"col-md-4 col-sm-12 col-xs-12 mb-3\"> <label for=\"size\">Size</label> <input type=\"text\" class=\"form-control\" name=\"size[]\" required></div><div class=\"col-md-4 col-sm-12 col-xs-12 mb-3\"> <label for=\"stock\">Stock</label> <input type=\"number\" min=\"0\" class=\"form-control\" name=\"stock[]\" required></div></div><div class=\"col-md-4 col-sm-12 col-xs-12 mb-3\"></div></div>');
+        }
+        else if(product_type == 2) {
+
+            $('#whole_stock_div').show();
+            $('#whole_color_div').hide();
+            $('#single_price_div').hide();
+            $('#size_chart').hide();
+
+            $("#input_price").prop('required', false);
+            $("#input_stock").prop('required', false);
+            $("#input_color").prop('required', false);
+            $("#input_color_code").prop('required', false);
+            $("#input_size_cart").prop('required', false);
+
+            $("#stock_div").html('<div class=\"col-md-12 col-sm-12 col-xs-12 mb-3\"><button type=\"button\" class=\"btn btn-primary\" onclick=\"addCosPerRow();\">Add</button></div><div class=\"col-md-12 col-sm-12 col-xs-12 mb-3\"><div class=\"col-md-2 col-sm-12 col-xs-12 mb-3\"><label for=\"size\">Size</label><input type=\"text\" class=\"form-control\" name=\"size[]\" required></div><div class=\"col-md-2 col-sm-12 col-xs-12 mb-3\"><label for=\"stock\">Stock</label><input type=\"number\" min=\"0\" class=\"form-control\" name=\"stock[]\" required></div><div class=\"col-md-2 col-sm-12 col-xs-12 mb-3\"><label for=\"price\">Price</label><input type=\"number\" min=\"0\" class=\"form-control\" name=\"price[]\" required></div><div class=\"col-md-2 col-sm-12 col-xs-12 mb-3\"><label for=\"discount\">Discount</label><input type=\"number\" class=\"form-control\" name=\"discount[]\" ></div><div class=\"col-md-2 col-sm-12 col-xs-12 mb-3\"></div></div>');
+        }
+        else if(product_type == 3) {
+
+            $('#whole_stock_div').hide();
+            $('#whole_color_div').hide();
+            $('#single_price_div').show();
+            $('#size_chart').hide();
+
+            $("#stock_div").html('');
+
+            $("#input_price").prop('required', false);
+            $("#input_stock").prop('required', false);
+            $("#input_color").prop('required', false);
+            $("#input_color_code").prop('required', false);
+            $("#input_size_cart").prop('required', false);
         }
     });
 
@@ -269,15 +357,23 @@ $(document).ready(function(){
     });
 });
 
-cnt = 0;
-
-function addRow() {
+function addClothRow() {
 
     cnt++;
-    $("#stock_div").append('<div class=\"col-md-12 col-sm-12 col-xs-12 mb-3\" id=\"stock_row'+cnt+'\"><div class=\"col-md-4 col-sm-12 col-xs-12 mb-3\"> <input type=\"text\" class=\"form-control\" name=\"size[]\" required></div><div class=\"col-md-4 col-sm-12 col-xs-12 mb-3\"> <input type=\"number\" min=\"0\" class=\"form-control\" name=\"stock[]\" required></div><div class=\"col-md-4 col-sm-12 col-xs-12 mb-3\"> <button type=\"button\" onclick=\"removeRow('+cnt+')\" class=\"btn btn-danger\">Remove</button></div></div>');
+    $("#stock_div").append('<div class=\"col-md-12 col-sm-12 col-xs-12 mb-3\" id=\"stock_row'+cnt+'\"><div class=\"col-md-4 col-sm-12 col-xs-12 mb-3\"> <input type=\"text\" class=\"form-control\" name=\"size[]\" required></div><div class=\"col-md-4 col-sm-12 col-xs-12 mb-3\"> <input type=\"number\" min=\"0\" class=\"form-control\" name=\"stock[]\" required></div><div class=\"col-md-4 col-sm-12 col-xs-12 mb-3\"> <button type=\"button\" onclick=\"removeClothRow('+cnt+')\" class=\"btn btn-danger\">Remove</button></div></div>');
 }
 
-function removeRow(counter){
+function addCosPerRow() {
+
+    cnt++;
+    $("#stock_div").append('<div class=\"col-md-12 col-sm-12 col-xs-12 mb-3\" id=\"stock_row'+cnt+'\"><div class=\"col-md-2 col-sm-12 col-xs-12 mb-3\"><input type=\"text\" class=\"form-control\" name=\"size[]\" required></div><div class=\"col-md-2 col-sm-12 col-xs-12 mb-3\"><input type=\"number\" min=\"0\" class=\"form-control\" name=\"stock[]\" required></div><div class=\"col-md-2 col-sm-12 col-xs-12 mb-3\"><input type=\"number\" min=\"0\" class=\"form-control\" name=\"price[]\" required></div><div class=\"col-md-2 col-sm-12 col-xs-12 mb-3\"><input type=\"number\" class=\"form-control\" name=\"discount[]\" required></div><div class=\"col-md-2 col-sm-12 col-xs-12 mb-3\"><button type=\"button\" onclick=\"removeCosPerRow('+cnt+')\" class=\"btn btn-danger\">Remove</button></div></div>');
+}
+
+function removeCosPerRow(counter){
+    $('#stock_row'+counter).remove();
+}
+
+function removeClothRow(counter){
     $('#stock_row'+counter).remove();
 }
 

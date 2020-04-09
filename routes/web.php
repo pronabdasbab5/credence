@@ -51,8 +51,6 @@ Route::group(['middleware'=>'auth:admin','prefix'=>'admin','namespace'=>'Admin']
       Route::get('show-grocery-edit-top-category-form/{grocerytopCategoryId}','GroceryTopCategoryController@showGroceryTopCategoryForm')->name('admin.show_edit_grocery_top_category_form');
       
       Route::put('update-grocery-top-category/{grocerytopCategoryId}','GroceryTopCategoryController@updateGroceryTopCategory')->name('admin.update_grocery_top_category');
-
-
     });
 
     Route::group(['namespace'=>'GrocerySubCategory'],function(){
@@ -102,7 +100,7 @@ Route::group(['middleware'=>'auth:admin','prefix'=>'admin','namespace'=>'Admin']
 
     Route::group(['namespace'=>'GrocerySize'],function(){
    
-    Route::get('grocery-new-size', 'GrocerySizeController@showGrocerySizeForm')->name('admin.grocery_new_size');
+        Route::get('grocery-new-size', 'GrocerySizeController@showGrocerySizeForm')->name('admin.grocery_new_size');
 
      Route::post('add-grocery-size', 'GrocerySizeController@addGrocerySize')->name('admin.add_grocery_size');
 
@@ -119,10 +117,6 @@ Route::group(['middleware'=>'auth:admin','prefix'=>'admin','namespace'=>'Admin']
            Route::get('edit-grocery-mappping-size/{size_mapping_id}', 'GrocerySizeController@showEditGroceryMappingSizeForm')->name('admin.edit_grocery_mappping_size');
 
            Route::post('update-mappping-size/{size_mapping_id}', 'GrocerySizeController@updateGroceryMappingSize')->name('admin.update_grocery_mappping_size');
-      
-
-
-
     });
 
     Route::group(['namespace'=>'Brand'],function(){
@@ -139,10 +133,6 @@ Route::group(['middleware'=>'auth:admin','prefix'=>'admin','namespace'=>'Admin']
         Route::get('all-grocery-brand', 'GroceryBrandController@allGroceryBrand')->name('admin.all_grocery_brand');
         Route::get('edit-grocery-brand/{grocery_brand_id}', 'GroceryBrandController@showGroceryEditBrandForm')->name('admin.grocery_edit_brand');
          Route::put('update-grocery-brand/{grocery_brand_id}', 'GroceryBrandController@updateGroceryBrand')->name('admin.update_grocery_brand');
-
-
-
-
     });
 
     Route::group(['namespace'=>'GroceryProduct'],function(){
@@ -166,10 +156,6 @@ Route::group(['middleware'=>'auth:admin','prefix'=>'admin','namespace'=>'Admin']
             Route::get('additional-grocery-prouduct-image-list/{product_id}', 'GrocerProductController@showGroceryProductImageList')->name('admin.additional_grocery_product_image_list');
 
             Route::put('update-grocery-prouduct-additional-Image/{product_id}', 'GrocerProductController@updateGroceryProductAdditionalImage')->name('admin.update_grocery_product_additional_image');
-
-
-
-
     });
 
     Route::group(['namespace'=>'Product'],function(){
@@ -213,6 +199,7 @@ Route::group(['middleware'=>'auth:admin','prefix'=>'admin','namespace'=>'Admin']
         /** Ajax Route **/
         Route::post('retrive-sub-category', 'ProductController@retriveSubCategory');
         Route::post('retrive-third-level-sub-category', 'ProductController@retriveThirdLevelSubCategory');
+        Route::post('retrive-brand', 'ProductController@retriveBrand');
 
        Route::post('retrive-grocery-sub-category', 'ProductController@retriveGrocerySubCategory');
         Route::post('retrive-grocery-size','ProductController@retriveGrocerySize');

@@ -31,8 +31,6 @@
 							<th>Sub-Category</th>
                             <th>3rd Sub-Category</th>
                             <th>Brand</th>
-                            <th>Price</th>
-							<th>Discount</th>
 							<th>Status</th>
                             <th>Product Images</th>
                             <th>Action</th>
@@ -76,8 +74,6 @@ $(document).ready(function(){
             { "data": "sub_category" },
             { "data": "third_sub_category" },
             { "data": "brand" },
-            { "data": "price" },
-            { "data": "discount" },
 			{ "data": "status" },
             { "data": "product_images" },
             { "data": "action" }

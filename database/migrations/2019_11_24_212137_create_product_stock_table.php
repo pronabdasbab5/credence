@@ -15,9 +15,11 @@ class CreateProductStockTable extends Migration
     {
         Schema::create('product_stock', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('product_id')->null;
-            $table->string('size', 191)->null;
-            $table->integer('stock')->null;
+            $table->integer('product_id')->nullable();
+            $table->string('size', 191)->nullable();
+            $table->integer('stock')->nullable();
+            $table->string('price')->nullable();
+            $table->string('discount')->nullable();
             $table->integer('status')->default(1)->comment('1 = Active, 2 = In-Active');
             $table->timestamps();
         });
