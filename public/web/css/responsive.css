@@ -1090,9 +1090,7 @@
 	.closeit .fa-search:before {
 	    content: "\f00d";
 	}
-	#livesearch {
-	    margin-top: 90px!important;
-	}
+
 	#this-togg {
 		outline: none;
 	    padding: 0;
@@ -1103,6 +1101,18 @@
 		margin-top: -5px;
 	    padding: 6px;
 	    background: #eee;
+	}	
+	#livesearch{
+	    top: 80px;
+	    max-height: 320px!important;
+	    width: 91.9%;
+	    transition: 1s ease-in-out
+	}
+	#livesearch .livesrc .col-md-3{
+	    width: 25%;float: left;
+	}
+	#livesearch .livesrc .col-md-9{
+	    width: 75%;float: left;
 	}
 	/*=========== Homepage ===========*/
 	.upsell-block img {
@@ -1111,6 +1121,10 @@
 	}
 }
 @media only screen and (min-width: 480px) and (max-width: 767px) {
+	.upsell-block img {
+	    width: 100%;
+       margin-bottom: 10px;
+	}
 
 	/*======== SEARCH =========*/
 	#livesearch .row img {
@@ -1134,7 +1148,8 @@
 	    content: "\f00d";
 	}
 	#livesearch {
-	    margin-top: 90px!important;
+	    margin-top: 60px!important;
+        max-height: 440px!important;
 	}
 	#this-togg {
 		outline: none;
